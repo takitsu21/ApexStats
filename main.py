@@ -2,9 +2,6 @@
 import discord, logging, re
 from stats import *
 
-headers={'TRN-Api-Key':'590406fa-b989-4cb6-8085-45ff22ba89ed'}
-CLIENT_SECRET='Bp0gN1Ieb6YBqXvsIq4NRVZ0FhoDrsnH'
-CLIENT_ID=551446491886125059
 TOKEN='NTUxNDQ2NDkxODg2MTI1MDU5.D1xGrw.UR40QVPCnnrrSCqlG0SV_zT1d7s'
 url='https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=8'.format(CLIENT_ID)
 
@@ -36,16 +33,12 @@ async def on_message(message):
         for member in [str(c) for c in client.get_all_members()]:
             if re.match(r'^({}#)[0-9]+'.format(args[1].lower()) ,member.lower()):
                 print(client.get_user_info(member))
-                msg = 'qsdsq'
+                msg = ''
                 member_found=True
                 # await client.send_message(message.channel, msg)
                 break
         if not member_found:
             await client.send_message(message.channel, '{0.author.mention} L\'utilisateur a mentionné n\'a pas été trouvé'.format(message))
-
-    # if message.content.startswith('!members'):
-    #     print([str(c) for c in client.get_all_members()])
-
 
     if message.content.startswith('!hello'):
         msg = 'Hello {0.author.mention}'.format(message)
