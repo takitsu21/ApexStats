@@ -3,7 +3,7 @@ import discord, logging, re
 from stats import *
 
 TOKEN='NTUxNDQ2NDkxODg2MTI1MDU5.D1xGrw.UR40QVPCnnrrSCqlG0SV_zT1d7s'
-url='https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=8'.format(CLIENT_ID)
+# url='https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=8'.format(CLIENT_ID)
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
