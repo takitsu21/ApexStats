@@ -22,7 +22,7 @@ def get_data(pseudo, platform=5):
         name, value, rank = [], [], []
 
     tmp_L = []
-    res = '```\n [{}]\n\n'.format(pseudo)
+    res = '```Markdown\n [{}]\n\n'.format(pseudo)
     for item in dic_stats.items():
         for j in range(len(item[1])):
             for z in range(len(item[1][j])):
