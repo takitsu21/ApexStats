@@ -45,8 +45,8 @@ async def on_message(message):
             await client.send_message(message.channel, msg)
 
     if message.content.startswith('!help'):
-        await client.send_message(message.channel, ' \n'.join(COMMANDS))
-        await client.send_message(message.channel, '{0.author.mention} ```fix\n {} \n```'.format(message,' \n'.join(COMMANDS)))
+        msg = '{0.author.mention}'.format(message) + '```fix\n' + " \n".join(COMMANDS) + '```'
+        await client.send_message(message.channel, msg)
 
 
 @client.event
