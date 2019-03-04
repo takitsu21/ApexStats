@@ -13,36 +13,23 @@ logger.addHandler(handler)
 
 client=discord.Client()
 
+COMMANDS = ['!clean [number_message](not available now)','!apex [name] [platform](set default to PC if no platform mentionned)']
+
+
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('!purge'):
-        args=message.content.split(' ')
-        if args[1].isdigit():
-            await client.purge_from(message.channel,limit=int(args[1])+1)
-        elif args[1] == 'all':
-            await client.purge_from(message.channel,limit=float("inf"))
-        else:
-            await client.send_message(message.channel,'{0.author.mention} Réssayez avec ```!purge [nb_message]```'.format(message))
-
-    if message.content.startswith('!mention'):
-        args=message.content.split(' ')
-        member_found=False
-        for member in [str(c) for c in client.get_all_members()]:
-            if re.match(r'^({}#)[0-9]+'.format(args[1].lower()) ,member.lower()):
-                print(client.get_user_info(member))
-                msg = ''
-                member_found=True
-                # await client.send_message(message.channel, msg)
-                break
-        if not member_found:
-            await client.send_message(message.channel, '{0.author.mention} L\'utilisateur a mentionné n\'a pas été trouvé'.format(message))
-
-    if message.content.startswith('!hello'):
-        msg = 'Hello {0.author.mention}'.format(message)
-        await client.send_message(message.channel, msg)
+    # Need to set permission to uncomment
+    # if message.content.startswith('!clean'):
+    #     args=message.content.split(' ')
+    #     if args[1].isdigit():
+    #         await client.purge_from(message.channel,limit=int(args[1])+1)
+    #     elif args[1] == 'all':
+    #         await client.purge_from(message.channel,limit=float("inf"))
+    #     else:
+    #         await client.send_message(message.channel,'{0.author.mention} Réssayez avec ```!purge [nb_message]```'.format(message))
 
     if message.content.startswith('!apex'):
         args = message.content.split(' ')
@@ -54,7 +41,10 @@ async def on_message(message):
             elif len(args) == 2:
                 await client.send_message(message.channel, get_data(pseudo))
             else:
-                await client.send_message(message.channel, '{0.author.mention} Un argument manquant ou eronné ```!apex NAME [PC, PS4, XBOX]```'.format(message))
+                await client.send_message(message.channel, '{0.author.mention} Un argument manquant ou eronné ```yaml\n!apex [name] [platform](set default to PC if no platform mentionned)```'.format(message))
+
+    if message.content.startswith('!help'):
+        await client.send_message(message.channel, '{0.author.mention} ```{}```'.format(message,' \n'.join(COMMANDS)))
 
 
 @client.event

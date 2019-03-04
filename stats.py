@@ -5,7 +5,7 @@ headers={'TRN-Api-Key':'590406fa-b989-4cb6-8085-45ff22ba89ed'}
 def get_data(pseudo, platform=5):
     json = requests.get('https://public-api.tracker.gg/apex/v1/standard/profile/{}/{}'.format(platform,pseudo),
                         headers=headers).json()
-    legend_list, name, value, rank, legend_number, legend_changed, dic_stats = [], [], [], [], [], False, {}
+    legend_list, name, value, rank, legend_number, dic_stats = [], [], [], [], [], {}
 
     for data in json['data']['children']:
         legend_number.append(data['id'])
@@ -22,7 +22,7 @@ def get_data(pseudo, platform=5):
         name, value, rank = [], [], []
 
     tmp_L = []
-    res = '```Markdown\n [{}]\n\n'.format(pseudo)
+    res = '```yaml\n [{}]\n\n'.format(pseudo)
     for item in dic_stats.items():
         for j in range(len(item[1])):
             for z in range(len(item[1][j])):
