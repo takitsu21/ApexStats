@@ -13,7 +13,7 @@ logger.addHandler(handler)
 
 client=discord.Client()
 
-COMMANDS = ['!clean [number_message](not available now)','!apex [name] [platform](set default to PC if no platform mentionned)']
+COMMANDS = ['!clean [number_message](not available now)','!apex [pseudo] [platform](set default to PC if no platform mentionned)']
 
 
 @client.event
@@ -37,20 +37,22 @@ async def on_message(message):
             pseudo = args[1]
             if len(args) == 3:
                 platform = platform_convert(args[2])
-                await client.send_message(message.channel, get_data(pseudo, platform))
+                msg = get_data(pseudo, platform)
             elif len(args) == 2:
-                await client.send_message(message.channel, get_data(pseudo))
+                msg = get_data(pseudo)
             else:
-                await client.send_message(message.channel, '{0.author.mention} Un argument manquant ou eronné ```yaml\n!apex [name] [platform](set default to PC if no platform mentionned)```'.format(message))
+                msg = '{0.author.mention} Un argument manquant ou eronné ```yaml\n!apex [pseudo] [platform](set default to PC if no platform mentionned)```'.format(message)
+            await client.send_message(message.channel, msg)
 
     if message.content.startswith('!help'):
-        await client.send_message(message.channel, '{0.author.mention} ```{}```'.format(message,' \n'.join(COMMANDS)))
+        await client.send_message(message.channel, COMMANDS)
+        await client.send_message(message.channel, '{0.author.mention} ```fix\n{}```'.format(message,' \n'.join(COMMANDS)))
 
 
 @client.event
 async def on_ready():
-    logged = 'Logged in as {} ID : {}'.format(client.user.name,client.user.id)
-    print(logged,len(logged)*'-',sep='\n')
-
+    # logged = 'Logged in as {} ID : {}'.format(client.user.name,client.user.id)
+    # print(logged,len(logged)*'-',sep='\n')
+    await client.change_presence(game=discord.Game(name='!apex [pseudo]'))
 
 client.run(TOKEN)
