@@ -42,7 +42,8 @@ async def on_message(message):
                 msg = get_data(pseudo)
             elif len(args) == 1:
                 embed = discord.Embed(title="Command: !apex", colour=discord.Colour(0xa1e8cc), description="!apex [pseudo]\n!apex [pseudo] [platform] (XBOX,PSN)")
-                await bot.say(embed=embed)
+                await client.send_message(message.channel, embed=embed)
+                return
             else:
                 msg = '{0.author.mention} Un argument manquant ou eronné ```yaml\n!apex [pseudo] [platform](set default to PC if no platform mentionned)```'.format(message)
             await client.send_message(message.channel, msg)
