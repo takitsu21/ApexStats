@@ -13,7 +13,7 @@ logger.addHandler(handler)
 
 client=discord.Client()
 
-COMMANDS = ['!clean [number_message](not available now)','!apex [pseudo] [platform](set default to PC if no platform mentionned)']
+COMMANDS = ['!clean [number_message]','!apex [pseudo]']
 
 
 @client.event
@@ -40,6 +40,9 @@ async def on_message(message):
                 msg = get_data(pseudo, platform)
             elif len(args) == 2:
                 msg = get_data(pseudo)
+            elif len(args) == 1:
+                embed = discord.Embed(title="Command: !apex", colour=discord.Colour(0xa1e8cc), description="!apex [pseudo]\n!apex [pseudo] [platform] (XBOX,PSN)")
+                await bot.say(embed=embed)
             else:
                 msg = '{0.author.mention} Un argument manquant ou eronné ```yaml\n!apex [pseudo] [platform](set default to PC if no platform mentionned)```'.format(message)
             await client.send_message(message.channel, msg)
