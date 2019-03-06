@@ -49,8 +49,8 @@ async def on_message(message):
                 await client.send_message(message.channel, msg)
             else:
                 await client.send_message(message.channel, embed=embed)
-            except:
-                embed = (discord.Embed(title="Command: !apex", description="!apex [pseudo]\n!apex [pseudo] [platform](XBOX,PSN)", colour=0x13c4d4))
+        except:
+            embed = (discord.Embed(title="Command: !apex", description="!apex [pseudo]\n!apex [pseudo] [platform](XBOX,PSN)", colour=0x13c4d4))
             await client.send_message(message.channel, embed=embed)
 
     if message.content.startswith('!help'):
