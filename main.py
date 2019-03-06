@@ -22,7 +22,9 @@ async def on_message(message):
         return
 
     # Need to set permission to uncomment
-    # if message.content.startswith('!clean'):
+    if message.content.startswith('!clean'):
+        embed = (discord.Embed(title='Commands: ', description='!clean [number_message]\nNot available now', colour=0xc8db))
+        await client.send_message(message.channel, embed=embed)
     #     args=message.content.split(' ')
     #     if args[1].isdigit():
     #         await client.purge_from(message.channel,limit=int(args[1])+1)
@@ -33,35 +35,27 @@ async def on_message(message):
 
     if message.content.startswith('!apex'):
         args = message.content.split(' ')
-        pseudo = args[1]
         try:
-            check = args[1]
+            pseudo = args[1]
             if len(args) == 3:
                 platform = platform_convert(args[2])
                 msg = get_data(pseudo, platform)
             elif len(args) == 2:
                 msg = get_data(pseudo)
-            elif message.content == '!apex':
-                embed = (discord.Embed(title="Command: !apex", description="!apex [pseudo]\n!apex [pseudo] [platform] (XBOX,PSN)",colour=0x13c4d4))
             else:
                 msg = '{0.author.mention} Un argument manquant ou eronné ```yaml\n!apex [pseudo] [platform](set default to PC if no platform mentionned)```'.format(message)
-            if msg:
-                await client.send_message(message.channel, msg)
-            else:
-                await client.send_message(message.channel, embed=embed)
+            await client.send_message(message.channel, msg)
         except:
             embed = (discord.Embed(title="Command: !apex", description="!apex [pseudo]\n!apex [pseudo] [platform](XBOX,PSN)", colour=0x13c4d4))
             await client.send_message(message.channel, embed=embed)
 
     if message.content.startswith('!help'):
-        embed = (discord.Embed(title='Commands: ', description=' \n'.join(COMMANDS), colour=0xc8db))
+        embed = (discord.Embed(title='Commands: ', description='\n'.join(COMMANDS), colour=0xc8db))
         await client.send_message(message.channel, embed=embed)
 
 
 @client.event
 async def on_ready():
-    # logged = 'Logged in as {} ID : {}'.format(client.user.name,client.user.id)
-    # print(logged,len(logged)*'-',sep='\n')
     await client.change_presence(game=discord.Game(name='!apex [pseudo] | !help'))
 
 client.run(TOKEN)
