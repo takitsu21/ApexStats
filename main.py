@@ -13,7 +13,7 @@ logger.addHandler(handler)
 
 client=discord.Client()
 
-COMMANDS = ['!clean [number_message]','!apex [pseudo]','!apex [pseudo] [platform](XBOX,PSN)']
+COMMANDS = ['!clean nb_message','!apex pseudo','!apex pseudo platform (XBOX,PSN)']
 
 
 @client.event
@@ -23,7 +23,7 @@ async def on_message(message):
 
     # Need to set permission to uncomment
     if message.content.startswith('!clean'):
-        embed = (discord.Embed(title='Commands: ', description='!clean [number_message]\nNot available now', colour=0xc8db))
+        embed = (discord.Embed(title='Commands: ', description='!clean number_message (Limit all)\nNot available now', colour=0xc8db))
         await client.send_message(message.channel, embed=embed)
     #     args=message.content.split(' ')
     #     if args[1].isdigit():
@@ -43,10 +43,10 @@ async def on_message(message):
             elif len(args) == 2:
                 msg = get_data(pseudo)
             else:
-                msg = '{0.author.mention} Un argument manquant ou eronné ```yaml\n!apex [pseudo] [platform](set default to PC if no platform mentionned)```'.format(message)
+                msg = '{0.author.mention} Un argument manquant ou eronné ```yaml\n!apex pseudo platform (set default to PC if no platform mentionned)```'.format(message)
             await client.send_message(message.channel, msg)
         except:
-            embed = (discord.Embed(title="Command: !apex", description="!apex [pseudo]\n!apex [pseudo] [platform](XBOX,PSN)", colour=0x13c4d4))
+            embed = (discord.Embed(title="Command: !apex", description="!apex pseudo\n!apex pseudo platform (XBOX,PSN)", colour=0x13c4d4))
             await client.send_message(message.channel, embed=embed)
 
     if message.content.startswith('!help'):
@@ -56,6 +56,6 @@ async def on_message(message):
 
 @client.event
 async def on_ready():
-    await client.change_presence(game=discord.Game(name='!apex [pseudo] | !help'))
+    await client.change_presence(game=discord.Game(name='!apex pseudo | !help'))
 
 client.run(TOKEN)
