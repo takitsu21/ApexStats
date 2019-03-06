@@ -39,9 +39,8 @@ async def on_message(message):
             msg = get_data(pseudo, platform)
         elif len(args) == 2:
             msg = get_data(pseudo)
-        elif len(args) == 1:
+        elif message.content == '!apex':
             embed = (discord.Embed(title="Command: !apex", description="!apex [pseudo]\n!apex [pseudo] [platform] (XBOX,PSN)",colour=0x0000ff))
-            embed.set_author(name="Commands")
         else:
             msg = '{0.author.mention} Un argument manquant ou eronné ```yaml\n!apex [pseudo] [platform](set default to PC if no platform mentionned)```'.format(message)
         if msg:
@@ -54,12 +53,14 @@ async def on_message(message):
         msg = '{0.author.mention}'.format(message) + '```fix\n' + " \n".join(COMMANDS) + '```'
         await client.send_message(message.channel, msg)
 
-
+    if message.content.startswith('!debug'):
+        embed = (discord.Embed(title="Command: !apex", description="!apex [pseudo]\n!apex [pseudo] [platform] (XBOX,PSN)", colour=0x0000ff))
+        await client.send_message(message.channel, embed=embed)
 
 @client.event
 async def on_ready():
     # logged = 'Logged in as {} ID : {}'.format(client.user.name,client.user.id)
     # print(logged,len(logged)*'-',sep='\n')
-    await client.change_presence(game=discord.Game(name='!apex [pseudo]'))
+    await client.change_presence(game=discord.Game(name='!apex [pseudo] | !help'))
 
 client.run(TOKEN)
