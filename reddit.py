@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import requests, webbrowser, re
+import requests, re
 from random import randint
 from bs4 import BeautifulSoup
 
@@ -27,5 +27,4 @@ def random_r_post():
         if a['href'].startswith('/r/apexlegends/comments/') and a['href'] not in hot_reddit_post and check_daily(a['href']):
             hot_reddit_post.append(a['href'])
 
-    print(hot_reddit_post)
     return prefix + hot_reddit_post[randint(0,len(hot_reddit_post)-1)]
