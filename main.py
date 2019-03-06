@@ -13,7 +13,7 @@ logger.addHandler(handler)
 
 client=discord.Client()
 
-COMMANDS = ['!clean [number_message]','!apex [pseudo]']
+COMMANDS = ['!clean [number_message]','!apex [pseudo]','!apex [pseudo] [platform](XBOX,PSN)']
 
 
 @client.event
@@ -34,6 +34,8 @@ async def on_message(message):
     if message.content.startswith('!apex'):
         args = message.content.split(' ')
         pseudo = args[1]
+        try:
+            check = args[1]
         if len(args) == 3:
             platform = platform_convert(args[2])
             msg = get_data(pseudo, platform)
@@ -47,15 +49,16 @@ async def on_message(message):
             await client.send_message(message.channel, msg)
         else:
             await client.send_message(message.channel, embed=embed)
-
+        except:
+            embed = (discord.Embed(title="Command: !apex", description="!apex [pseudo]\n!apex [pseudo] [platform](XBOX,PSN)", colour=0xc8db))
+            await client.send_message(message.channel, embed=embed)
 
     if message.content.startswith('!help'):
-        msg = '{0.author.mention}'.format(message) + '```fix\n' + " \n".join(COMMANDS) + '```'
-        await client.send_message(message.channel, msg)
+        embed = (discord.Embed(title='Commands: ', description=' \n'.join(COMMANDS), colour=0xc8db))
+        await client.send_message(message.channel, embed=embed)
 
     if message.content == '!apex':
-        embed = (discord.Embed(title="Command: !apex", description="!apex [pseudo]\n!apex [pseudo] [platform] (XBOX,PSN)", colour=0xc8db))
-        await client.send_message(message.channel, embed=embed)
+
 
 @client.event
 async def on_ready():
