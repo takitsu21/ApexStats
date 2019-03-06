@@ -1,6 +1,7 @@
 #coding:utf-8
 import discord, logging, re
 from stats import *
+from reddit import *
 
 TOKEN='NTUxNDQ2NDkxODg2MTI1MDU5.D1xGrw.UR40QVPCnnrrSCqlG0SV_zT1d7s'
 # url='https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=8'.format(CLIENT_ID)
@@ -53,6 +54,8 @@ async def on_message(message):
         embed = (discord.Embed(title='Commands: ', description='\n'.join(COMMANDS), colour=0xc8db))
         await client.send_message(message.channel, embed=embed)
 
+    if message.content.startswith('!reddit'):
+        await client.send_message(message.channel, random_r_post())
 
 @client.event
 async def on_ready():
