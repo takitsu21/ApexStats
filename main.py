@@ -39,9 +39,6 @@ async def on_message(message):
             msg = get_data(pseudo, platform)
         elif len(args) == 2:
             msg = get_data(pseudo)
-        elif len(args) == 1:
-            embed=discord.Embed(title="Command: !apex", description="!apex [pseudo]\n!apex [pseudo] [platform] (XBOX,PSN)")
-            await client.send_message(message.channel, embed)
         else:
             msg = '{0.author.mention} Un argument manquant ou eronné ```yaml\n!apex [pseudo] [platform](set default to PC if no platform mentionned)```'.format(message)
         await client.send_message(message.channel, msg)
@@ -49,6 +46,11 @@ async def on_message(message):
     if message.content.startswith('!help'):
         msg = '{0.author.mention}'.format(message) + '```fix\n' + " \n".join(COMMANDS) + '```'
         await client.send_message(message.channel, msg)
+
+    if message.content.startswith('!embed'):
+        embed=(discord.Embed(title="Command: !apex", description="!apex [pseudo]\n!apex [pseudo] [platform] (XBOX,PSN)"))
+        embed.set_author(name="Hello")
+        await client.send_message(message.channel, embed=embed)
 
 
 @client.event
