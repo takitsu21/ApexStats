@@ -40,7 +40,7 @@ async def on_message(message):
         elif len(args) == 2:
             msg = get_data(pseudo)
         elif message.content == '!apex':
-            embed = (discord.Embed(title="Command: !apex", description="!apex [pseudo]\n!apex [pseudo] [platform] (XBOX,PSN)",colour=0x0000ff))
+            embed = (discord.Embed(title="Command: !apex", description="!apex [pseudo]\n!apex [pseudo] [platform] (XBOX,PSN)",colour=0xc8db))
         else:
             msg = '{0.author.mention} Un argument manquant ou eronné ```yaml\n!apex [pseudo] [platform](set default to PC if no platform mentionned)```'.format(message)
         if msg:
@@ -53,8 +53,8 @@ async def on_message(message):
         msg = '{0.author.mention}'.format(message) + '```fix\n' + " \n".join(COMMANDS) + '```'
         await client.send_message(message.channel, msg)
 
-    if message.content.startswith('!debug'):
-        embed = (discord.Embed(title="Command: !apex", description="!apex [pseudo]\n!apex [pseudo] [platform] (XBOX,PSN)", colour=0x0000ff))
+    if message.content == '!apex':
+        embed = (discord.Embed(title="Command: !apex", description="!apex [pseudo]\n!apex [pseudo] [platform] (XBOX,PSN)", colour=0xc8db))
         await client.send_message(message.channel, embed=embed)
 
 @client.event
