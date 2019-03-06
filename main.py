@@ -41,6 +41,7 @@ async def on_message(message):
             msg = get_data(pseudo)
         elif len(args) == 1:
             embed = (discord.Embed(title="Command: !apex", description="!apex [pseudo]\n!apex [pseudo] [platform] (XBOX,PSN)",colour=0x0000ff))
+            embed.set_author(name="Commands")
         else:
             msg = '{0.author.mention} Un argument manquant ou eronné ```yaml\n!apex [pseudo] [platform](set default to PC if no platform mentionned)```'.format(message)
         if msg:
