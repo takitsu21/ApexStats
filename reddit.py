@@ -28,5 +28,3 @@ def hot_post():
             hot_reddit_post.append(a['href'])
     return prefix + hot_reddit_post[randint(0,len(hot_reddit_post)-1)]
     
-
-print(hot_post())
