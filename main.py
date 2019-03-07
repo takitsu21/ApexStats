@@ -61,9 +61,9 @@ async def on_message(message):
             if reddit_parameter == 'hot':
                 reddit_hot = str(reddit.hot_post())
                 await client.send_message(message.channel, reddit_hot)
-        except:
-            embed = (discord.Embed(title='Command: !reddit', description='!reddit hot', colour=colour))
-            await client.send_message(message.channel, embed=embed)
+        except Exception as e:
+            # embed = (discord.Embed(title='Command: !reddit', description='!reddit hot', colour=colour))
+            await client.send_message(message.channel, e)
 
 @client.event
 async def on_ready():
