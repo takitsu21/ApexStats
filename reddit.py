@@ -27,3 +27,6 @@ def hot_post():
         if a['href'].startswith('/r/apexlegends/comments/') and a['href'] not in hot_reddit_post and check_daily(a['href']):
             hot_reddit_post.append(a['href'])
     return prefix + hot_reddit_post[randint(0,len(hot_reddit_post)-1)]
+    
+
+print(hot_post())
