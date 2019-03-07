@@ -55,8 +55,8 @@ async def on_message(message):
         await client.send_message(message.channel, embed=embed)
 
     if message.content.startswith('!reddit'):
-        msg = reddit.hot_post()
-        await client.send_message(message.channel, 'Reddit hot random url : {}'.format(msg))
+        embed = (discord.Embed(title='Reddit hot random: ', description='[Reddit hot]({})'.format(reddit.hot_post()), url=str(reddit.hot_post()), colour=colour))
+        await client.send_message(message.channel, embed=embed)
 
 @client.event
 async def on_ready():
