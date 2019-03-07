@@ -14,7 +14,7 @@ logger.addHandler(handler)
 
 client=discord.Client()
 
-COMMANDS = ['!clean nb_message','!apex pseudo','!apex pseudo platform (XBOX,PSN)','!reddit']
+COMMANDS = ['!clean nb_message','!apex pseudo','!apex pseudo platform (XBOX,PSN)','!reddit hot']
 colour = 0xc8db
 
 @client.event
@@ -62,8 +62,8 @@ async def on_message(message):
                 reddit_hot = str(reddit.hot_post())
                 await client.send_message(message.channel, reddit_hot)
         except Exception as e:
-            # embed = (discord.Embed(title='Command: !reddit', description='!reddit hot', colour=colour))
-            await client.send_message(message.channel, e)
+            embed = (discord.Embed(title='Command: !reddit', description='!reddit hot', colour=colour))
+            await client.send_message(message.channel, embed=embed)
 
 @client.event
 async def on_ready():
