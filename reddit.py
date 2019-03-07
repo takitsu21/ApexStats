@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 headers = {'User-Agent':'Mozilla/5.0 (Windows NT x.y; Win64; x64; rv:10.0) Gecko/20100101 Firefox/10.0'}
 
 prefix = 'https://www.reddit.com'
-url = 'https://www.reddit.com/r/apexlegends/hot/'
+url = prefix + '/r/apexlegends/hot/'
 
 def check_daily(a):
     a_list = a.split('/')
@@ -18,7 +18,7 @@ def check_daily(a):
             return False
     return True
 
-def random_r_post():
+def hot_post():
     response = requests.get(url, headers=headers)
     page = BeautifulSoup(response.content, features="lxml")
 
@@ -26,5 +26,6 @@ def random_r_post():
     for a in page.find_all('a',href=True):
         if a['href'].startswith('/r/apexlegends/comments/') and a['href'] not in hot_reddit_post and check_daily(a['href']):
             hot_reddit_post.append(a['href'])
-
     return prefix + hot_reddit_post[randint(0,len(hot_reddit_post)-1)]
+
+print(hot_post())

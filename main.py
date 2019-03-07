@@ -14,7 +14,7 @@ logger.addHandler(handler)
 
 client=discord.Client()
 
-COMMANDS = ['!clean nb_message','!apex pseudo','!apex pseudo platform (XBOX,PSN)']
+COMMANDS = ['!clean nb_message','!apex pseudo','!apex pseudo platform (XBOX,PSN)','!reddit']
 colour = 0xc8db
 
 @client.event
@@ -24,7 +24,7 @@ async def on_message(message):
 
     # Need to set permission to uncomment
     if message.content.startswith('!clean'):
-        embed = (discord.Embed(title='Command: !clean', description='!clean number_message (Limit all)\nNot available now', colour=0xc8db))
+        embed = (discord.Embed(title='Command: !clean', description='!clean number_message (Limit all)\nNot available now', colour=colour))
         await client.send_message(message.channel, embed=embed)
     #     args=message.content.split(' ')
     #     if args[1].isdigit():
@@ -55,8 +55,8 @@ async def on_message(message):
         await client.send_message(message.channel, embed=embed)
 
     if message.content.startswith('!reddit'):
-        msg = str(reddit.random_r_post())
-        await client.send_message(message.channel, msg)
+        # msg = reddit.hot_post()
+        await client.send_message(message.channel, 'work')
 
 @client.event
 async def on_ready():
