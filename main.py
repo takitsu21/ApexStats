@@ -1,7 +1,7 @@
 #coding:utf-8
-import discord, logging, re
+import discord, logging, re, reddit
 from stats import *
-from reddit import *
+
 
 TOKEN='NTUxNDQ2NDkxODg2MTI1MDU5.D1xGrw.UR40QVPCnnrrSCqlG0SV_zT1d7s'
 # url='https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=8'.format(CLIENT_ID)
@@ -15,7 +15,7 @@ logger.addHandler(handler)
 client=discord.Client()
 
 COMMANDS = ['!clean nb_message','!apex pseudo','!apex pseudo platform (XBOX,PSN)']
-
+colour = 0xc8db
 
 @client.event
 async def on_message(message):
@@ -24,7 +24,7 @@ async def on_message(message):
 
     # Need to set permission to uncomment
     if message.content.startswith('!clean'):
-        embed = (discord.Embed(title='Commands: ', description='!clean number_message (Limit all)\nNot available now', colour=0xc8db))
+        embed = (discord.Embed(title='Command: !clean', description='!clean number_message (Limit all)\nNot available now', colour=0xc8db))
         await client.send_message(message.channel, embed=embed)
     #     args=message.content.split(' ')
     #     if args[1].isdigit():
@@ -47,15 +47,16 @@ async def on_message(message):
                 msg = '{0.author.mention} Un argument manquant ou eronné ```yaml\n!apex pseudo platform (set default to PC if no platform mentionned)```'.format(message)
             await client.send_message(message.channel, msg)
         except:
-            embed = (discord.Embed(title="Command: !apex", description="!apex pseudo\n!apex pseudo platform (XBOX,PSN)", colour=0x13c4d4))
+            embed = (discord.Embed(title="Command: !apex", description="!apex pseudo\n!apex pseudo platform (XBOX,PSN)", colour=colour))
             await client.send_message(message.channel, embed=embed)
 
     if message.content.startswith('!help'):
-        embed = (discord.Embed(title='Commands: ', description='\n'.join(COMMANDS), colour=0xc8db))
+        embed = (discord.Embed(title='Commands: ', description='\n'.join(COMMANDS), colour=colour))
         await client.send_message(message.channel, embed=embed)
 
     if message.content.startswith('!reddit'):
-        await client.send_message(message.channel, random_r_post())
+        msg = str(reddit.random_r_post())
+        await client.send_message(message.channel, msg)
 
 @client.event
 async def on_ready():
