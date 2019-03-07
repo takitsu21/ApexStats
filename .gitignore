@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 *test.py
 *discord.log
+*update_github.py
 
 # C extensions
 *.so
