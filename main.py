@@ -59,7 +59,7 @@ async def on_message(message):
         embed = (discord.Embed(title='Reddit hot random: ', description='[Reddit hot]' + url_post, colour=colour))
         await client.send_message(message.channel, embed=embed)
 
-@client.event
+@client.events
 async def on_ready():
     await client.change_presence(game=discord.Game(name='!apex pseudo | !help'))
 
