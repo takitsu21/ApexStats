@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 #coding:utf-8
 import requests
 headers={'TRN-Api-Key':'590406fa-b989-4cb6-8085-45ff22ba89ed'}
