@@ -44,11 +44,9 @@ async def on_message(message):
                 msg = get_data(pseudo, platform)
             elif len(args) == 2:
                 msg = get_data(pseudo)
-            else:
-                msg = '{0.author.mention} Un argument manquant ou eronné ```yaml\n!apex pseudo platform (set default to PC if no platform mentionned)```'.format(message)
             await client.send_message(message.channel, msg)
         except:
-            embed = (discord.Embed(title="Command: !apex", description="!apex pseudo\n!apex pseudo platform (XBOX,PSN)", colour=colour))
+            embed = (discord.Embed(title="Command: !apex", description="!apex pseudo (Return Apex Legends stats)\n!apex pseudo platform (XBOX,PSN) (Return Apex Legends stats according to the platform)", colour=colour))
             await client.send_message(message.channel, embed=embed)
 
     if message.content.startswith('!help'):
@@ -66,7 +64,7 @@ async def on_message(message):
                 msg = reddit.reddit_post('top')
             await client.send_message(message.channel, msg)
         except Exception as e:
-            embed = (discord.Embed(title='Command: !reddit', description='!reddit hot\n!reddit top', colour=colour))
+            embed = (discord.Embed(title='Command: !reddit', description='!reddit hot (Return random recent hot on r/apexlegends)\n!reddit top (Return random recent top on r/apexlegends)', colour=colour))
             await client.send_message(message.channel, embed=embed)
 
 @client.event
