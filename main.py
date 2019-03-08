@@ -15,7 +15,7 @@ logger.addHandler(handler)
 
 client=discord.Client()
 
-COMMANDS = ['!clean nb_message','!apex pseudo','!apex pseudo platform (XBOX,PSN)','!reddit hot']
+COMMANDS = ['!clean','!apex','!reddit']
 colour = 0xc8db
 
 @client.event
@@ -53,7 +53,8 @@ async def on_message(message):
 
     if message.content.startswith('!help'):
         embed = (discord.Embed(title='Commands: ', description='\n'.join(COMMANDS), colour=colour))
-        await client.send_message(message.channel, embed=embed)
+        ch = await client.start_private_message(message.author)
+        await client.send_message(ch, embed=embed)
 
     if message.content.startswith('!reddit'):
         args = message.content.split(' ')
@@ -65,7 +66,7 @@ async def on_message(message):
                 msg = reddit.reddit_post('top')
             await client.send_message(message.channel, msg)
         except Exception as e:
-            embed = (discord.Embed(title='Command: !reddit', description='!reddit hot', colour=colour))
+            embed = (discord.Embed(title='Command: !reddit', description='!reddit hot\n!reddit top', colour=colour))
             await client.send_message(message.channel, embed=embed)
 
 @client.event
