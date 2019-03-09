@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #coding:utf-8
-import discord, logging, re, reddit
+import discord, logging, re, web_scrapper
 from stats import *
 
 
@@ -59,9 +59,9 @@ async def on_message(message):
         try:
             reddit_parameter = args[1]
             if reddit_parameter == 'hot':
-                msg = reddit.reddit_post('hot')
+                msg = web_scrapper.reddit_post('hot')
             elif reddit_parameter == 'top':
-                msg = reddit.reddit_post('top')
+                msg = web_scrapper.reddit_post('top')
             await client.send_message(message.channel, msg)
         except Exception as e:
             embed = (discord.Embed(title='Command: !reddit', description='!reddit hot (Return random recent hot on r/apexlegends)\n!reddit top (Return random recent top on r/apexlegends)', colour=colour))

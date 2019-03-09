@@ -1,12 +1,22 @@
 #!/usr/bin/env python3
-#coding: utf-8
+#coding:utf-8
 import requests, re
 from random import randint
 from bs4 import BeautifulSoup
 
 headers = {'User-Agent':'Mozilla/5.0 (Windows NT x.y; Win64; x64; rv:10.0) Gecko/20100101 Firefox/10.0'}
 
-prefix = 'https://www.reddit.com'
+reddit = 'https://www.reddit.com'
+server_status = 'https://apexlegendsstatus.com/datacenters'
+
+def get_server_status(*region):
+    response = requests.get(server_status, headers=headers)
+    page = BeautifulSoup(response.content, features="lxml")
+    # print(response.text)
+    for a in page.find_all(re.compile('^h5')):
+        print(a)
+
+get_server_status('eu','us','au')
 
 def check_daily(a):
     a_list = a.split('/')
@@ -16,7 +26,7 @@ def check_daily(a):
     return True
 
 def reddit_post(filtre):
-    url = '{}/r/apexlegends/{}'.format(prefix,filtre)
+    url = '{}/r/apexlegends/{}'.format(reddit,filtre)
     response = requests.get(url, headers=headers)
     page = BeautifulSoup(response.content, features="lxml")
     hot_reddit_post = []
@@ -24,4 +34,4 @@ def reddit_post(filtre):
     for a in page.find_all('a',href=True):
         if a['href'].startswith('/r/apexlegends/comments/') and a['href'] not in hot_reddit_post and check_daily(a['href']):
             hot_reddit_post.append(a['href'])
-    return prefix + hot_reddit_post[randint(0,len(hot_reddit_post)-1)]
+    return reddit + hot_reddit_post[randint(0,len(hot_reddit_post)-1)]
