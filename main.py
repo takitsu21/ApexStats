@@ -18,7 +18,7 @@ client = commands.Bot(command_prefix='!')
 
 # client=discord.Client()
 
-COMMANDS = ['!clean','!apex','!reddit','!ss']
+COMMANDS = ['!apex','!reddit','!ss','!support']
 colour = 0xc8db
 
 @client.event
@@ -62,7 +62,9 @@ async def on_message(message):
         embed = (discord.Embed(title='Server Status', description='[Apex Server Status](https://apexlegendsstatus.com/datacenters)', colour=colour))
         await client.send_message(message.channel, embed=embed)
 
-
+    if message.content.startswith('!support'):
+        embed = (discord.Embed(title='Kofi support', description='Hey if you like my work and want to support me, you can do it here [Support me](https://ko-fi.com/takitsu)', colour=colour))
+        await client.send_message(message.channel, embed=embed)
 
 @client.event
 async def on_ready():
