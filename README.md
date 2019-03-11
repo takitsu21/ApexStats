@@ -6,6 +6,7 @@ Discord bot that give your Apex Legends statistics and other features.
 
 ```
 !apex username | !apex username platform
+dqsdqs
 ```
 ```
 !reddit hot | !reddit top
