@@ -12,11 +12,8 @@ server_status = 'https://apexlegendsstatus.com/datacenters'
 def get_server_status(*region):
     response = requests.get(server_status, headers=headers)
     page = BeautifulSoup(response.content, features="lxml")
-    # print(response.text)
     for a in page.find_all(re.compile('^h5')):
         print(a)
-
-get_server_status('eu','us','au')
 
 def check_daily(a):
     a_list = a.split('/')

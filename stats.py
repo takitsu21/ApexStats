@@ -3,9 +3,9 @@
 import requests
 headers={'TRN-Api-Key':'590406fa-b989-4cb6-8085-45ff22ba89ed'}
 
-def get_data(pseudo, platform=5):
+def get_data(pseudo, platform = 5):
     json = requests.get('https://public-api.tracker.gg/apex/v1/standard/profile/{}/{}'.format(platform,pseudo),
-                        headers=headers).json()
+                        headers = headers).json()
     legend_list, name, value, rank, legend_number, dic_stats = [], [], [], [], [], {}
 
     for data in json['data']['children']:
