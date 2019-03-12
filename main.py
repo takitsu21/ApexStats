@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 #coding:utf-8
-import discord, logging, re, web_scrapper
+import discord, logging, re, web_scrapper, time, datetime
 from discord.ext import commands
 from stats import *
-
-
-TOKEN='NTUxNDQ2NDkxODg2MTI1MDU5.D1xGrw.UR40QVPCnnrrSCqlG0SV_zT1d7s'
-# url='https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=8'.format(CLIENT_ID)
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -25,6 +21,20 @@ colour = 0xc8db
 async def on_message(message):
     if message.author == client.user:
         return
+
+    if message.content.startswith('!debug'):
+        args = message.content.split(' ')
+        data = get_data(args[1])
+        embed = discord.Embed(colour=colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+
+        embed.set_thumbnail(url=message.author.avatar_url)
+        embed.set_author(name='{} | Level {}'.format(data['name'],data['level']) , url=data['profile'], icon_url=client.user.avatar_url)
+        for key, value in data.items():
+            try:
+                embed.add_field(name="<:thonkang:219069250692841473>", value="these last two", inline=True)
+            except: pass
+        embed.set_footer(text="using apex.tracker.gg API", icon_url=client.user.avatar_url)
+        await client.send_message(message.channel, embed=embed)
 
     if message.content.startswith('!apex'):
         args = message.content.split(' ')
@@ -63,11 +73,12 @@ async def on_message(message):
         await client.send_message(message.channel, embed=embed)
 
     if message.content.startswith('!support'):
-        embed = (discord.Embed(title='Kofi support', description='Hey if you like my work and want to support me, you can do it here [Support me](https://ko-fi.com/takitsu)', colour=colour))
+        embed = (discord.Embed(title='Kofi support', description='Hey if you like my work and want to support me, you can do it here [Support my creativty](https://ko-fi.com/takitsu)', colour=colour))
         await client.send_message(message.channel, embed=embed)
 
 @client.event
 async def on_ready():
     await client.change_presence(game=discord.Game(name='!apex username | !help'))
 
-client.run(TOKEN)
+#
+client.run(process.env.TOKEN)

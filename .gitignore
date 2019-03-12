@@ -5,6 +5,7 @@ __pycache__/
 *test.py
 *discord.log
 *git.py
+*test.json
 
 # C extensions
 *.so

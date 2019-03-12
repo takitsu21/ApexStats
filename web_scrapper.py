@@ -9,11 +9,11 @@ headers = {'User-Agent':'Mozilla/5.0 (Windows NT x.y; Win64; x64; rv:10.0) Gecko
 reddit = 'https://www.reddit.com'
 server_status = 'https://apexlegendsstatus.com/datacenters'
 
-def get_server_status(*region):
-    response = requests.get(server_status, headers=headers)
-    page = BeautifulSoup(response.content, features="lxml")
-    for a in page.find_all(re.compile('^h5')):
-        print(a)
+# def get_server_status(*region):
+#     response = requests.get(server_status, headers=headers)
+#     page = BeautifulSoup(response.content, features="lxml")
+#     for a in page.find_all(re.compile('^h5')):
+#         print(a)
 
 def check_daily(a):
     a_list = a.split('/')
