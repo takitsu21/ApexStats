@@ -15,6 +15,10 @@ Discord bot that give your Apex Legends statistics and other features.
 
 * [discord.py](https://discordpy.readthedocs.io/en/latest/index.html) - The library used
 
+##Deployment
+
+This bot is deployed on Heroku's servers
+
 ## Author
 
 * **takitsu** 
