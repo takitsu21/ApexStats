@@ -11,8 +11,7 @@ handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(me
 logger.addHandler(handler)
 
 client = commands.Bot(command_prefix='!')
-
-COMMANDS = ['!apex','!reddit','!ss','!support']
+COMMANDS = ['!apex','!reddit','!ss','!support','!invite']
 colour = 0xc8db
 
 @client.event
@@ -86,6 +85,8 @@ async def on_message(message):
         embed = (discord.Embed(title='Kofi support', description='Hey if you like my work and want to support me, you can do it here [Support my creativty](https://ko-fi.com/takitsu)', colour=colour))
         await client.send_message(message.channel, embed=embed)
 
+    if message.content.startswith('!invite'):
+        await client.send_message(message.channel, '{0.author.mention} https://discordapp.com/oauth2/authorize?client_id=551446491886125059&scope=bot&permissions=52224'.format(message))
 @client.event
 async def on_ready():
     await client.change_presence(game=discord.Game(name='!apex username | !help'))
