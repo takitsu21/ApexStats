@@ -87,6 +87,7 @@ async def on_message(message):
 
     if message.content.startswith('!invite'):
         await client.send_message(message.channel, '{0.author.mention} https://discordapp.com/oauth2/authorize?client_id=551446491886125059&scope=bot&permissions=52224'.format(message))
+
 @client.event
 async def on_ready():
     await client.change_presence(game=discord.Game(name='!apex username | !help'))
