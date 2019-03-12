@@ -3,8 +3,6 @@
 import discord, logging, re, web_scrapper, time, datetime, os
 from discord.ext import commands
 from stats import *
-# from boto.s3.connection import S3Connection
-
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -12,10 +10,7 @@ handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w'
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
 
-# token = S3Connection(os.environ['TOKEN'])
 client = commands.Bot(command_prefix='!')
-
-# client=discord.Client()
 
 COMMANDS = ['!apex','!reddit','!ss','!support']
 colour = 0xc8db
@@ -27,15 +22,15 @@ async def on_message(message):
 
     if message.content.startswith('!debug'):
         args = message.content.split(' ')
-        data = get_data(args[1])
+        data = data_parser(args[1])
         embed = discord.Embed(colour=colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
 
         embed.set_thumbnail(url=message.author.avatar_url)
         embed.set_author(name='{} | Level {}'.format(data['name'],data['level']) , url=data['profile'], icon_url=client.user.avatar_url)
-        for key, value in data.items():
-            try:
-                embed.add_field(name="<:thonkang:219069250692841473>", value="these last two", inline=True)
-            except: pass
+        for i, key in enumerate(data['legends']):
+            for value in key[str(i)]:
+                print(key[str(i)][value])
+                embed.add_field(name=value, value=key[str(i)][value], inline=True)
         embed.set_footer(text="using apex.tracker.gg API", icon_url=client.user.avatar_url)
         await client.send_message(message.channel, embed=embed)
 
@@ -45,9 +40,9 @@ async def on_message(message):
             username = args[1]
             if len(args) == 3:
                 platform = platform_convert(args[2])
-                msg = get_data(username, platform)
+                msg = data_parser(username, platform)
             elif len(args) == 2:
-                msg = get_data(username)
+                msg = data_parser(username)
             await client.send_message(message.channel, msg)
         except:
             embed = (discord.Embed(title="Command: !apex", description="!apex username (Return Apex Legends stats)\n!apex username platform (XBOX,PSN) (Return Apex Legends stats according to the platform)", colour=colour))
@@ -83,5 +78,4 @@ async def on_message(message):
 async def on_ready():
     await client.change_presence(game=discord.Game(name='!apex username | !help'))
 
-#
 client.run(os.environ['TOKEN'])
