@@ -20,30 +20,42 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('!debug'):
-        args = message.content.split(' ')
-        data = data_parser(args[1])
-        embed = discord.Embed(colour=colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-
-        embed.set_thumbnail(url=message.author.avatar_url)
-        embed.set_author(name='{} | Level {}'.format(data['name'],data['level']) , url=data['profile'], icon_url=client.user.avatar_url)
-        for i, key in enumerate(data['legends']):
-            for value in key[str(i)]:
-                print(key[str(i)][value])
-                embed.add_field(name=value, value=key[str(i)][value], inline=True)
-        embed.set_footer(text="using apex.tracker.gg API", icon_url=client.user.avatar_url)
-        await client.send_message(message.channel, embed=embed)
-
     if message.content.startswith('!apex'):
         args = message.content.split(' ')
         try:
             username = args[1]
             if len(args) == 3:
                 platform = platform_convert(args[2])
-                msg = data_parser(username, platform)
+                data = data_parser(args[1], platform)
+                embed = discord.Embed(colour=colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                res = ''
+                embed.set_thumbnail(url=message.author.avatar_url)
+                embed.set_author(name='{} | Level {}'.format(data['name'],data['level']) , url=data['profile'], icon_url=client.user.avatar_url)
+                for i, key in enumerate(data['legends']):
+                    legend = key[str(i)].get('legend')
+                    for value in key[str(i)]:
+                        if key[str(i)][value] != legend:
+                            res += '**{}** : {}\n'.format(value, int(float(key[str(i)][value])))
+                    embed.add_field(name = '**{}**'.format(legend), value='{}'.format(res), inline=True)
+                    res=''
+                embed.set_footer(text="data provided by apex.tracker.gg | Bot created by takitsu", icon_url=client.user.avatar_url)
+
             elif len(args) == 2:
-                msg = data_parser(username)
-            await client.send_message(message.channel, msg)
+                data = data_parser(args[1])
+                embed = discord.Embed(colour=colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                res = ''
+                embed.set_thumbnail(url=message.author.avatar_url)
+                embed.set_author(name='{} | Level {}'.format(data['name'],data['level']) , url=data['profile'], icon_url=client.user.avatar_url)
+                for i, key in enumerate(data['legends']):
+                    legend = key[str(i)].get('legend')
+                    for value in key[str(i)]:
+                        if key[str(i)][value] != legend:
+                            res += '**{}** : {}\n'.format(value, int(float(key[str(i)][value])))
+                    embed.add_field(name = '**{}**'.format(legend), value='{}'.format(res), inline=True)
+                    res=''
+                embed.set_footer(text="data provided by apex.tracker.gg | Bot created by takitsu", icon_url=client.user.avatar_url)
+            await client.send_message(message.channel, embed=embed)
+
         except:
             embed = (discord.Embed(title="Command: !apex", description="!apex username (Return Apex Legends stats)\n!apex username platform (XBOX,PSN) (Return Apex Legends stats according to the platform)", colour=colour))
             await client.send_message(message.channel, embed=embed)
