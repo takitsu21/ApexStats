@@ -10,6 +10,7 @@ Discord bot that give your Apex Legends statistics and other features, for examp
 !reddit hot | !reddit top
 !ss
 !help
+!invite
 ```
 
 ## Built With
