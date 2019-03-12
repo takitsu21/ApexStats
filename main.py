@@ -38,7 +38,7 @@ async def on_message(message):
                             res += '**{}** : {}\n'.format(value, int(float(key[str(i)][value])))
                     embed.add_field(name = '**{}**'.format(legend), value='{}'.format(res), inline=True)
                     res=''
-                embed.set_footer(text="data provided by apex.tracker.gg | Bot created by takitsu", icon_url=client.user.avatar_url)
+                embed.set_footer(text="data provided by apex.tracker.gg | Bot created by takitsu (WIP)", icon_url=client.user.avatar_url)
 
             elif len(args) == 2:
                 data = data_parser(args[1])
