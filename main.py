@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 #coding:utf-8
-import discord, logging, re, web_scrapper, time, datetime
+import discord, logging, re, web_scrapper, time, datetime, os
 from discord.ext import commands
 from stats import *
+from boto.s3.connection import S3Connection
+
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -10,6 +12,7 @@ handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w'
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
 
+token = S3Connection(os.environ['TOKEN'])
 client = commands.Bot(command_prefix='!')
 
 # client=discord.Client()
@@ -81,4 +84,4 @@ async def on_ready():
     await client.change_presence(game=discord.Game(name='!apex username | !help'))
 
 #
-client.run(process.env.TOKEN)
+client.run(token)
