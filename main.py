@@ -90,6 +90,10 @@ async def on_message(message):
 
 @client.event
 async def on_ready():
-    await client.change_presence(game=discord.Game(name='!help | Servers: {}'.format(len(client.servers))))
+    active_servers = client.servers
+    nb_users = 0
+    for s in active_servers:
+        nb_users += len(s.members)
+    await client.change_presence(game=discord.Game(name='!help | Servers: {}'.format(nb_users)))
 
 client.run(os.environ['TOKEN'])
