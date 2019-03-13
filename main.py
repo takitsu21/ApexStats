@@ -94,6 +94,6 @@ async def on_ready():
     nb_users = 0
     for s in active_servers:
         nb_users += len(s.members)
-    await client.change_presence(game=discord.Game(name='!help | Servers: {}'.format(nb_users)))
+    await client.change_presence(game=discord.Game(name='!help | users: {}'.format(nb_users)))
 
 client.run(os.environ['TOKEN'])
