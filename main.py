@@ -88,6 +88,9 @@ async def on_message(message):
     if message.content.startswith('!invite'):
         await client.send_message(message.channel, '{0.author.mention} https://discordapp.com/oauth2/authorize?client_id=551446491886125059&scope=bot&permissions=52224'.format(message))
 
+    if message.content.startswith('!apvote'):
+        await client.send_message(message.channel, '{0.author.mention} ```[![Discord Bots](https://discordbots.org/api/widget/551446491886125059.svg)](https://discordbots.org/bot/551446491886125059)```'.format(message))
+
 @client.event
 async def on_ready():
     active_servers = client.servers
