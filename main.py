@@ -89,7 +89,7 @@ async def on_message(message):
         await client.send_message(message.channel, '{0.author.mention} https://discordapp.com/oauth2/authorize?client_id=551446491886125059&scope=bot&permissions=52224'.format(message))
 
     if message.content.startswith('!apvote'):
-        await client.send_message(message.channel, '{0.author.mention} ```[![Discord Bots](https://discordbots.org/api/widget/551446491886125059.svg)](https://discordbots.org/bot/551446491886125059)```'.format(message))
+        await client.send_message(message.channel, '{0.author.mention} https://discordbots.org/bot/551446491886125059/vote'.format(message))
 
 @client.event
 async def on_ready():
@@ -97,6 +97,6 @@ async def on_ready():
     nb_users = 0
     for s in active_servers:
         nb_users += len(s.members)
-    await client.change_presence(game=discord.Game(name='!help | users: {}'.format(nb_users)))
+    await client.change_presence(game=discord.Game(name='!help | Users: {}'.format(nb_users)))
 
 client.run(os.environ['TOKEN'])
