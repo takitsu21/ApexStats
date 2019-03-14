@@ -11,7 +11,7 @@ handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(me
 logger.addHandler(handler)
 
 client = commands.Bot(command_prefix='!')
-COMMANDS = ['!apex','!reddit','!ss','!support','!invite']
+COMMANDS = ['**!apex**','**!reddit**','**!ss**','**!support**','**!invite**','**!apvote**']
 colour = 0xc8db
 
 @client.event
@@ -75,18 +75,18 @@ async def on_message(message):
             await client.send_message(message.channel, msg)
         except Exception as e:
             embed = (discord.Embed(title='Command: !reddit', description='!reddit hot (Return random recent hot on r/apexlegends)\n!reddit top (Return random recent top on r/apexlegends)', colour=colour))
-            await client.send_message(message.channel, embed=embed)
+            await client.send_message(message.channel, embed = embed)
 
     if message.content.startswith('!ss'):
         embed = (discord.Embed(title='Server Status', description='[Apex Server Status](https://apexlegendsstatus.com/datacenters)', colour=colour))
-        await client.send_message(message.channel, embed=embed)
+        await client.send_message(message.channel, embed = embed)
 
     if message.content.startswith('!support'):
         embed = (discord.Embed(title='Kofi support', description='Hey if you like my work and want to support me, you can do it here [Support my creativty](https://ko-fi.com/takitsu)', colour=colour))
-        await client.send_message(message.channel, embed=embed)
+        await client.send_message(message.channel, embed = embed)
 
     if message.content.startswith('!invite'):
-        await client.send_message(message.channel, '{0.author.mention} https://discordapp.com/oauth2/authorize?client_id=551446491886125059&scope=bot&permissions=52224'.format(message))
+        await client.send_message(message.channel, '{0.author.mention} https://discordbots.org/bot/551446491886125059/'.format(message))
 
     if message.content.startswith('!apvote'):
         await client.send_message(message.channel, '{0.author.mention} https://discordbots.org/bot/551446491886125059/vote'.format(message))
