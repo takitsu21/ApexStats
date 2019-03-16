@@ -24,8 +24,7 @@ async def on_message(message):
         try:
             username = args[1]
             if len(args) == 3:
-                platform = platform_convert(args[2])
-                data = data_parser(args[1], str(platform))
+                data = data_parser(args[1], args[2])
                 embed = discord.Embed(colour=colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                 res = ''
                 embed.set_thumbnail(url=message.author.avatar_url)
