@@ -3,7 +3,7 @@
 # Apex Stats BOT
 
 Discord bot that give your Apex Legends statistics and other features, for example : 
-![alt text](https://imgur.com/94Sdg0O)
+![alt text](https://i.imgur.com/94Sdg0O.png)
 
 ## Commands
 
