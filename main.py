@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 #coding:utf-8
-import discord, re, time, datetime, os
+
+import discord, re, time, datetime, os, aiohttp, asyncio
 from discord.ext import commands
 from ressources.stats import *
 import ressources.web_scrapper as scrap_data
@@ -133,8 +134,12 @@ async def on_message(message):
 async def on_ready():
     active_servers = client.servers
     nb_users = 0
-    for s in active_servers:
-        nb_users += len(s.members)
-    await client.change_presence(game=discord.Game(name='!aphelp | Users: {} Servers : {}'.format(nb_users, len(active_servers))))
+    while True:
+        for s in active_servers:
+            nb_users += len(s.members)
+        await client.change_presence(game=discord.Game(name='!aphelp | Users: {} Servers : {}'.format(nb_users, len(active_servers))))
+        nb_users = 0
+        await asyncio.sleep(600)
+
 
 client.run(os.environ['TOKEN'])
