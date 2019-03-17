@@ -3,6 +3,6 @@
 **!support**
 **!invite**
 **!apvote**
-**!discord
+**!discord**
 !leaderboard (soon)
 !ss (server status soon)

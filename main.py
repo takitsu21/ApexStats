@@ -49,7 +49,7 @@ async def on_message(message):
             await client.send_message(message.channel, embed=embed)
 
         except Exception as e:
-            embed = discord.Embed(title="Command: !apex", description="!apex <username> (Return Apex Legends stats)\n!apex <username> <platform> (XBOX,PSN)", colour=colour)
+            embed = discord.Embed(title="Command: !apex", description="!apex <username> (Return Apex Legends stats for PC)\n!apex <username> <platform> (XBOX,PSN)", colour=colour)
             embed.set_thumbnail(url=client.user.avatar_url)
             embed.set_footer(text="Bot created by Taki#0853 (WIP)", icon_url=client.user.avatar_url)
             await client.send_message(message.channel, embed=embed)

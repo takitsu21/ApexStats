@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #coding:utf-8
-import requests, re
+import requests, re, unicodedata
 from random import randint
 from bs4 import BeautifulSoup
 
@@ -28,18 +28,37 @@ def reddit_post(filtre):
 
 class ApexStatus:
     def __init__(self):
-        self.cookies = {'lang': 'EN'}
-        self.response = requests.get(status, cookies=self.cookies)
+        self.response = requests.get(status, cookies={'lang': 'EN'})
         self.page = BeautifulSoup(self.response.content, features="lxml")
 
     def get_server_status(self, region):
         referencies = {'eu':'europe','na':'north america',
                        'sa':'south america','as':'asia','oc':'oceania'}
-        res=''
-        for i in range(len(self.page.find_all("div",class_="card-header"))):
-            res+=str(self.page.find_all("div",class_="card-header")[i])
-        soup = BeautifulSoup(self.response.text, features='lxml')
+        servers=[]
+        ping = []
+        status = {}
+        tag = BeautifulSoup(self.response.content, features='lxml')
+        for i in range(len(tag.find_all("div", class_="container"))):
+            print(tag.find("div", class_="container").div)
+            # if 'europe' in str(tag.find_all("div", class_="container")).lower():
+        # for i in range(len(self.page.find_all("div",class_="card-header"))):
+        #     try:
+        #         soup_server = BeautifulSoup(str(self.page.find_all("div",class_="card-header")[i]), features='lxml')
+        #         server = unicodedata.normalize("NFKD", soup_server.get_text())
+        #         soup_ms = BeautifulSoup(str(self.page.find_all("p",class_="card-text")[i]), features='lxml')
+        #         ms = unicodedata.normalize("NFKD", soup_ms.get_text())
+        #         last_div_tag = tag.find("div", class_="container")
+        #         status[server.lstrip()] = ms
+        #     except Exception as e:
+        #         print(e)
+
+            # servers.append(server.lstrip())
+            # ping.append(ms)
+        # print(status)
 
     def save_content(self):
         with open('status.html','w',encoding='utf8') as f:
             f.write(self.response.text)
+
+aps = ApexStatus()
+aps.get_server_status('eu')
