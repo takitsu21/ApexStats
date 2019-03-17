@@ -49,13 +49,16 @@ async def on_message(message):
             await client.send_message(message.channel, embed=embed)
 
         except Exception as e:
-            embed = (discord.Embed(title="Command: !apex", description="!apex <username> (Return Apex Legends stats)\n!apex <username> <platform> (XBOX,PSN)", colour=colour))
+            embed = discord.Embed(title="Command: !apex", description="!apex <username> (Return Apex Legends stats)\n!apex <username> <platform> (XBOX,PSN)", colour=colour)
+            embed.set_thumbnail(url=client.user.avatar_url)
+            embed.set_footer(text="Bot created by Taki#0853 (WIP)", icon_url=client.user.avatar_url)
             await client.send_message(message.channel, embed=embed)
 
     if message.content.startswith('!aphelp'):
         with open('commands.txt','r',encoding='utf8') as f:
             embed = discord.Embed(title='Commands: ', description=''.join(f.readlines()), colour=colour)
-        embed.set_thumbnail(url=message.author.avatar_url)
+
+        embed.set_thumbnail(url=client.user.avatar_url)
         embed.set_footer(text="Bot created by Taki#0853 (WIP)", icon_url=client.user.avatar_url)
         ch = await client.start_private_message(message.author)
         await client.send_message(ch, embed=embed)
