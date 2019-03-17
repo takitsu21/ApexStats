@@ -59,6 +59,3 @@ class ApexStatus:
     def save_content(self):
         with open('status.html','w',encoding='utf8') as f:
             f.write(self.response.text)
-
-aps = ApexStatus()
-aps.get_server_status('eu')

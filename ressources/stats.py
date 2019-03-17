@@ -20,6 +20,13 @@ def data_parser(pseudo, platform = 'pc'):
         legends_stat.append({str(i):stat_tmp})
         stat_tmp = {}
     data['legends'] = legends_stat
+
+    all_stats = {}
+    for _all in _json['data']['stats']:
+        if _all['metadata']['name'] != 'Level':
+            all_stats[_all['metadata']['name']] = _all['displayValue']
+
+    data['all'] = all_stats
     return data
 
 def platform_convert(s):

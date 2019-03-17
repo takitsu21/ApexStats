@@ -7,6 +7,7 @@ __pycache__/
 *git.py
 *test.json
 *status.html
+*log.txt
 
 # C extensions
 *.so
