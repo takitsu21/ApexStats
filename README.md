@@ -1,9 +1,9 @@
+[![Discord Bots](https://discordbots.org/api/widget/551446491886125059.svg)](https://discordbots.org/bot/551446491886125059)
+
 # Apex Stats BOT
 
 Discord bot that give your Apex Legends statistics and other features, for example : 
 ![alt text](https://i.imgur.com/SqDb8pv.png)
-
-[![Discord Bots](https://discordbots.org/api/widget/551446491886125059.svg)](https://discordbots.org/bot/551446491886125059)
 
 ## Commands
 
