@@ -1,17 +1,11 @@
 #!/usr/bin/env python3
 #coding:utf-8
-import discord, logging, re, web_scrapper, time, datetime, os
+import discord, re, time, datetime, os
 from discord.ext import commands
-from stats import *
-
-logger = logging.getLogger('discord')
-logger.setLevel(logging.DEBUG)
-handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
-handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
-logger.addHandler(handler)
+from ressources.stats import *
+import ressources.web_scrapper as scrap_data
 
 client = commands.Bot(command_prefix='!')
-COMMANDS = ['**!apex**','**!reddit**','**!ss**','**!support**','**!invite**','**!apvote**']
 colour = 0xc8db
 
 @client.event
@@ -24,8 +18,7 @@ async def on_message(message):
         try:
             username = args[1]
             if len(args) == 3:
-                platform = platform_convert(args[2])
-                data = data_parser(args[1], platform)
+                data = data_parser(args[1], args[2])
                 embed = discord.Embed(colour=colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                 res = ''
                 embed.set_thumbnail(url=message.author.avatar_url)
@@ -55,12 +48,15 @@ async def on_message(message):
                 embed.set_footer(text="data provided by apex.tracker.gg | Bot created by Taki#0853 (WIP)", icon_url=client.user.avatar_url)
             await client.send_message(message.channel, embed=embed)
 
-        except:
-            embed = (discord.Embed(title="Command: !apex", description="!apex username (Return Apex Legends stats)\n!apex username platform (XBOX,PSN) (Return Apex Legends stats according to the platform)", colour=colour))
+        except Exception as e:
+            embed = (discord.Embed(title="Command: !apex", description="!apex <username> (Return Apex Legends stats)\n!apex <username> <platform> (XBOX,PSN)", colour=colour))
             await client.send_message(message.channel, embed=embed)
 
-    if message.content.startswith('!help'):
-        embed = (discord.Embed(title='Commands: ', description='\n'.join(COMMANDS), colour=colour))
+    if message.content.startswith('!aphelp'):
+        with open('commands.txt','r',encoding='utf8') as f:
+            embed = discord.Embed(title='Commands: ', description=''.join(f.readlines()), colour=colour)
+        embed.set_thumbnail(url=message.author.avatar_url)
+        embed.set_footer(text="Bot created by Taki#0853 (WIP)", icon_url=client.user.avatar_url)
         ch = await client.start_private_message(message.author)
         await client.send_message(ch, embed=embed)
 
@@ -69,20 +65,26 @@ async def on_message(message):
         try:
             reddit_parameter = args[1]
             if reddit_parameter == 'hot':
-                msg = web_scrapper.reddit_post('hot')
+                msg = scrap_data.reddit_post('hot')
             elif reddit_parameter == 'top':
-                msg = web_scrapper.reddit_post('top')
+                msg = scrap_data.reddit_post('top')
             await client.send_message(message.channel, msg)
         except Exception as e:
-            embed = (discord.Embed(title='Command: !reddit', description='!reddit hot (Return random recent hot on r/apexlegends)\n!reddit top (Return random recent top on r/apexlegends)', colour=colour))
+            embed = (discord.Embed(title='Command: !reddit', description='!reddit <hot/top> (Return random recent hot/top on r/apexlegends)', colour=colour))
+            embed.set_thumbnail(url=client.user.avatar_url)
+            embed.set_footer(text="Bot created by Taki#0853 (WIP)", icon_url=client.user.avatar_url)
             await client.send_message(message.channel, embed = embed)
 
     if message.content.startswith('!ss'):
         embed = (discord.Embed(title='Server Status', description='[Apex Server Status](https://apexlegendsstatus.com/datacenters)', colour=colour))
+        embed.set_thumbnail(url=client.user.avatar_url)
+        embed.set_footer(text="Bot created by Taki#0853 (WIP)", icon_url=client.user.avatar_url)
         await client.send_message(message.channel, embed = embed)
 
     if message.content.startswith('!support'):
         embed = (discord.Embed(title='Kofi support', description='Hey if you like my work and want to support me, you can do it here [Support my creativty](https://ko-fi.com/takitsu)', colour=colour))
+        embed.set_thumbnail(url=client.user.avatar_url)
+        embed.set_footer(text="Bot created by Taki#0853 (WIP)", icon_url=client.user.avatar_url)
         await client.send_message(message.channel, embed = embed)
 
     if message.content.startswith('!invite'):
@@ -91,12 +93,19 @@ async def on_message(message):
     if message.content.startswith('!apvote'):
         await client.send_message(message.channel, '{0.author.mention} https://discordbots.org/bot/551446491886125059/vote'.format(message))
 
+    if message.content.startswith('!leaderboard'):
+        pass
+
+    if message.content.startswith('!discord'):
+        await client.send_message(message.channel, '{0.author.mention} https://discordapp.com/invite/wTxbQYb'.format(message))
+
+
 @client.event
 async def on_ready():
     active_servers = client.servers
     nb_users = 0
     for s in active_servers:
         nb_users += len(s.members)
-    await client.change_presence(game=discord.Game(name='!help | Users: {}'.format(nb_users)))
+    await client.change_presence(game=discord.Game(name='!aphelp | Users: {} Servers : {}'.format(nb_users, len(active_servers))))
 
 client.run(os.environ['TOKEN'])

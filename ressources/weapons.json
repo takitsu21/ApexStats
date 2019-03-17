@@ -1,0 +1,186 @@
+{
+  "weapons":[
+    {
+      "RE45":{
+        "body": "11 (132 DPS)",
+        "headshot": "16 (192 DPS)",
+        "description":"Full-auto pistol."
+      }
+    },
+    {
+      "P2020":{
+        "body": "12 (84 DPS)",
+        "headshot": "18 (126 DPS)",
+        "description":"Semi-auto Pistol"
+
+      }
+    },
+    {
+      "Wingman":{
+        "body": "45 (135 DPS)",
+        "headshot": "90 (270 DPS)",
+        "description":"High powered revolver"
+
+      }
+    },
+    {
+      "EVA":{
+        "body": "63 (126 DPS)",
+        "headshot": "16 (180 DPS)",
+        "description":"Full-auto shotgun."
+
+      }
+    },
+    {
+      "Mastiff":{
+        "body": "144 (144 DPS)",
+        "headshot": "288 (288 DPS)",
+        "description":"Powerful semi-auto shotgun."
+
+      }
+    },
+    {
+      "Mozambique":{
+        "body": "45 (135 DPS)",
+        "headshot": "66 (198 DPS)",
+        "description":"Triple-barrel shotgun pistol."
+
+      }
+    },
+    {
+      "Peacekeeper":{
+        "body": "110 (110 DPS)",
+        "headshot": "165 (165 DPS)",
+        "description":"Lever-action shotgun."
+
+      }
+    },
+    {
+      "Alternator":{
+        "body": "13 (139 DPS)",
+        "headshot": "19 (203 DPS)",
+        "description":"Twin barrel full-auto SMG."
+
+      }
+    },
+    {
+      "Prowler":{
+        "body": "14 damage per bullet, 70 if you hit all the shots (186 DPS)",
+        "headshot": "21 damage per bullet, 105 if you hit all the shots (279 DPS)",
+        "description":"5-round burst SMG."
+
+      }
+    },
+    {
+      "R99":{
+        "body": "12 (216 DPS)",
+        "headshot": "18 (324 DPS)",
+        "description":"Rapid-fire automatic SMG."
+
+      }
+    },
+    {
+      "Havoc":{
+        "body": "18",
+        "headshot": "36",
+        "description":"Full-auto charged energy rifle."
+
+      }
+    },
+    {
+      "Hemlok":{
+        "body": "18 (144 DPS)",
+        "headshot": "24 (288 DPS)",
+        "description":"3-round burst assault rifle."
+
+      }
+    },
+    {
+      "R99":{
+        "body": "12 (216 DPS)",
+        "headshot": "18 (324 DPS)",
+        "description":"Rapid-fire automatic SMG."
+
+      }
+    },
+    {
+      "R301":{
+        "body": "14 (186 DPS)",
+        "headshot": "28 (336 DPS)",
+        "description":"Full-auto and high accuracy."
+
+      }
+    },
+    {
+      "Flatline":{
+        "body": "16 (160 DPS)",
+        "headshot": "32 (320 DPS)",
+        "description":"Full-auto with a punch."
+
+      }
+    },
+    {
+      "R301":{
+        "body": "14 (186 DPS)",
+        "headshot": "28 (336 DPS)",
+        "description":"Full-auto and high accuracy."
+
+      }
+    },
+    {
+      "Devotion":{
+        "body": "17 (255 DPS)",
+        "headshot": "34 (510 DPS)",
+        "description":"Full-auto energy LMG."
+
+      }
+    },
+    {
+      "R301":{
+        "body": "14 (186 DPS)",
+        "headshot": "28 (336 DPS)",
+        "description":"Full-auto and high accuracy."
+
+      }
+    },
+    {
+      "Spitfire":{
+        "body": "20 (180 DPS)",
+        "headshot": "40 (360 DPS)",
+        "description":"Full-auto LMG."
+
+      }
+    },
+    {
+      "G7scout":{
+        "body": "30 (120 DPS)",
+        "headshot": "60 (250 DPS)",
+        "description":"Semi-auto light sniper rifle"
+
+      }
+    },
+    {
+      "Kraber":{
+        "body": "125 (125 DPS)",
+        "headshot": "250 (250 DPS)",
+        "description":"Powerful bolt-action sniper rifle. Optic: 6x - 10x Variable."
+
+      }
+    },
+    {
+      "Longbow":{
+        "body": "55 (55 DPS)",
+        "headshot": "110 (110 DPS)",
+        "description":"Semi-auto sniper rifle"
+
+      }
+    },
+    {
+      "TripleTake":{
+        "body": "69 (69 DPS)",
+        "headshot": "138 (138 DPS)",
+        "description":"Triple-barrel sniper rifle."
+      }
+    }
+  ]
+}

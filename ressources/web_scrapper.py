@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 
 headers = {'User-Agent':'Mozilla/5.0 (Windows NT x.y; Win64; x64; rv:10.0) Gecko/20100101 Firefox/10.0'}
 reddit = 'https://www.reddit.com'
+status = 'https://apexlegendsstatus.com/datacenters'
 
 def check_daily(a):
     a_list = a.split('/')
@@ -23,3 +24,22 @@ def reddit_post(filtre):
         if a['href'].startswith('/r/apexlegends/comments/') and a['href'] not in hot_reddit_post and check_daily(a['href']):
             hot_reddit_post.append(a['href'])
     return reddit + hot_reddit_post[randint(0,len(hot_reddit_post)-1)]
+
+
+class ApexStatus:
+    def __init__(self):
+        self.cookies = {'lang': 'EN'}
+        self.response = requests.get(status, cookies=self.cookies)
+        self.page = BeautifulSoup(self.response.content, features="lxml")
+
+    def get_server_status(self, region):
+        referencies = {'eu':'europe','na':'north america',
+                       'sa':'south america','as':'asia','oc':'oceania'}
+        res=''
+        for i in range(len(self.page.find_all("div",class_="card-header"))):
+            res+=str(self.page.find_all("div",class_="card-header")[i])
+        soup = BeautifulSoup(self.response.text, features='lxml')
+
+    def save_content(self):
+        with open('status.html','w',encoding='utf8') as f:
+            f.write(self.response.text)
