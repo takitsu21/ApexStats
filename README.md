@@ -3,21 +3,25 @@
 # Apex Stats BOT
 
 Discord bot that give your Apex Legends statistics and other features, for example : 
-![alt text](https://i.imgur.com/SqDb8pv.png)
+![alt text](https://imgur.com/94Sdg0O)
 
 ## Commands
 
 ```
-!apex username | !apex username platform
-!reddit hot | !reddit top
-!ss
-!help
+!apex <username> 
+!apex <username> <platform>
+!reddit <hot/top>
+!ss (soon)
+!aphelp
 !invite
+!discord
+!support
+!leaderboard (soon)
 ```
 
 ## Built With
 
-* [discord.py](https://discordpy.readthedocs.io/en/latest/index.html) - The library used
+* [discord.py](https://discordpy.readthedocs.io/en/latest/index.html) - Library used
 
 ## Author
 
