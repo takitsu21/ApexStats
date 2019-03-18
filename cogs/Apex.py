@@ -1,4 +1,4 @@
-import discord
+import discord,asyncio`
 import time, datetime
 from discord.ext import commands
 from ressources.stats import *
