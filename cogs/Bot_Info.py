@@ -2,6 +2,8 @@
 import discord,asyncio
 from discord.ext import commands
 
+colour = 0xc8db
+
 class Bot_Info:
     def __init__(self,bot):
       self.bot = bot
