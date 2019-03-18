@@ -2,7 +2,8 @@
 #coding:utf-8
 import requests, os, json
 
-headers={'TRN-Api-Key':os.environ['TRN_API_KEY']}
+headers={'TRN-Api-Key':'590406fa-b989-4cb6-8085-45ff22ba89ed'}
+# headers={'TRN-Api-Key':os.environ['TRN_API_KEY']}
 
 def data_parser(pseudo, platform = 'pc'):
     _json = requests.get('https://public-api.tracker.gg/apex/v1/standard/profile/{}/{}'.format(platform_convert(platform),pseudo), headers = headers).json()
@@ -16,7 +17,7 @@ def data_parser(pseudo, platform = 'pc'):
     for i, _data in enumerate(_json['data']['children']):
         stat_tmp['legend'] = _data['metadata']['legend_name']
         for stat in _data['stats']:
-            stat_tmp[stat['metadata']['name']] = str(stat['value'])
+            stat_tmp[stat['metadata']['name']] = str(stat['displayValue'])
         legends_stat.append({str(i):stat_tmp})
         stat_tmp = {}
     data['legends'] = legends_stat
@@ -29,18 +30,21 @@ def data_parser(pseudo, platform = 'pc'):
     data['all'] = all_stats
     return data
 
+def leaderboard():
+    pass
+
 def platform_convert(s):
     if str(s).lower() == 'pc': return '5'
     elif str(s).lower() == 'psn': return '2'
     elif str(s).lower() == 'xbox': return '1'
 
-class WeaponStats:
-    def __init__(self, file = 'weapons.json'):
-        self.file = file
-
-    def get_weapon_by_args(self, args=''):
-        with open(self.file, 'r', encoding='utf8') as f:
-            data = json.load(f)
-            for p in data['weapons']:
-                for weapon in p:
-                    print(p['body'])
+# class WeaponStats:
+#     def __init__(self, file = 'weapons.json'):
+#         self.file = file
+#
+#     def get_weapon_by_args(self, args=''):
+#         with open(self.file, 'r', encoding='utf8') as f:
+#             data = json.load(f)
+#             for p in data['weapons']:
+#                 for weapon in p:
+#                     print(p['body'])

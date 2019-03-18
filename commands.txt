@@ -4,5 +4,5 @@
 **!invite**
 **!apvote**
 **!discord**
+**!apserver**
 !leaderboard (soon)
-!ss (server status soon)
