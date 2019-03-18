@@ -1,5 +1,5 @@
 # This cog is basically all the !support, !discord, !upvote, etc....
-import discord
+import discord,asyncio
 from discord.ext import commands
 
 class Bot_Info:
