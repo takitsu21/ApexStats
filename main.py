@@ -27,7 +27,7 @@ async def on_message(message):
                     legend = key[str(i)].get('legend')
                     for value in key[str(i)]:
                         if key[str(i)][value] != legend:
-                            res += '**{}** : {}\n'.format(value, int(float(key[str(i)][value])))
+                            res += '**{}** : {}\n'.format(value, key[str(i)][value])
                     embed.add_field(name = '**{}**'.format(legend), value='{}'.format(res), inline=True)
                     res = ''
                 for key, value in data['all'].items():
