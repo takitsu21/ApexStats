@@ -1,4 +1,4 @@
-import discord
+import discord,asyncio
 from discord.ext import commands
 import ressources.web_scrapper as scrap_data
 
