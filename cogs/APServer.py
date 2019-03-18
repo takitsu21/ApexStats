@@ -1,6 +1,8 @@
 import discord,asyncio
 from discord.ext import commands
 
+colour = 0xc8db
+
 class APServer:
   def __init__(self,bot):
     self.bot = bot
