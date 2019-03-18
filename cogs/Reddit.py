@@ -2,6 +2,8 @@ import discord,asyncio
 from discord.ext import commands
 import ressources.web_scrapper as scrap_data
 
+colour = 0xc8db`
+
 class Reddit:
   def __init__(self,bot):
     self.bot = bot
