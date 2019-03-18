@@ -3,6 +3,8 @@ import time, datetime
 from discord.ext import commands
 from ressources.stats import *
 
+colour = 0xc8db
+
 class Apex:
   def __init__(self,bot):
     """Pass the bot in as the bot not a string or a value, pass the client created using commands.Bot()"""
