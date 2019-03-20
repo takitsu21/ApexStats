@@ -10,7 +10,6 @@ client = commands.Bot(command_prefix='!', activity=discord.Game(name='Rebooting.
                       status=discord.Status('idle'), afk=True)
 colour = 0xc8db
 
-
 @client.event
 async def on_ready():
     await client.wait_until_ready() # Waiting for the bot to be ready
