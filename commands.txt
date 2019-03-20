@@ -1,8 +1,12 @@
-**!apex**
-**!reddit**
-**!support**
-**!invite**
-**!apvote**
-**!discord**
-**!apserver**
-!leaderboard (soon)
+**!apex** - return apex stats
+**!reddit** - return reddit post
+**!support** - return link to support me
+**!invite** - return bot link invite
+**!apvote** - return link to vote
+**!discord** - return discord creator
+**!apserver** - return apex legends status server
+**!apinfo** - return bot info
+**!drop** - return a random place to land
+**!legend** - return random legend to pick for the next game
+**!profile** (soon, implemanting database to save profile)
+**!leaderboard** (soon)

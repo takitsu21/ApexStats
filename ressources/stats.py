@@ -36,14 +36,3 @@ def platform_convert(s):
     if str(s).lower() == 'pc': return '5'
     elif str(s).lower() == 'psn': return '2'
     elif str(s).lower() == 'xbox': return '1'
-
-# class WeaponStats:
-#     def __init__(self, file = 'weapons.json'):
-#         self.file = file
-#
-#     def get_weapon_by_args(self, args=''):
-#         with open(self.file, 'r', encoding='utf8') as f:
-#             data = json.load(f)
-#             for p in data['weapons']:
-#                 for weapon in p:
-#                     print(p['body'])

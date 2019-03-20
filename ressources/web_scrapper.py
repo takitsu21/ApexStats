@@ -23,7 +23,7 @@ def reddit_post(filtre):
     for a in page.find_all('a',href=True):
         if a['href'].startswith('/r/apexlegends/comments/') and a['href'] not in hot_reddit_post and check_daily(a['href']):
             hot_reddit_post.append(a['href'])
-    return reddit + hot_reddit_post[randint(0,len(hot_reddit_post)-1)]    
+    return reddit + hot_reddit_post[randint(0,len(hot_reddit_post)-1)]
 
 class ApexStatus:
     def __init__(self):
@@ -65,5 +65,5 @@ class ApexStatus:
             else:
                 res+= '**{}** : {} {}\n'.format(key, value['ping'], value['latency_msg'])
             acc+=1
-        res += '\n(This feature needs to be improve)'
+        res += '\n(This feature will be improve)'
         return res
