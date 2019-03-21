@@ -43,7 +43,7 @@ class DataBase(commands.Cog):
             if len(args) == 0:
                 await ctx.send("Please provide a username and plaftorm you want to save to your profile")
                 return
-            if(len(args) >= 2):
+            if(len(args) >= 3):
                 await ctx.send("Too many arguments provided!")
                 return
             if len(args) == 1:
