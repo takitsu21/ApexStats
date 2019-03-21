@@ -67,5 +67,3 @@ async def on_ready():
         nb_users = 0
 
 # client.run(os.environ['TOKEN'])
-
-client.run('NTU3NjU2ODc1MzE5OTUxMzcy.D3QpbQ.IEpvTOUev4dAEdfw4sLuwOkszsE')
