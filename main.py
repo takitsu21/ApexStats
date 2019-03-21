@@ -56,7 +56,7 @@ async def on_ready():
             elif acc % 2 == 0:
                 t+=10
                 acc += 1
-                await client.change_presence(activity=discord.Activity(name=f'!aphelp | !profile (maintenance)', type=2))
+                await client.change_presence(activity=discord.Activity(name=f'!aphelp | !profile command (under maintenance)', type=2))
                 await asyncio.sleep(10)
             else:
                 t+=10
@@ -65,5 +65,4 @@ async def on_ready():
                 await asyncio.sleep(10)
         nb_users = 0
 
-# client.run(os.environ['TOKEN'])
-client.run('NTU3NjU2ODc1MzE5OTUxMzcy.D3VNAA.U3lHqg07KvGJtBmM2jDHmh6nPnY')
+client.run(os.environ['TOKEN'])

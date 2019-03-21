@@ -1,6 +1,6 @@
-__**New Command**__: **!profile** - using database to link your discord to your Apex Legends statistics!
+__**New Command**__: **!profile** - __(Under maintenance fixing issues)__
 **!apex** - returns apex stats
-**!profile help** - returns command for !profile and save your profile in database
+**!profile help** - //
 **!reddit** - returns reddit post
 **!support** - returns link to support me
 **!invite** - returns bot link invite

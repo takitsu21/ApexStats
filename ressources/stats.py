@@ -2,8 +2,8 @@
 #coding:utf-8
 import requests, os
 
-# headers={'TRN-Api-Key':os.environ['TRN_API_KEY']}
-headers={'TRN-Api-Key':'590406fa-b989-4cb6-8085-45ff22ba89ed'}
+headers={'TRN-Api-Key':os.environ['TRN_API_KEY']}
+
 def data_parser(pseudo, platform = 'pc'):
     _json = requests.get('https://public-api.tracker.gg/apex/v1/standard/profile/{}/{}'.format(platform_convert(platform),pseudo), headers = headers).json()
     if platform_convert(platform) == '1':
