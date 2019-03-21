@@ -10,6 +10,7 @@ class Apex(commands.Cog):
         """Pass the bot in as the bot not a string or a value, pass the ctx created using commands.Bot()"""
         self.bot = bot
 
+
     @commands.command(pass_context=True)
     async def apex(self, ctx, *args):
         """Displays apex stats for a given player (and platform)"""
@@ -74,12 +75,11 @@ class Apex(commands.Cog):
             embed.set_thumbnail(url= client_icon)
             embed.set_footer(text="data provided by apex.tracker.gg | Bot created by Taki#0853 (WIP)",
                              icon_url=client_icon)
-            print(e)
             await finding.edit(content='', embed=embed)
 
         except Exception as e:
-            embed = discord.Embed(title="Command: !apex",
-                                  description="!apex <username> - Return Apex Legends stats for PC\n!apex <username> <platform> (XBOX,PSN)",
+            embed = discord.Embed(title="__Command__: **!apex**",
+                                  description="!apex <username> - Returns Apex Legends stats for PC\n!apex <username> <platform> (XBOX,PSN)",
                                   timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=colour)
             embed.set_thumbnail(url=client_icon)
             embed.set_footer(text="data provided by apex.tracker.gg | Bot created by Taki#0853 (WIP)",

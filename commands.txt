@@ -1,12 +1,13 @@
-**!apex** - return apex stats
-**!reddit** - return reddit post
-**!support** - return link to support me
-**!invite** - return bot link invite
-**!apvote** - return link to vote
-**!discord** - return discord creator
-**!apserver** - return apex legends status server
-**!apinfo** - return bot info
-**!drop** - return a random place to land
-**!legend** - return random legend to pick for the next game
-**!profile** (soon, implemanting database to save profile)
+__**New Command**__: **!profile** - using database to link your discord to your Apex Legends statistics!
+**!apex** - returns apex stats
+**!profile help** - returns command for !profile and save your profile in database
+**!reddit** - returns reddit post
+**!support** - returns link to support me
+**!invite** - returns bot link invite
+**!apvote** - returns link to vote
+**!discord** - returns discord creator
+**!apserver** - returns apex legends status server
+**!apinfo** - returns bot info
+**!drop** - returns a random place to land
+**!legend** - returns random legend to pick for the next game
 **!leaderboard** (soon)
