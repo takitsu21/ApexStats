@@ -34,4 +34,4 @@ def change(table,user,value,newValue):
     sql_command = '''UPDATE ''' + table + ''' SET ''' + value + '''='''+"'"+ newValue +"'"+''' WHERE id=''' + "'" + user + "'" + ''';'''
     cursor.execute(sql_command)
     db.commit()
-    print("Changed " + user + "'s " + value + " value to " + newValue)
+    # print("Changed " + user + "'s " + value + " value to " + newValue)

@@ -5,20 +5,34 @@
 # Apex Stats BOT
 
 Discord bot that give your Apex Legends statistics and other features, for example :
-![alt text](https://i.imgur.com/94Sdg0O.png)
+<p align="center">
+<a href="https://i.imgur.com/AH9nQn3.png" >
+  <img src="https://i.imgur.com/AH9nQn3.png" alt="Example Apex stats" />
+ </a>
+ <a href="https://i.imgur.com/k9cryX8.png" >
+   <img src="https://i.imgur.com/k9cryX8.png" alt="Save your profile" />
+  </a>
+  <a href="https://i.imgur.com/LdQzPP5.png" >
+    <img src="https://i.imgur.com/LdQzPP5.png" alt="See your profile" />
+   </a>
+ </p>
 
 ## Commands
 
 ```
-!apex - return apex stats
-!reddit - return reddit post
-!support - return link to support me
-!invite - return bot link invite
-!apvote - return link to vote
-!discord - return discord creator
-!apserver - return apex legends status server
-!apinfo - return bot info
-!profile (soon, implemanting database to save profile)
+Commands:
+New Command: !profile - using database to link your discord to your Apex Legends statistics!
+!apex - returns apex stats
+!profile help - returns command for !profile and save your profile in database
+!reddit - returns reddit post
+!support - returns link to support me
+!invite - returns bot link invite
+!apvote - returns link to vote
+!discord - returns discord creator
+!apserver - returns apex legends status server
+!apinfo - returns bot info
+!drop - returns a random place to land
+!legend - returns random legend to pick for the next game
 !leaderboard (soon)
 ```
 

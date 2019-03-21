@@ -1,5 +1,7 @@
 import discord,asyncio
 from discord.ext import commands
+import ressources.SqlManagment as SqlManagment
+from ressources.stats import *
 
 colour = 0xc8db
 
