@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #coding:utf-8
-import requests, os, json
+import requests, os
 
 headers={'TRN-Api-Key':os.environ['TRN_API_KEY']}
 
@@ -36,3 +36,11 @@ def platform_convert(s):
     if str(s).lower() == 'pc': return '5'
     elif str(s).lower() == 'psn': return '2'
     elif str(s).lower() == 'xbox': return '1'
+
+def stats_exists(player, platform = 'pc'):
+    _json = requests.get('https://public-api.tracker.gg/apex/v1/standard/profile/{}/{}'.format(platform_convert(platform),player), headers = headers).json()
+    try:
+        if _json['errors']:
+            return False
+    except KeyError:
+        return True
