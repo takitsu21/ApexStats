@@ -44,5 +44,3 @@ def stats_exists(player, platform = 'pc'):
             return False
     except KeyError:
         return True
-
-# print(stats_exists('nicehat_taki'))
