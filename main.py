@@ -66,4 +66,4 @@ async def on_ready():
                 await asyncio.sleep(10)
         nb_users = 0
 
-# client.run(os.environ['TOKEN'])
+client.run(os.environ['TOKEN'])
