@@ -16,7 +16,6 @@ colour = 0xc8db
 @client.event
 async def on_guild_join(ctx):
     for member in ctx.members:
-        print(member.id)
         user = SqlManagment.select(str(member.id))
         if(len(user) == 0):
             SqlManagment.add_user(str(member.id),"NAN")
@@ -57,7 +56,7 @@ async def on_ready():
             elif acc % 2 == 0:
                 t+=10
                 acc += 1
-                await client.change_presence(activity=discord.Activity(name=f'!aphelp | !profile (link discord to stats)', type=2))
+                await client.change_presence(activity=discord.Activity(name=f'!aphelp | !profile (maintenance)', type=2))
                 await asyncio.sleep(10)
             else:
                 t+=10
@@ -66,4 +65,5 @@ async def on_ready():
                 await asyncio.sleep(10)
         nb_users = 0
 
-client.run(os.environ['TOKEN'])
+# client.run(os.environ['TOKEN'])
+client.run('NTU3NjU2ODc1MzE5OTUxMzcy.D3VNAA.U3lHqg07KvGJtBmM2jDHmh6nPnY')

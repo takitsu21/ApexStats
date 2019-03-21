@@ -8,7 +8,6 @@ __pycache__/
 *test.json
 *status.html
 *log.txt
-*players.db
 
 # C extensions
 *.so

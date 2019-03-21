@@ -12,6 +12,7 @@ class DataBase(commands.Cog):
 
     @commands.command(pass_context=True)
     async def idtodb(self,ctx):
+        print(ctx.author.id)
         if '162200556234866688' == str(ctx.author.id):
             user_added = 0
             for server in self.bot.guilds:
@@ -42,7 +43,7 @@ class DataBase(commands.Cog):
             if len(args) == 0:
                 await ctx.send("Please provide a username and plaftorm you want to save to your profile")
                 return
-            if(len(args) >= 3):
+            if(len(args) >= 2):
                 await ctx.send("Too many arguments provided!")
                 return
             if len(args) == 1:
