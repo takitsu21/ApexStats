@@ -1,6 +1,7 @@
-__**New Command**__: **!profile** - __(Under maintenance fixing issues)__
+__**New Command**__: **!profile** - You can now link your Discord account to your Apex Legends statistics!
+
 **!apex** - returns apex stats
-**!profile help** - //
+**!profile** *help* - returns help for !profile
 **!reddit** - returns reddit post
 **!support** - returns link to support me
 **!invite** - returns bot link invite

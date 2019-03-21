@@ -9,9 +9,8 @@ from cogs import Leaderboard, APServer, Bot_Info, Reddit, Help, Apex, DataBase, 
 
 client = commands.Bot(command_prefix='!', activity=discord.Game(name='Rebooting...'),
                       status=discord.Status('idle'), afk=True)
-# client = commands.Bot(command_prefix='!', status=discord.Status('offline'))
-colour = 0xc8db
 
+colour = 0xc8db
 
 @client.event
 async def on_guild_join(ctx):
@@ -19,8 +18,6 @@ async def on_guild_join(ctx):
         user = SqlManagment.select(str(member.id))
         if(len(user) == 0):
             SqlManagment.add_user(str(member.id),"NAN")
-        elif not (len(user) == 0):
-            pass
     await ctx.owner.send('Thanks for inviting me!\nPrefix : !\n Type !aphelp to get the commands!')
 
 @client.event
@@ -28,9 +25,6 @@ async def on_member_join(ctx):
     user = SqlManagment.select(str(ctx.id))
     if(len(user) == 0):
         SqlManagment.add_user(ctx.id,"NAN")
-    elif not (len(user) == 0):
-        pass
-
 
 @client.event
 async def on_ready():
@@ -54,9 +48,11 @@ async def on_ready():
                 t, acc = 0, 0
                 break #Update count every 10 mins
             elif acc % 2 == 0:
-                t+=10
+                t+=20
                 acc += 1
-                await client.change_presence(activity=discord.Activity(name=f'!aphelp | !profile command (under maintenance)', type=2))
+                await client.change_presence(activity=discord.Activity(name='!aphelp', type=2))
+                await asyncio.sleep(10)
+                await client.change_presence(activity=discord.Activity(name='!profile (link Discord to Apex stats)', type=2))
                 await asyncio.sleep(10)
             else:
                 t+=10
