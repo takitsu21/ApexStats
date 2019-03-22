@@ -9,6 +9,7 @@ __pycache__/
 *status.html
 *log.txt
 *players.db
+*ManageDB.py
 
 # C extensions
 *.so

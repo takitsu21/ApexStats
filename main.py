@@ -14,17 +14,11 @@ colour = 0xc8db
 
 @client.event
 async def on_guild_join(ctx):
-    # for member in ctx.members:
-    #     user = SqlManagment.select(str(member.id))
-    #     if(len(user) == 0):
-    #         SqlManagment.add_user(str(member.id),"NAN")
     await ctx.owner.send('Thanks for inviting me!\nPrefix : !\n Type !aphelp to get the commands!')
 
 # @client.event
 # async def on_member_join(ctx):
-#     user = SqlManagment.select(str(ctx.id))
-#     if(len(user) == 0):
-#         SqlManagment.add_user(ctx.id,"NAN")
+    # pass
 
 @client.event
 async def on_ready():
@@ -44,16 +38,14 @@ async def on_ready():
             nb_users += len(s.members)
 
         while True:
-            if t == 600:
+            if t >= 600:
                 t, acc = 0, 0
                 break #Update count every 10 mins
             elif acc % 2 == 0:
-                t+=20
+                t+=15
                 acc += 1
-                await client.change_presence(activity=discord.Activity(name='!aphelp', type=2))
-                await asyncio.sleep(10)
-                await client.change_presence(activity=discord.Activity(name='!profile (link Discord to Apex stats)', type=2))
-                await asyncio.sleep(10)
+                await client.change_presence(activity=discord.Activity(name='!aphelp & !profile (NEW)', type=2))
+                await asyncio.sleep(15)
             else:
                 t+=10
                 acc+=1
