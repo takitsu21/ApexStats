@@ -14,17 +14,17 @@ colour = 0xc8db
 
 @client.event
 async def on_guild_join(ctx):
-    for member in ctx.members:
-        user = SqlManagment.select(str(member.id))
-        if(len(user) == 0):
-            SqlManagment.add_user(str(member.id),"NAN")
+    # for member in ctx.members:
+    #     user = SqlManagment.select(str(member.id))
+    #     if(len(user) == 0):
+    #         SqlManagment.add_user(str(member.id),"NAN")
     await ctx.owner.send('Thanks for inviting me!\nPrefix : !\n Type !aphelp to get the commands!')
 
-@client.event
-async def on_member_join(ctx):
-    user = SqlManagment.select(str(ctx.id))
-    if(len(user) == 0):
-        SqlManagment.add_user(ctx.id,"NAN")
+# @client.event
+# async def on_member_join(ctx):
+#     user = SqlManagment.select(str(ctx.id))
+#     if(len(user) == 0):
+#         SqlManagment.add_user(ctx.id,"NAN")
 
 @client.event
 async def on_ready():
