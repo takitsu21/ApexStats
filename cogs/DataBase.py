@@ -96,7 +96,7 @@ class DataBase(commands.Cog):
                 embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
                                  icon_url=client_icon)
             await finding.edit(content='',embed=embed)
-            stats.doRequestStatus()
+            # stats.doRequestStatus()
 
 def setup(bot):
     bot.add_cog(DataBase(bot))

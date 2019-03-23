@@ -24,7 +24,7 @@ class Stats:
 
 
     def getStats(self):
-        platform = 'xbl' if platformConvert(self.platform) == '1' else 'pc'
+        platform = 'xbl' if platformConvert(self.platform) == '1' else self.platform
         data = {"level":self.r['data']['metadata']['level'],
                 "name":self.r['data']['metadata']['platformUserHandle'],
                 "profile":f"https://apex.tracker.gg/profile/{platform}/{self.player}"}
