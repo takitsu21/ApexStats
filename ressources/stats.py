@@ -3,8 +3,10 @@
 import requests, os
 import ressources.SqlManagment as SqlManagment
 
-headers={'TRN-Api-Key':os.environ['TRN_API_KEY']}
-AUTH=os.environ['AUTH']
+# headers={'TRN-Api-Key':os.environ['TRN_API_KEY']}
+headers={'TRN-Api-Key':'590406fa-b989-4cb6-8085-45ff22ba89ed'}
+# AUTH=os.environ['AUTH']
+AUTH='Y7EHrBbjPAJfI5eYFehq'
 
 def platformConvert(s): #apex.tracker.gg
     if str(s).lower() == 'pc': return '5'
