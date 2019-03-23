@@ -85,11 +85,11 @@ class DataBase(commands.Cog):
                     legend = key[str(i)].get('legend')
                     for value in key[str(i)]:
                         if key[str(i)][value] != legend:
-                            res += '**{}** : {}\n'.format(value, key[str(i)][value])
+                            res += '***{}*** : {}\n'.format(value, key[str(i)][value])
                     embed.add_field(name = '__{}__'.format(legend), value='{}'.format(res), inline=True)
                     res = ''
                 for key, value in data['all'].items():
-                    all_value += '**{}** : {}\n'.format(key, value)
+                    all_value += '***{}*** : {}\n'.format(key, value)
                 embed.add_field(name = '__**All Stats**__',
                                 value='{}'.format(all_value),
                                  inline=True)
