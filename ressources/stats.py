@@ -16,17 +16,6 @@ def legendStatusConvert(platform: str = 'pc'): #apexlegendsstatus
     if platform.lower() == 'psn': return 'PS4'
     if platform.lower() == 'xbox': return 'X1'
 
-def leaderboardInit(self, leaderboard : dict = SqlManagment.createLeaderboard()):
-    data_stats = {}
-    for player, platform in leaderboard.items():
-        if statsExists(player, platform):
-            data_stats[self.r['data']['metadata']['platformUserHandle']] = r['data']['metadata']['level']
-    return data_stats
-
-def sortedLeaderboard():#+ to - by level
-     key_value ={}
-     return sorted(leaderboard_init().items(), key = lambda kv:(kv[1], kv[0]), reverse=True)
-
 class Stats:
     def __init__(self, player: str = '', platform: str = 'pc'):
         self.player = player
@@ -35,9 +24,7 @@ class Stats:
 
 
     def getStats(self):
-        platform = 'pc'
-        if platformConvert(self.platform) == '1':
-            platform = 'xbl'
+        platform = 'xbl' if platformConvert(self.platform) == '1' else 'pc'
         data = {"level":self.r['data']['metadata']['level'],
                 "name":self.r['data']['metadata']['platformUserHandle'],
                 "profile":f"https://apex.tracker.gg/profile/{platform}/{self.player}"}
@@ -66,3 +53,14 @@ class Stats:
 
     def iconUrl(self):
         return self.r['data']['children'][0]['metadata']['icon']
+
+    def leaderboardInit(self, leaderboard : dict = SqlManagment.createLeaderboard()):
+        data_stats = {}
+        for player, platform in leaderboard.items():
+            if statsExists(player, platform):
+                data_stats[self.r['data']['metadata']['platformUserHandle']] = r['data']['metadata']['level']
+        return data_stats
+
+    def sortedLeaderboard():#+ to - by level
+         key_value ={}
+         return sorted(self.leaderboardInit().items(), key = lambda kv:(kv[1], kv[0]), reverse=True)

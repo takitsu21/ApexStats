@@ -14,7 +14,7 @@ class DataBase(commands.Cog):
     async def profile(self,ctx, mode : str = "N", *args):
         userDb = SqlManagment.select(str(ctx.author.id))
         if not len(userDb):
-            SqlManagment.add_user(str(ctx.author.id),"NAN")
+            SqlManagment.addUser(str(ctx.author.id),"NAN")
         if mode.lower() == "help":
             embed = discord.Embed(title="__Command__: **!profile**",
                                   description="**!profile** help - Returns help for profile command\n**!profile** save <username> <platform>(PC, XBOX, PSN) - Link profile to your discord\n**!profile** display - returns your current saved username and platform\n**!profile** - Return your Apex Legends statistics if you linked a profile before",
