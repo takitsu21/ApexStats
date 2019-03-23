@@ -10,6 +10,7 @@ __pycache__/
 *log.txt
 *players.db
 *ManageDB.py
+*users.txt
 
 # C extensions
 *.so

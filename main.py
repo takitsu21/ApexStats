@@ -32,12 +32,16 @@ async def on_ready():
         print('All cogs loaded!')
     except Exception as e:
         print(f"Cogs can't be loaded : {e}")
-    nb_users,acc, t = 0, 0, 0
+    nb_users, acc, t = 0, 0, 0
     while True:
         for s in client.guilds:
             nb_users += len(s.members)
 
         while True:
+            # now = datetime.datetime.now()
+            # real_time = f'{now.hour:0>2}:{now.minute:0>2}'
+            # if real_time == '03:00':
+            #     leaderboard = sortedLeaderboard()
             if t >= 600:
                 t, acc = 0, 0
                 break #Update count every 10 mins

@@ -1,46 +1,68 @@
 #!/usr/bin/env python3
 #coding:utf-8
 import requests, os
+import ressources.SqlManagment as SqlManagment
 
 headers={'TRN-Api-Key':os.environ['TRN_API_KEY']}
+AUTH=os.environ['AUTH']
 
-def data_parser(pseudo, platform = 'pc'):
-    _json = requests.get('https://public-api.tracker.gg/apex/v1/standard/profile/{}/{}'.format(platform_convert(platform),pseudo), headers = headers).json()
-    if platform_convert(platform) == '1':
-        platform = 'xbl'
-    data = {"level":_json['data']['metadata']['level'],
-            "name":_json['data']['metadata']['platformUserHandle'],
-            "profile":"https://apex.tracker.gg/profile/{}/{}".format(platform,pseudo)}
-    stat_tmp = {}
-    legends_stat=[]
-    for i, _data in enumerate(_json['data']['children']):
-        stat_tmp['legend'] = _data['metadata']['legend_name']
-        for stat in _data['stats']:
-            stat_tmp[stat['metadata']['name']] = str(stat['displayValue'])
-        legends_stat.append({str(i):stat_tmp})
-        stat_tmp = {}
-    data['legends'] = legends_stat
-
-    all_stats = {}
-    for _all in _json['data']['stats']:
-        if _all['metadata']['name'] != 'Level':
-            all_stats[_all['metadata']['name']] = _all['displayValue']
-
-    data['all'] = all_stats
-    return data
-
-def leaderboard():
-    pass
-
-def platform_convert(s):
+def platformConvert(s): #apex.tracker.gg
     if str(s).lower() == 'pc': return '5'
     elif str(s).lower() == 'psn': return '2'
     elif str(s).lower() == 'xbox': return '1'
 
-def stats_exists(player, platform = 'pc'):
-    _json = requests.get('https://public-api.tracker.gg/apex/v1/standard/profile/{}/{}'.format(platform_convert(platform),player), headers = headers).json()
-    try:
-        if _json['errors']:
-            return False
-    except KeyError:
-        return True
+def legendStatusConvert(platform: str = 'pc'): #apexlegendsstatus
+    if platform.lower() == 'pc': return 'PC'
+    if platform.lower() == 'psn': return 'PS4'
+    if platform.lower() == 'xbox': return 'X1'
+
+def leaderboardInit(self, leaderboard : dict = SqlManagment.createLeaderboard()):
+    data_stats = {}
+    for player, platform in leaderboard.items():
+        if statsExists(player, platform):
+            data_stats[self.r['data']['metadata']['platformUserHandle']] = r['data']['metadata']['level']
+    return data_stats
+
+def sortedLeaderboard():#+ to - by level
+     key_value ={}
+     return sorted(leaderboard_init().items(), key = lambda kv:(kv[1], kv[0]), reverse=True)
+
+class Stats:
+    def __init__(self, player: str = '', platform: str = 'pc'):
+        self.player = player
+        self.platform = platform
+        self.r = requests.get(f'https://public-api.tracker.gg/apex/v1/standard/profile/{platformConvert(self.platform)}/{self.player}', headers = headers).json()
+
+
+    def getStats(self):
+        platform = 'pc'
+        if platformConvert(self.platform) == '1':
+            platform = 'xbl'
+        data = {"level":self.r['data']['metadata']['level'],
+                "name":self.r['data']['metadata']['platformUserHandle'],
+                "profile":f"https://apex.tracker.gg/profile/{platform}/{self.player}"}
+        stat_tmp, legends_stat = {}, []
+        for i, _data in enumerate(self.r['data']['children']):
+            stat_tmp['legend'] = _data['metadata']['legend_name']
+            for stat in _data['stats']:
+                stat_tmp[stat['metadata']['name']] = str(stat['displayValue'])
+            legends_stat.append({str(i):stat_tmp})
+            stat_tmp = {}
+
+        data['legends'] = legends_stat
+        all_stats = {}
+        for _all in self.r['data']['stats']:
+            if _all['metadata']['name'] != 'Level':
+                all_stats[_all['metadata']['name']] = _all['displayValue']
+
+        data['all'] = all_stats
+        return data
+
+    def statsExists(self):
+        return requests.get(f'https://public-api.tracker.gg/apex/v1/standard/profile/{platformConvert(self.platform)}/{self.player}', headers = headers).status_code == 200
+
+    def doRequestStatus(self): #Just do a request
+        return requests.get(f'http://api.apexlegendsstatus.com/bridge?platform={legendStatusConvert(self.platform)}&player={self.player}&auth={AUTH}&version=2')
+
+    def iconUrl(self):
+        return self.r['data']['children'][0]['metadata']['icon']

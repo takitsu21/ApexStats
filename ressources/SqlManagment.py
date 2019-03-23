@@ -22,7 +22,7 @@ try:
 except Exception as e:
     print(e)
 
-def add_user(id_number,user,platform='pc'):
+def addUser(id_number,user,platform: str = 'pc'):
     cursor = conn.cursor()
     sql = 'INSERT INTO users(id,username, platform) VALUES(%s, %s, %s);'
     cursor.execute(sql, (id_number, user, platform,))
@@ -44,3 +44,12 @@ def change(table,user,value,newValue):
     conn.commit()
 
     print("Changed " + user + "'s " + value + " value to " + newValue)
+
+def createLeaderboard():
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users")
+    rows = cursor.fetchall()
+    leaderboard_data = {}
+    for row in rows:
+        leaderboard_data[row[1]] = row[2]
+    return leaderboard_data
