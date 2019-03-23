@@ -14,14 +14,10 @@ def createTables():
     conn.commit()
 
 try:
-    # conn = psycopg2.connect(host=os.environ['host'],
-    #                     database=os.environ['database'],
-    #                     user=os.environ['user'],
-    #                     password=os.environ['password'])
-    conn = psycopg2.connect(host='ec2-54-247-70-127.eu-west-1.compute.amazonaws.com',
-                        database='d173l9ujjlp3vm',
-                        user='wrxxgxzbxyomnz',
-                        password='797aaf820688eabe6bd5ee111e45c25d688ee2a09ea62baf4c2a0688800da963')
+    conn = psycopg2.connect(host=os.environ['host'],
+                        database=os.environ['database'],
+                        user=os.environ['user'],
+                        password=os.environ['password'])
 
     createTables()
 except Exception as e:
