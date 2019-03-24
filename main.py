@@ -10,8 +10,6 @@ from cogs import Leaderboard, APServer, Bot_Info, Reddit, Help, Apex, DataBase, 
 client = commands.Bot(command_prefix='!', activity=discord.Game(name='Rebooting...'),
                       status=discord.Status('idle'), afk=True)
 
-colour = 0xc8db
-
 @client.event
 async def on_guild_join(ctx):
     await ctx.owner.send('Thanks for inviting me!\nPrefix : !\n Type !aphelp to get the commands!')

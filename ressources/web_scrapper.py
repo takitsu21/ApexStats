@@ -1,36 +1,40 @@
 #!/usr/bin/env python3
 #coding:utf-8
-import requests, re, unicodedata
-from random import randint
+import requests, re, unicodedata, random
 from bs4 import BeautifulSoup
 
 headers = {'User-Agent':'Mozilla/5.0 (Windows NT x.y; Win64; x64; rv:10.0) Gecko/20100101 Firefox/10.0'}
 reddit = 'https://www.reddit.com'
 SERVERS = 'https://apexlegendsstatus.com/datacenters'
 
-def check_daily(a):
+def checkDaily(a): #Cuz we don't want daily_discussion
     a_list = a.split('/')
     for c in a_list:
         if re.match(r'^(daily_discussion)\w+',c):
             return False
     return True
 
-def reddit_post(filtre):
-    url = '{}/r/apexlegends/{}'.format(reddit,filtre)
+def getSubjectTitle(a):
+    return a.split('/')[len(a.split('/'))-2]
+
+def redditPost(filter):
+    url = f'{reddit}/r/apexlegends/{filter}'
     response = requests.get(url, headers=headers)
     page = BeautifulSoup(response.content, features="lxml")
-    hot_reddit_post = []
+    redditPost = []
+    checkList = []
     for a in page.find_all('a',href=True):
-        if a['href'].startswith('/r/apexlegends/comments/') and a['href'] not in hot_reddit_post and check_daily(a['href']):
-            hot_reddit_post.append(a['href'])
-    return reddit + hot_reddit_post[randint(0,len(hot_reddit_post)-1)]
+        if a['href'].startswith('/r/apexlegends/comments/') and reddit + a['href'] not in checkList and checkDaily(a['href']):
+            checkList.append(reddit + a['href'])
+            redditPost.append('[r/apexlegends/{}]({}/{})\n'.format(getSubjectTitle(a['href']), reddit,a['href']))
+    return '\n'.join(redditPost)
 
 class ApexStatus:
     def __init__(self):
         self.response = requests.get(SERVERS, cookies={'lang': 'EN'})
         self.page = BeautifulSoup(self.response.content, features="lxml")
 
-    def get_server_status(self):
+    def getServerStatus(self):
         # referencies = {'eu':'europe','na':'north america',
         #                'sa':'south america','as':'asia','oc':'oceania'}
         info_server, status = {}, {}
@@ -59,7 +63,7 @@ class ApexStatus:
     def status(self):
         res = ''
         acc = 0
-        for key, value in self.get_server_status().items():
+        for key, value in self.getServerStatus().items():
             if acc % 2 == 0:
                 res+= '**{}** : {} {}  |   '.format(key, value['ping'], value['latency_msg'])
             else:

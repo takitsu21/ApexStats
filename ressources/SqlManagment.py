@@ -18,7 +18,6 @@ try:
                         database=os.environ['database'],
                         user=os.environ['user'],
                         password=os.environ['password'])
-
     createTables()
 except Exception as e:
     print(e)
