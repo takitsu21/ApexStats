@@ -4,37 +4,32 @@
 
 # Apex Stats BOT
 
-Discord bot that give your Apex Legends statistics and other features, for example :
-<p align="center">
-<a href="https://i.imgur.com/AH9nQn3.png" >
-  <img src="https://i.imgur.com/AH9nQn3.png" alt="Example Apex stats" />
- </a>
- <a href="https://i.imgur.com/k9cryX8.png" >
-   <img src="https://i.imgur.com/k9cryX8.png" alt="Save your profile" />
-  </a>
-  <a href="https://i.imgur.com/LdQzPP5.png" >
-    <img src="https://i.imgur.com/LdQzPP5.png" alt="See your profile" />
-   </a>
- </p>
+* This bot gives your Apex Legends statistics and has other features (You can save your Apex profile to Discord for example).
 
 ## Commands
 
-```
-Commands:
-New Command: !profile - using database to link your discord to your Apex Legends statistics!
-!apex - returns apex stats
-!profile help - returns command for !profile and save your profile in database
-!reddit - returns reddit post
-!support - returns link to support me
-!invite - returns bot link invite
-!apvote - returns link to vote
-!discord - returns discord creator
-!apserver - returns apex legends status server
-!apinfo - returns bot info
-!drop - returns a random place to land
-!legend - returns random legend to pick for the next game
-!leaderboard (soon)
-```
+* **New Command**: **`!profile`** - You can now link your Discord account to your Apex Legends statistics!
+
+* **`!apex`** - returns Apex stats commands
+* **`!profile help`** - returns help for !profile
+* **`!reddit <hot/top>`** - returns random reddit hot/top recent post on Apex Legends
+* **`!support`** - returns link to support me
+* **`!invite`** - returns bot link invite
+* **`!apvote`** - returns link to vote
+* **`!discord`** - returns discord creator
+* **`!apserver`** - returns apex legends status server
+* **`!apinfo`** - returns bot info
+* **`!drop`** - returns a random place to land
+* **`!legend`** - returns random legend to pick for the next game
+* **`!leaderboard`** (soon, will be the top 10 of the database)
+
+## Few examples
+
+![Example Apex stats](https://i.imgur.com/qyk6Uge.png)
+
+![Save your profile](https://i.imgur.com/BFLN6sJ.png)
+
+![See your profile](https://i.imgur.com/y7T3Dk5.png)
 
 ## Built With
 
@@ -48,10 +43,10 @@ New Command: !profile - using database to link your discord to your Apex Legends
 
 * [*RedstonedLife*](https://github.com/RedstonedLife/) have contribute to this project.
 
-## License
+### License
 
 This project is licensed under the GNU General Public License v3.0 License - see the [LICENSE.md](LICENSE) file for details.
 
-## Deployment
+### Deployment
 
 * Using Heroku environnement to deploy the bot.
