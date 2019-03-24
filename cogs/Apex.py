@@ -43,7 +43,7 @@ class Apex(commands.Cog):
                     embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
                                      icon_url=client_icon)
                 await finding.edit(content='',embed=embed)
-                # stats.doRequestStatus()
+                stats.doRequestStatus()
 
             else:
                 await ctx.send(f'{ctx.author.mention} Wrong platform! retry with `pc` | `xbox` | `psn`')
