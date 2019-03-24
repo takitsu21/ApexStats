@@ -26,7 +26,7 @@ def redditPost(filter):
     for a in page.find_all('a',href=True):
         if a['href'].startswith('/r/apexlegends/comments/') and reddit + a['href'] not in checkList and checkDaily(a['href']):
             checkList.append(reddit + a['href'])
-            redditPost.append('[r/apexlegends/{}]({}/{})\n'.format(getSubjectTitle(a['href']), reddit,a['href']))
+            redditPost.append('[r/apexlegends/{}]({})\n'.format(getSubjectTitle(a['href']), reddit + a['href']))
     return '\n'.join(redditPost)
 
 class ApexStatus:
