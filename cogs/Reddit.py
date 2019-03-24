@@ -9,8 +9,8 @@ class Reddit(commands.Cog):
         self.redditIcon = 'https://ya-webdesign.com/images/reddit-alien-png-3.png'
 
     @commands.command(pass_context=True)
-    async def reddit(self, ctx, parameter):
-        if not len(parameter):
+    async def reddit(self, ctx, parameter: str = ''):
+        if parameter == '':
             embed = (discord.Embed(title='Command: !reddit',
                                    description='!reddit <hot/top/best> - Return recent hot/top/best on r/apexlegends',
                                     colour=self.colour))
