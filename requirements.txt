@@ -5,3 +5,4 @@ lxml
 aiohttp
 asyncio
 psycopg2
+dblpy
