@@ -10,11 +10,20 @@ class Reddit(commands.Cog):
 
     @commands.command(pass_context=True)
     async def reddit(self, ctx, parameter):
+        if not len(parameter):
+            embed = (discord.Embed(title='Command: !reddit',
+                                   description='!reddit <hot/top/best> - Return recent hot/top/best on r/apexlegends',
+                                    colour=self.colour))
+            embed.set_thumbnail(url=self.redditIcon)
+            embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
+            print(e)
+            await ctx.send(embed = embed)
+            return
         try:
             if parameter in ['hot','top','best']:
                 searchReddit = await ctx.send(f'`Searching reddit {parameter} recents posts...`')
                 desc = reddit.redditPost(parameter)
-                embed = discord.Embed(title=f'**Reddit {parameter}** recents posts',
+                embed = discord.Embed(title=f'**Reddit {parameter}** recents posts in the last 24 hours',
                                                description=desc,
                                                 colour=self.colour)
                 embed.set_thumbnail(url=self.redditIcon)
