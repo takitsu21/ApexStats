@@ -3,12 +3,12 @@ from discord.ext import commands
 import ressources.SqlManagment as SqlManagment
 from ressources.stats import *
 
-colour = 0xc8db
 
 class DataBase(commands.Cog):
     """Save player profile and get player stats"""
     def __init__(self,bot):
         self.bot = bot
+        self.colour = 0xff0004
 
     @commands.command(pass_context=True)
     async def profile(self,ctx, mode : str = "N", *args):
@@ -18,7 +18,7 @@ class DataBase(commands.Cog):
         if mode.lower() == "help":
             embed = discord.Embed(title="__Command__: **!profile**",
                                   description="**!profile** help - Returns help for profile command\n**!profile** save <username> <platform>(PC, XBOX, PSN) - Link profile to your discord\n**!profile** display - returns your current saved username and platform\n**!profile** - Return your Apex Legends statistics if you linked a profile before",
-                                  timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=colour)
+                                  timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
             embed.set_thumbnail(url=ctx.guild.me.avatar_url)
             embed.set_footer(text="Made by Taki#0853 (WIP)",
                              icon_url=ctx.guild.me.avatar_url)
@@ -38,7 +38,7 @@ class DataBase(commands.Cog):
             if len(args) == 1:
                 embed = discord.Embed(title="__Command__: **!profile**",
                                       description="**!profile** help - Returns help for profile command\n**!profile** save <username> <platform>(PC, XBOX, PSN) - Link profile to your discord\n**!profile** display - returns your current saved username and platform\n**!profile** - Return your Apex Legends statistics if you linked a profile before",
-                                      timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=colour)
+                                      timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
                 embed.set_thumbnail(url=ctx.guild.me.avatar_url)
                 embed.set_footer(text="Made by Taki#0853 (WIP)",
                                  icon_url=ctx.guild.me.avatar_url)
@@ -62,7 +62,7 @@ class DataBase(commands.Cog):
             row = SqlManagment.select(str(ctx.author.id))
 
             if row[0][1] == "NAN":
-                embed = discord.Embed(title="__Command__: **!profile**",colour=0xc8db,
+                embed = discord.Embed(title="__Command__: **!profile**",colour=self.colour,
                                       description="**Sorry but I didn't find your profile on the database.**\n\n**!profile** help - Return help for profile command\n**!profile** save <username> <platform>(PC, XBOX, PSN) - Link profile to your discord\n**!profile** - Return your Apex Legends statistics if you linked a profile before",
                                       timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                 embed.set_thumbnail(url=ctx.guild.me.avatar_url)
@@ -75,7 +75,7 @@ class DataBase(commands.Cog):
                 finding = await ctx.send('Finding Stats...')
                 stats = Stats(row[0][1], row[0][2])
                 data = stats.getStats()
-                embed = discord.Embed(colour=colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                embed = discord.Embed(colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                 all_value, res = '', ''
                 embed.set_thumbnail(url = stats.iconUrl())
                 embed.set_author(name='{} | Level {}'.format(data['name'],data['level']) ,

@@ -7,7 +7,7 @@ class Apex(commands.Cog):
     def __init__(self, bot):
         """Display apex stats"""
         self.bot = bot
-        self.colour = 0xc8db
+        self.colour = 0xff0004
 
     @commands.command(pass_context=True)
     async def apex(self, ctx, player : str = '', platform : str = 'pc'):

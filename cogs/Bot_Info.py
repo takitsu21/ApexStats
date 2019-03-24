@@ -2,17 +2,17 @@
 import discord
 from discord.ext import commands
 import time
-colour = 0xc8db
 
 class Bot_Info(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
+        self.colour = 0xff0004
 
     @commands.command(pass_context=True)
     async def support(self,ctx):
         embed = discord.Embed(title='__Support me__ :',
                                description='Hey if you like my work and want to support me, you can do it here [__**Patreon**__](https://www.patreon.com/takitsu) or here [__**Buy me a Kofi**__](https://ko-fi.com/takitsu)',
-                                colour=colour)
+                                colour=self.colour)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
         embed.set_footer(text="Bot created by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
         await ctx.send(embed = embed)
@@ -31,7 +31,7 @@ class Bot_Info(commands.Cog):
 
     @commands.command(pass_context=True)
     async def apinfo(self,ctx):
-        embed = discord.Embed(title="__**Apex Stats**__",description="Apex Legends statistics infos and more...",color=colour)
+        embed = discord.Embed(title="__**Apex Stats**__",description="Apex Legends statistics infos and more...",color=self.colour)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
         embed.add_field(name="__Creator__",value="Taki#0853",inline=True)
         embed.add_field(name="*Contributor*",value="RedstonedLife#8787",inline=True)
@@ -49,12 +49,11 @@ class Bot_Info(commands.Cog):
 
     @commands.command(pass_context=True)
     async def apping(self,ctx):
-        # #"""Command not public for now"""
-        # await ctx.send(f'{self.bot.latency:.2f} ms')
+        """Ping's Bot"""
         before = time.monotonic()
         message = await ctx.send("Pong!")
         ping = (time.monotonic() - before) * 1000
-        await message.edit(content=f"Pong!  `{int(ping)}ms`")
+        await message.edit(content=f"Bot latency : `{int(ping)}ms`")
 
 def setup(bot):
     bot.add_cog(Bot_Info(bot))

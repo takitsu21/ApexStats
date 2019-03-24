@@ -17,7 +17,7 @@ def legendStatusConvert(platform: str = 'pc'): #apexlegendsstatus
     if platform.lower() == 'xbox': return 'X1'
 
 class Stats:
-    def __init__(self, player: str = '', platform: str = 'pc'):
+    def __init__(self, player, platform: str = 'pc'):
         self.player = player
         self.platform = platform
         self.r = requests.get(f'https://public-api.tracker.gg/apex/v1/standard/profile/{platformConvert(self.platform)}/{self.player}', headers = headers).json()
@@ -57,10 +57,10 @@ class Stats:
     def leaderboardInit(self, leaderboard : dict = SqlManagment.createLeaderboard()):
         data_stats = {}
         for player, platform in leaderboard.items():
-            if statsExists(player, platform):
+            if self.statsExists(player, platform):
                 data_stats[self.r['data']['metadata']['platformUserHandle']] = r['data']['metadata']['level']
         return data_stats
 
-    def sortedLeaderboard():#+ to - by level
+    def sortedLeaderboard(self):#+ to - by level
          key_value ={}
          return sorted(self.leaderboardInit().items(), key = lambda kv:(kv[1], kv[0]), reverse=True)
