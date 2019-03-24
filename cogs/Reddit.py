@@ -9,14 +9,13 @@ class Reddit(commands.Cog):
         self.redditIcon = 'https://ya-webdesign.com/images/reddit-alien-png-3.png'
 
     @commands.command(pass_context=True)
-    async def reddit(self, ctx, parameter: str = ''):
-        if parameter == '':
+    async def reddit(self, ctx, parameter: str = 'nan'):
+        if parameter == 'nan':
             embed = (discord.Embed(title='Command: !reddit',
                                    description='!reddit <hot/top/best> - Return recent hot/top/best on r/apexlegends',
                                     colour=self.colour))
             embed.set_thumbnail(url=self.redditIcon)
             embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
-            print(e)
             await ctx.send(embed = embed)
             return
         try:
