@@ -28,8 +28,6 @@ def addUser(id_number,user,platform: str = 'pc'):
     cursor.execute(sql, (id_number, user, platform,))
     conn.commit()
 
-    print("Added " + str(id_number) + " To database!")
-
 
 def select(user_id):
     cursor = conn.cursor()
@@ -44,6 +42,12 @@ def change(table,user,value,newValue):
     conn.commit()
 
     print("Changed " + user + "'s " + value + " value to " + newValue)
+
+def unlink(value):
+    cur = conn.cursor()
+    cur.execute("DELETE FROM users WHERE id={}".format(value))
+    conn.commit()
+
 
 def createLeaderboard():
     cursor = conn.cursor()

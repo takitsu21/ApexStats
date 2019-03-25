@@ -17,7 +17,7 @@ class DataBase(commands.Cog):
             SqlManagment.addUser(str(ctx.author.id),"NAN")
         if mode.lower() == "help":
             embed = discord.Embed(title="__Command__: **!profile**",
-                                  description="**!profile** help - Returns help for profile command\n**!profile** save <username> <platform>(PC, XBOX, PSN) - Link profile to your discord\n**!profile** display - returns your current saved username and platform\n**!profile** - Return your Apex Legends statistics if you linked a profile before",
+                                  description="**!profile** help - Returns help for profile command\n**!profile** save <username> <platform>(PC, XBOX, PSN) - Link profile to your discord\n**!profile** display - returns your current saved username and platform\n**!profile unlink** - Unlink your profile\n**!profile** - Return your Apex Legends statistics if you linked a profile before",
                                   timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
             embed.set_thumbnail(url=ctx.guild.me.avatar_url)
             embed.set_footer(text="Made by Taki#0853 (WIP)",
@@ -28,6 +28,15 @@ class DataBase(commands.Cog):
             user = SqlManagment.select(str(ctx.author.id))
             await ctx.send(f"{ctx.author.mention} The username you currently have in the database is `{user[0][1]}` and the platform is `{user[0][2]}`")
             return
+        if mode.lower() == 'unlink':
+            row = SqlManagment.select(str(ctx.author.id))
+            player, platform = row[0][1], row[0][2]
+            if player == 'NAN':
+                await ctx.send(f'{ctx.author.mention} Your profile is not yet registered in the database')
+            else:
+                SqlManagment.unlink(str(ctx.author.id))
+                await ctx.send(f'{ctx.author.mention} `{player}` on `{platform}` has been successfully unlinked!')
+            return
         if mode.lower() == "save":
             if len(args) == 0:
                 await ctx.send("Please provide a username and plaftorm you want to save to your profile")
@@ -37,7 +46,7 @@ class DataBase(commands.Cog):
                 return
             if len(args) == 1:
                 embed = discord.Embed(title="__Command__: **!profile**",
-                                      description="**!profile** help - Returns help for profile command\n**!profile** save <username> <platform>(PC, XBOX, PSN) - Link profile to your discord\n**!profile** display - returns your current saved username and platform\n**!profile** - Return your Apex Legends statistics if you linked a profile before",
+                                      description="**!profile** help - Returns help for profile command\n**!profile** save <username> <platform>(PC, XBOX, PSN) - Link profile to your discord\n**!profile** display - returns your current saved username and platform\n**!profile unlink** - Unlink your profile\n**!profile** - Return your Apex Legends statistics if you linked a profile before",
                                       timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
                 embed.set_thumbnail(url=ctx.guild.me.avatar_url)
                 embed.set_footer(text="Made by Taki#0853 (WIP)",
@@ -63,7 +72,7 @@ class DataBase(commands.Cog):
 
             if row[0][1] == "NAN":
                 embed = discord.Embed(title="__Command__: **!profile**",colour=self.colour,
-                                      description="**Sorry but I didn't find your profile on the database.**\n\n**!profile** help - Return help for profile command\n**!profile** save <username> <platform>(PC, XBOX, PSN) - Link profile to your discord\n**!profile** - Return your Apex Legends statistics if you linked a profile before",
+                                      description="**Sorry but I didn't find your profile on the database.**\n\n**!profile** help - Return help for profile command\n**!profile** save <username> <platform>(PC, XBOX, PSN) - Link profile to your discord\n**!profile unlink** - Unlink your profile\n**!profile** - Return your Apex Legends statistics if you linked a profile before",
                                       timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                 embed.set_thumbnail(url=ctx.guild.me.avatar_url)
                 embed.set_footer(text="Made by Taki#0853 (WIP)",
