@@ -1,7 +1,7 @@
-# This cog is basically all the !support, !discord, !upvote, etc....
+#coding: utf-8
 import discord
 from discord.ext import commands
-import time
+import time, datetime
 
 class Bot_Info(commands.Cog):
     def __init__(self,bot):
@@ -19,7 +19,7 @@ class Bot_Info(commands.Cog):
 
     @commands.command(pass_context=True)
     async def discord(self,ctx):
-        await ctx.send(f'{ctx.author.mention} https://discordapp.com/invite/wTxbQYb')
+        await ctx.send(f'{ctx.author.mention} If you need support, come on my discord https://discordapp.com/invite/wTxbQYb')
 
     @commands.command(pass_context=True)
     async def invite(self,ctx):
@@ -31,7 +31,9 @@ class Bot_Info(commands.Cog):
 
     @commands.command(pass_context=True)
     async def apinfo(self,ctx):
-        embed = discord.Embed(title="__**Apex Stats**__",description="Apex Legends statistics infos and more...",color=self.colour)
+        embed = discord.Embed(title="__**Apex Stats**__",description="Apex Legends statistics infos and more...",
+                              timestamp=datetime.datetime.utcfromtimestamp(time.time()),
+                              color=self.colour)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
         embed.add_field(name="__Creator__",value="Taki#0853",inline=True)
         embed.add_field(name="*Contributor*",value="RedstonedLife#8787",inline=True)
@@ -44,6 +46,9 @@ class Bot_Info(commands.Cog):
 
         embed.add_field(name="Servers",value=len(active_servers),inline=True)
         embed.add_field(name="Members",value=nb_users,inline=True)
+        embed.add_field(name = "Website", value="Visit the the website [**here**](https://apexstats.github.io/) (WIP)")
+        embed.set_footer(text="Made by Taki#0853 (WIP) | Website made by RedstonedLife#8787 (WIP)",
+                         icon_url=ctx.guild.me.avatar_url)
 
         await ctx.send(embed=embed)
 

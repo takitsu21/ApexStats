@@ -12,4 +12,5 @@ __**New Command**__: **!profile** - You can now link your Discord account to you
 **!drop** - returns a random place to land
 **!legend** - returns random legend to pick for the next game
 **!team** - returns a random team for Apex Legends
+**!apping** - retuns bot ping
 **!leaderboard** (soon)
