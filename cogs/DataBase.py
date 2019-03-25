@@ -72,7 +72,7 @@ class DataBase(commands.Cog):
                 return
             else:
                 client_icon = ctx.guild.me.avatar_url
-                finding = await ctx.send('Finding Stats...')
+                finding = await ctx.send('`Finding Stats...`')
                 stats = Stats(row[0][1], row[0][2])
                 data = stats.getStats()
                 embed = discord.Embed(colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))

@@ -10,7 +10,7 @@ class APServer(commands.Cog):
 
     @commands.command(pass_context=True)
     async def apserver(self,ctx):
-        statusServer = ctx.send('`Checking apexlegendsstatus.com...`')
+        statusServer = await ctx.send('`Checking apexlegendsstatus.com...`')
         try:
             Aps = server.ApexStatus()
             embed = discord.Embed(title='__**Apex Servers Status**__',
@@ -19,10 +19,11 @@ class APServer(commands.Cog):
             embed.set_thumbnail(url=ctx.guild.me.avatar_url)
             embed.set_footer(text="using apexlegendsstatus.com | Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
             await statusServer.edit(content='',embed = embed)
-        except:
+        except Exception as e:
             embed = discord.Embed(title='__**Apex Servers Status**__', description='[Apex Server Status](https://apexlegendsstatus.com/datacenters)', colour=self.colour)
             embed.set_thumbnail(url=ctx.guild.me.avatar_url)
             embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
+            print(f'{type(e).__name__} : {e}')
             await statusServer.edit(content='', embed=embed)
 
 def setup(bot):
