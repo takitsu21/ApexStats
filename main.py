@@ -29,7 +29,7 @@ async def on_ready():
                 client.load_extension(f'cogs.{file.split(".")[0]}')
         print('All cogs loaded!')
     except Exception as e:
-        print(f"Cogs can't be loaded : {e}")
+        print(f"Cogs can't be loaded\n{type(e).__name__} : {e}")
     nb_users, acc, t = 0, 0, 0
     while True:
         for s in client.guilds:

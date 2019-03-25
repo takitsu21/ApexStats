@@ -20,7 +20,7 @@ try:
                         password=os.environ['password'])
     createTables()
 except Exception as e:
-    print(e)
+    print(f'{type(e).__name__} {e}')
 
 def addUser(id_number,user,platform: str = 'pc'):
     cursor = conn.cursor()

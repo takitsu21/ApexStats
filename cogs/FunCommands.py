@@ -1,4 +1,4 @@
-import discord,asyncio,random, time, datetime
+import discord, asyncio, random, time, datetime
 from discord.ext import commands
 
 landings = {
@@ -97,11 +97,13 @@ class FunCommands(commands.Cog):
     @commands.command(pass_context=True)
     async def drop(self,ctx):
         land = random.choice(list(landings.keys()))
-        embed = discord.Embed(title="Next game land at",color=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+        embed = discord.Embed(title="Next game land at",
+                              color=self.colour,
+                              timestamp=datetime.datetime.utcfromtimestamp(time.time()))
         embed.add_field(name="__Location__",value=landings[land]["Name"],inline=True)
         embed.add_field(name="__Loot Tier__",value=landings[land]["Tier"],inline=True)
         embed.set_image(url=landings[land]["ICON_URL"])
-        embed.set_footer(text="command created by RedstonedLife#8787 | Bot created by Taki#0853 (WIP)",
+        embed.set_footer(text="command created by RedstonedLife#8787 | Made by Taki#0853 (WIP)",
                          icon_url = ctx.guild.me.avatar_url)
         await ctx.send(embed=embed)
 
@@ -113,7 +115,7 @@ class FunCommands(commands.Cog):
     @commands.command(pass_context=True)
     async def team(self, ctx):
         legends = ["Bangalore","Bloodhound","Lifeline","Pathfinder","Gibraltar","Wraith","Caustic","Mirage", "Octane"]
-        await ctx.send(f"{ctx.author.mention} Here is your team : `{legends.pop(legends.index(random.choice(legends)))}`, `{legends.pop(legends.index(random.choice(legends)))}`, `{legends.pop(legends.index(random.choice(legends)))}` HF ;)")
+        await ctx.send("{} Here is your team : `{}`, `{}`, `{}` HF".format(ctx.author.mention, legends.pop(legends.index(random.choice(legends))), legends.pop(legends.index(random.choice(legends))), legends.pop(legends.index(random.choice(legends)))))
 
 
 def setup(bot):

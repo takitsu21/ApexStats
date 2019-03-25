@@ -33,4 +33,7 @@ class DiscordBotsOrgAPI:
 def setup(bot):
     global logger
     logger = logging.getLogger('bot')
-    bot.add_cog(DiscordBotsOrgAPI(bot))
+    try:
+        bot.add_cog(DiscordBotsOrgAPI(bot))
+    except Exception as e:
+        print(f'{type(e).__name__} : {e}')
