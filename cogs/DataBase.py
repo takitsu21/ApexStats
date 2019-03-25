@@ -108,5 +108,7 @@ class DataBase(commands.Cog):
             stats.doRequestStatus()
 
 def setup(bot):
-    bot.add_cog(DataBase(bot))
-    print("Added DataBase cog!")
+    try:
+        bot.add_cog(DataBase(bot))
+    except:
+        pass

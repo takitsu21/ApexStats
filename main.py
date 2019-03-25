@@ -46,7 +46,7 @@ async def on_ready():
             elif acc % 2 == 0:
                 t+=15
                 acc += 1
-                await client.change_presence(activity=discord.Activity(name='!aphelp & !profile (NEW)', type=2))
+                await client.change_presence(activity=discord.Activity(name='!aphelp & !profile (MAINTENANCE)', type=2))
                 await asyncio.sleep(15)
             else:
                 t+=10
