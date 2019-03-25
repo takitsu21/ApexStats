@@ -14,7 +14,7 @@ landings = {
     },
     "Bridges": {
         "Name": "Bridges",
-        "Tier": "Epic Tier Loot",
+        "Tier": "Rare Tier Loot",
         "ICON_URL": "https://cdn.discordapp.com/attachments/547488986239860739/554748223315640331/Bridges.jpg"
     },
     "Bunker": {
@@ -24,12 +24,12 @@ landings = {
     },
     "Cascades": {
         "Name": "Cascades",
-        "Tier": "Epic Tier Loot",
+        "Tier": "Rare Tier Loot",
         "ICON_URL": "https://cdn.discordapp.com/attachments/547488986239860739/554748334540062750/Cascades.jpg"
     },
     "Hydro Dam": {
         "Name": "Hydro Dam",
-        "Tier": "Epic Tier Loot",
+        "Tier": "Common Tier Loot",
         "ICON_URL": "https://cdn.discordapp.com/attachments/547488986239860739/554748399916679191/HydroDam.jpg"
     },
     "Market": {
