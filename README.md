@@ -1,10 +1,10 @@
-<p align="center"><a href="https://discordbots.org/bot/551446491886125059" >
-  <img src="https://discordbots.org/api/widget/551446491886125059.svg" alt="Apex Stats" />
- </a></p>
+# Apex Stats
 
-# Apex Stats BOT
-
+* Discord BOT
 * This bot gives your Apex Legends statistics and has other features (You can save your Apex profile to Discord for example).
+<p align="center"><a href="https://discordbots.org/bot/551446491886125059" >
+  <img src="https://discordbots.org/api/widget/551446491886125059.svg?usernamecolor=FFFFFF&topcolor=000000" alt="Apex Stats" />
+ </a></p>
 
 ## Commands
 

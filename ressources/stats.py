@@ -49,8 +49,12 @@ class Stats:
         return requests.get(f'https://public-api.tracker.gg/apex/v1/standard/profile/{platformConvert(self.platform)}/{self.player}', headers = headers).status_code == 200
 
     def doRequestStatus(self): #Just do a request
-        return requests.get(f'http://api.apexlegendsstatus.com/bridge?platform={legendStatusConvert(self.platform)}&player={self.player}&auth={AUTH}&version=2')
-
+        try:
+            return requests.get(f'http://api.apexlegendsstatus.com/bridge?platform={legendStatusConvert(self.platform)}&player={self.player}&auth={AUTH}&version=2')
+        except Exception as e:
+            print(f'{type(e).__name__} : {e}')
+            return
+            
     def iconUrl(self):
         return self.r['data']['children'][0]['metadata']['icon']
 
