@@ -39,7 +39,32 @@ async def on_ready():
             print(f"{file} can't be loaded :\n {type(e).__name__} : {e}")
     print('All cogs loaded!')
     while True:
+<<<<<<< HEAD
         await client.change_presence(activity=discord.Activity(name='[a!help] (new prefix: a!) & {} servers'.format(len(client.guilds)), type=3))
         await asyncio.sleep(600)
+=======
+        for s in client.guilds:
+            nb_users += len(s.members)
+
+        while True:
+            # now = datetime.datetime.now()
+            # real_time = f'{now.hour:0>2}:{now.minute:0>2}'
+            # if real_time == '03:00':
+            #     leaderboard = sortedLeaderboard()
+            if t >= 600:
+                t, acc = 0, 0
+                break #Update count every 10 mins
+            elif acc % 2 == 0:
+                t+=15
+                acc += 1
+                await client.change_presence(activity=discord.Activity(name='!aphelp', type=2))
+                await asyncio.sleep(15)
+            else:
+                t+=10
+                acc+=1
+                await client.change_presence(activity=discord.Activity(name=f'{nb_users} Users & {len(client.guilds)} Servers', type=3))
+                await asyncio.sleep(10)
+        nb_users = 0
+>>>>>>> 75c8bd7b908d86264ab0a0d80c6b5f752ac576b2
 
 client.run(os.environ['TOKEN'])
