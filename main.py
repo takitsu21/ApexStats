@@ -2,9 +2,6 @@
 #coding:utf-8
 import discord, re, time, datetime, os, aiohttp, asyncio
 from discord.ext import commands
-# from ressources.stats import *
-# import ressources.web_scrapper as scrap_data
-# import ressources.SqlManagment as SqlManagment
 from cogs import Leaderboard, APServer, Bot_Info, Reddit, Help, Apex, DataBase, FunCommands, LeaderboardUpdate
 
 client = commands.Bot(command_prefix='a!', activity=discord.Game(name='Updating...'),
@@ -58,5 +55,5 @@ async def on_ready():
                 await client.change_presence(activity=discord.Activity(name='[a!help] & {} users'.format(nb_users), type=3))
                 await asyncio.sleep(10)
         nb_users = 0
-        
+
 client.run(os.environ['TOKEN'])
