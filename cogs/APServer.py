@@ -13,7 +13,7 @@ class APServer(commands.Cog):
         patch_note = "https://www.reddit.com/r/apexlegends/comments/b90snf/11_patch_notes/"
         embed = discord.Embed(colour=self.colour,
                               timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-        embed.add_field(name="**1.1 Patch Notes** 04/03/2019", value=f"[**Last patch note**]({patch_note})")
+        embed.add_field(name="**1.1 Patch Notes** (04/03/2019)", value=f"[**Last patch note**]({patch_note})")
         embed.set_thumbnail(url="https://ya-webdesign.com/images/reddit-alien-png-3.png")
         embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
         await ctx.send(embed=embed)
@@ -23,7 +23,7 @@ class APServer(commands.Cog):
         statusServer = await ctx.send('`Checking apexlegendsstatus.com...`')
         try:
             Aps = server.ApexStatus()
-            embed = discord.Embed(title='__**Apex Servers Status**__',
+            embed = discord.Embed(title='**Apex Servers Status**',
                                   description=f'{Aps.status()}',
                                    colour=self.colour)
             embed.set_thumbnail(url=ctx.guild.me.avatar_url)
