@@ -37,8 +37,6 @@ class ApexStatus:
         self.page = BeautifulSoup(self.response.content, features="lxml")
 
     def get_server_status(self):
-        # referencies = {'eu':'europe','na':'north america',
-        #                'sa':'south america','as':'asia','oc':'oceania'}
         info_server, status = {}, {}
         for i in range(len(self.page.find_all("div",class_="card-header"))):
             try:
@@ -70,12 +68,10 @@ class ApexStatus:
             if acc % 2 == 0:
                 res+= '**{}** : {} {}   |  '.format(key, value['ping'], value['latency_msg'])
             else:
-                res+= '**{}** : {} {}\n'.format(key, value['ping'], value['latency_msg'].strip(' '))
+                res+= '**{}** : {} {}\n'.format(key, value['ping'], value['latency_msg'])
             if len(res) >= 2000:
                 return old_res
-            print(len(res))
             acc+=1
-        res += '\n(This feature will be improve)'
         return res
 
 class ApexNews:

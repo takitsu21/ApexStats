@@ -18,7 +18,6 @@ class Leaderboard(commands.Cog):
                               timestamp=datetime.datetime.utcfromtimestamp(time.time()),
                               colour=self.colour)
         for row in rows:
-            # repr_leaderboard =  f'{row[0]} :trophy: **{row[1]}** : Level **{row[2]}**\n' if row[0] == '1' else f'{row[0]}# **{row[1]}** : Level **{row[2]}**\n'
             if row[0] == '1':
                 embed.add_field(name=f"__#{row[0]}__ **{row[1]}** :trophy:", value=f"Level **{row[2]}**", inline=False)
             else:
@@ -27,7 +26,6 @@ class Leaderboard(commands.Cog):
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
         embed.set_footer(text="Made by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
-        print(repr_leaderboard)
         await ctx.send(embed=embed)
 
 def setup(bot):

@@ -1,4 +1,4 @@
-import discord
+import discord, datetime, time
 from discord.ext import commands
 import ressources.web_scrapper as server
 
@@ -7,6 +7,16 @@ class APServer(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
         self.colour = 0xff0004
+
+    @commands.command(pass_context=True)
+    async def patch(self,ctx):
+        patch_note = "https://www.reddit.com/r/apexlegends/comments/b90snf/11_patch_notes/"
+        embed = discord.Embed(colour=self.colour,
+                              timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+        embed.add_field(name="**1.1 Patch Notes** 04/03/2019", value=f"[**Last patch note**]({patch_note})")
+        embed.set_thumbnail(url="https://ya-webdesign.com/images/reddit-alien-png-3.png")
+        embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
+        await ctx.send(embed=embed)
 
     @commands.command(pass_context=True)
     async def servers(self,ctx):
