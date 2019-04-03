@@ -38,8 +38,25 @@ async def on_ready():
         except Exception as e:
             print(f"{file} can't be loaded :\n {type(e).__name__} : {e}")
     print('All cogs loaded!')
+    nb_users, t, acc = 0,0,0
     while True:
-        await client.change_presence(activity=discord.Activity(name='[a!help] (new prefix: a!) & {} servers'.format(len(client.guilds)), type=3))
-        await asyncio.sleep(600)
-
+        for s in client.guilds:
+            nb_users += len(s.members)
+        while True:
+            if t >= 600:
+                t=0
+                acc = 0
+                break
+            if acc % 2 == 0:
+                t += 10
+                acc += 1
+                await client.change_presence(activity=discord.Activity(name='[a!help] & {} servers'.format(len(client.guilds)), type=3))
+                await asyncio.sleep(10)
+            else:
+                t += 10
+                acc += 1
+                await client.change_presence(activity=discord.Activity(name='[a!help] & {} users'.format(nb_users), type=3))
+                await asyncio.sleep(10)
+        nb_users = 0
+        
 client.run(os.environ['TOKEN'])
