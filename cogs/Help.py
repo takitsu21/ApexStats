@@ -4,7 +4,8 @@
 import discord
 from discord.ext import commands
 
-stats_commands = """**`a!stats <username> <platform>`** - returns apex stats
+stats_commands = """**`a!stats <username>`** - returns apex stats if you are on PC
+**`a!stats <username> <platform>(xbox,psn,pc)`** - returns apex stats
 **`a!profile save <username> <platform>`** - link your discord account to your apex stats
 **`a!profile display`** - returns your current saved profile
 **`a!profile unlink`** - unlink your profile
@@ -16,7 +17,7 @@ apex_commands = """**`a!news`** - returns 6 last apex legends news
 **`a!drop`** - returns a random place to land
 **`a!legend`** - returns random legend to pick for the next game
 **`a!team`** - returns a random team for Apex Legends
-**`a!patch` - returns live patch note**"""
+**`a!patch`** - returns live patch note"""
 
 other_commands = """**`a!ping`** - retuns bot latency
 **`a!about`** - returns bot info
