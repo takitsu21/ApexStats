@@ -9,51 +9,73 @@ class Bot_Info(commands.Cog):
         self.colour = 0xff0004
 
     @commands.command(pass_context=True)
-    async def support(self,ctx):
-        embed = discord.Embed(title='__Support me__ :',
-                               description='Hey if you like my work and want to support me, you can do it here [__**Patreon**__](https://www.patreon.com/takitsu) or here [__**Buy me a Kofi**__](https://ko-fi.com/takitsu)',
+    async def donate(self,ctx):
+        embed = discord.Embed(title='**Donate** :',
+                               description='[__**Patreon**__](https://www.patreon.com/takitsu) or here [__**Buy me a Kofi**__](https://ko-fi.com/takitsu)',
                                 colour=self.colour)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
-        embed.set_footer(text="Bot created by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
+        embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
         await ctx.send(embed = embed)
 
     @commands.command(pass_context=True)
-    async def discord(self,ctx):
-        await ctx.send(f'{ctx.author.mention} If you need support, come on my discord https://discordapp.com/invite/wTxbQYb')
+    async def support(self,ctx):
+        embed = discord.Embed(title='**Discord support**',
+                               description='[**Click here**](https://discordapp.com/invite/wTxbQYb)',
+                                colour=self.colour)
+        embed.set_thumbnail(url=ctx.guild.me.avatar_url)
+        embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
+
+        await ctx.send(embed = embed)
 
     @commands.command(pass_context=True)
     async def invite(self,ctx):
-        await ctx.send(f'{ctx.author.mention} https://discordapp.com/oauth2/authorize?client_id=551446491886125059&scope=bot&permissions=52224')
+        embed = discord.Embed(title='**Invite me** :',
+                               description='[**here**](https://discordapp.com/oauth2/authorize?client_id=551446491886125059&scope=bot&permissions=52224)',
+                                colour=self.colour)
+        embed.set_thumbnail(url=ctx.guild.me.avatar_url)
+        embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
+
+        await ctx.send(embed = embed)
 
     @commands.command(pass_context=True)
-    async def apvote(self,ctx):
-        await ctx.send(f'{ctx.author.mention} https://discordbots.org/bot/551446491886125059/vote')
+    async def vote(self,ctx):
+        embed = discord.Embed(title='**Vote for Apex Stats**',
+                               description='[**Click here**](https://discordbots.org/bot/551446491886125059/vote)',
+                                colour=self.colour)
+        embed.set_thumbnail(url=ctx.guild.me.avatar_url)
+        embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
+        await ctx.send(embed = embed)
 
     @commands.command(pass_context=True)
-    async def apinfo(self,ctx):
-        embed = discord.Embed(title="__**Apex Stats**__",description="Apex Legends statistics infos and more...",
-                              timestamp=datetime.datetime.utcfromtimestamp(time.time()),
+    async def about(self,ctx):
+        embed = discord.Embed(timestamp=datetime.datetime.utcfromtimestamp(time.time()),
                               color=self.colour)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
-        embed.add_field(name="__Creator__",value="Taki#0853",inline=True)
-        embed.add_field(name="*Contributor*",value="RedstonedLife#8787",inline=True)
-        embed.add_field(name="Prefix",value="!",inline=True)
+        embed.add_field(name="Vote",
+                        value="[**here**](https://discordbots.org/bot/551446491886125059/vote)",inline=True)
+        embed.add_field(name="Invite Apex Stats",
+                        value="[**here**](https://discordapp.com/oauth2/authorize?client_id=551446491886125059&scope=bot&permissions=52224)",inline=True)
+        embed.add_field(name="Support",
+                        value="[**here**](https://discordapp.com/invite/wTxbQYb)",inline=True)
 
-        active_servers = self.bot.guilds
+        embed.add_field(name="Prefix",value="a!",inline=True)
+
         nb_users = 0
-        for s in active_servers:
+        for s in self.bot.guilds:
             nb_users += len(s.members)
 
-        embed.add_field(name="Servers",value=len(active_servers),inline=True)
+        embed.add_field(name="Servers",value=len(self.bot.guilds),inline=True)
         embed.add_field(name="Members",value=nb_users,inline=True)
-        embed.add_field(name = "Website", value="Visit the the website [**here**](https://apexstats.github.io/) (WIP)")
-        embed.set_footer(text="Made by Taki#0853 (WIP) | Website made by RedstonedLife#8787 (WIP)",
+        embed.add_field(name = "Website", value="[**here**](https://apexstatistics.gitbook.io/workspace/)")
+        embed.add_field(name="**Creator**",value="Taki#0853",inline=True)
+        embed.add_field(name="*Contributor*",value="RedstonedLife#8787",inline=True)
+        embed.set_footer(text="Made by Taki#0853 (WIP)",
                          icon_url=ctx.guild.me.avatar_url)
 
         await ctx.send(embed=embed)
 
     @commands.command(pass_context=True)
-    async def apping(self,ctx):
+    async def ping(self,ctx):
         """Ping's Bot"""
         before = time.monotonic()
         message = await ctx.send("Pong!")

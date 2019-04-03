@@ -20,7 +20,7 @@ class Reddit(commands.Cog):
             return
         try:
             if parameter in ['hot','top','best']:
-                searchReddit = await ctx.send(f'`Searching reddit {parameter} recents posts...`')
+                searchReddit = await ctx.send(f'`Looking for reddit {parameter} recents posts...`')
                 desc = reddit.redditPost(parameter)
                 embed = discord.Embed(title=f'**Reddit {parameter}** recents posts in the last 24 hours',
                                                description=desc,

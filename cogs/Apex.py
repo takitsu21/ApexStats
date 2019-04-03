@@ -10,7 +10,7 @@ class Apex(commands.Cog):
         self.colour = 0xff0004
 
     @commands.command(pass_context=True)
-    async def apex(self, ctx, player : str = '', platform : str = 'pc'):
+    async def stats(self, ctx, player : str = '', platform : str = 'pc'):
         """Displays apex stats for a given player (and platform)"""
         user_icon = ctx.author.avatar_url
         client_icon = ctx.guild.me.avatar_url

@@ -1,0 +1,2 @@
+class UnvailableServices(Exception):
+    pass
