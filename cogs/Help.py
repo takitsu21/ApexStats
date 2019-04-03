@@ -8,14 +8,15 @@ stats_commands = """**`a!stats <username> <platform>`** - returns apex stats
 **`a!profile save <username> <platform>`** - link your discord account to your apex stats
 **`a!profile display`** - returns your current saved profile
 **`a!profile unlink`** - unlink your profile
-**`a!leaderboard`** (soon)"""
+**`a!leaderboard`** - returns top 10 database from our database"""
 
 apex_commands = """**`a!news`** - returns 6 last apex legends news
 **`a!servers`** - returns apex legends status server
 **`a!reddit <hot/top>`** - returns reddit recents post by categorie
 **`a!drop`** - returns a random place to land
 **`a!legend`** - returns random legend to pick for the next game
-**`a!team`** - returns a random team for Apex Legends"""
+**`a!team`** - returns a random team for Apex Legends
+**`a!patch` - returns live patch note**"""
 
 other_commands = """**`a!ping`** - retuns bot latency
 **`a!about`** - returns bot info
