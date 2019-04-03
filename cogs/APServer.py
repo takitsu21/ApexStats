@@ -9,7 +9,7 @@ class APServer(commands.Cog):
         self.colour = 0xff0004
 
     @commands.command(pass_context=True)
-    async def apserver(self,ctx):
+    async def servers(self,ctx):
         statusServer = await ctx.send('`Checking apexlegendsstatus.com...`')
         try:
             Aps = server.ApexStatus()

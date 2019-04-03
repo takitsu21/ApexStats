@@ -12,7 +12,7 @@ class DataBase(commands.Cog):
 
     @commands.command(pass_context=True)
     async def profile(self,ctx, mode : str = "N", *args):
-        userDb = SqlManagment.select(str(ctx.author.id))
+        userDb = SqlManagment.select('users', 'id', str(ctx.author.id))
         if not len(userDb):
             SqlManagment.addUser(str(ctx.author.id),"NAN")
         if mode.lower() == "help":
@@ -25,11 +25,11 @@ class DataBase(commands.Cog):
             await ctx.send(embed=embed)
             return
         if mode.lower() == "display":
-            user = SqlManagment.select(str(ctx.author.id))
+            user = SqlManagment.select('users', 'id', str(ctx.author.id))
             await ctx.send(f"{ctx.author.mention} The username you currently have in the database is `{user[0][1]}` and the platform is `{user[0][2]}`")
             return
         if mode.lower() == 'unlink':
-            row = SqlManagment.select(str(ctx.author.id))
+            row = SqlManagment.select('users', 'id', str(ctx.author.id))
             player, platform = row[0][1], row[0][2]
             if player == 'NAN':
                 await ctx.send(f'{ctx.author.mention} Your profile is not yet registered in the database')
@@ -68,7 +68,7 @@ class DataBase(commands.Cog):
 
         if(mode.lower() == "n"):
 
-            row = SqlManagment.select(str(ctx.author.id))
+            row = SqlManagment.select('users', 'id', str(ctx.author.id))
 
             if row[0][1] == "NAN":
                 embed = discord.Embed(title="__Command__: **!profile**",colour=self.colour,
@@ -108,7 +108,4 @@ class DataBase(commands.Cog):
             stats.doRequestStatus()
 
 def setup(bot):
-    try:
-        bot.add_cog(DataBase(bot))
-    except:
-        pass
+    bot.add_cog(DataBase(bot))

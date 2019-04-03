@@ -2,8 +2,9 @@
 #coding:utf-8
 import requests, re, unicodedata, random
 from bs4 import BeautifulSoup
+from ressources.exceptions import *
 
-headers = {'User-Agent':'Mozilla/5.0 (Windows NT x.y; Win64; x64; rv:10.0) Gecko/20100101 Firefox/10.0'}
+user_agent = {'User-Agent':'Mozilla/5.0 (Windows NT x.y; Win64; x64; rv:10.0) Gecko/20100101 Firefox/10.0'}
 reddit = 'https://www.reddit.com'
 SERVERS = 'https://apexlegendsstatus.com/datacenters'
 
@@ -19,7 +20,7 @@ def getSubjectTitle(a):
 
 def redditPost(filter):
     url = f'{reddit}/r/apexlegends/{filter}'
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=user_agent)
     page = BeautifulSoup(response.content, features="lxml")
     redditPost = []
     checkList = []
@@ -30,11 +31,12 @@ def redditPost(filter):
     return '\n'.join(redditPost)
 
 class ApexStatus:
+    """Returns Apex Legends server status"""
     def __init__(self):
         self.response = requests.get(SERVERS, cookies={'lang': 'EN'})
         self.page = BeautifulSoup(self.response.content, features="lxml")
 
-    def getServerStatus(self):
+    def get_server_status(self):
         # referencies = {'eu':'europe','na':'north america',
         #                'sa':'south america','as':'asia','oc':'oceania'}
         info_server, status = {}, {}
@@ -47,9 +49,9 @@ class ApexStatus:
                 soup_latency_msg = BeautifulSoup(str(self.page.find_all("h4", class_="card-title")[i]), features='lxml')
                 latency_normalize = unicodedata.normalize("NFKD", soup_latency_msg.get_text())
                 if latency_normalize.lower() == 'high latency':
-                    latency_normalize = ':warning:'
+                    latency_normalize = ' :warning:'+9*' '
                 elif latency_normalize.lower() == 'down':
-                    latency_normalize = ':x:'
+                    latency_normalize = ':x:'+ 14 * ' '
                 else:
                     latency_normalize = ':white_check_mark:'
                 info_server['ping'] = ms_normalize
@@ -63,11 +65,41 @@ class ApexStatus:
     def status(self):
         res = ''
         acc = 0
-        for key, value in self.getServerStatus().items():
+        for key, value in self.get_server_status().items():
+            old_res = res
             if acc % 2 == 0:
-                res+= '**{}** : {} {}  |   '.format(key, value['ping'], value['latency_msg'])
+                res+= '**{}** : {} {}   |  '.format(key, value['ping'], value['latency_msg'])
             else:
-                res+= '**{}** : {} {}\n'.format(key, value['ping'], value['latency_msg'])
+                res+= '**{}** : {} {}\n'.format(key, value['ping'], value['latency_msg'].strip(' '))
+            if len(res) >= 2000:
+                return old_res
+            print(len(res))
             acc+=1
         res += '\n(This feature will be improve)'
         return res
+
+class ApexNews:
+    """Returns last 6 Apex Legends news"""
+    def __init__(self, lang, limit=6):
+        self.news_url = "https://www.ea.com/games/apex-legends/news"
+        self.lang = lang
+        self.r = requests.get(self.news_url, cookies={'lang':self.lang}, headers=user_agent)
+        self.page = BeautifulSoup(self.r.content, features="lxml")
+        self.limit = limit
+        if not self.r.status_code == 200:
+            raise UnvailableServices(self.r.status_code)
+            quit()
+
+    def get_news(self):
+        news_link = []
+        acc = 1
+        for c in self.page.find_all("a", href=True):
+            if str(c['href']).startswith('/games/apex-legends/news/') and len(news_link) < self.limit:
+                if self.lang == 'en':
+                    news_link.append('**#{}** {}{}'.format(acc, "https://www.ea.com",c['href']))
+                    acc += 1
+                else:
+                    news_link.append('**#{}** {}{}'.format(acc, f"https://www.ea.com/{self.lang}-{self.lang}"
+                                                   ,c['href']))
+                    acc += 1
+        return '\n\n'.join(news_link)
