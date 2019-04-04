@@ -13,10 +13,10 @@ async def on_guild_join(ctx):
                         colour=0xff0004,
                         description= "Thanks for inviting me!")
     embed.add_field(name="**Prefix**", value="`a!`")
-    embed.add_field(name="**Commands**",
+    embed.add_field(name="**About Apex Stats**",
                     value="Type `a!help` to get all the commands!")
     embed.set_footer(text="Made by Taki#0853 (WIP)",
-                    icon_url=ctx.guild.me.avatar_url)
+                    icon_url=client.guild.me.avatar_url)
     await ctx.owner.send(embed = embed)
 
 # @client.event

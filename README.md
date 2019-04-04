@@ -8,20 +8,24 @@
 
 ## Commands
 
-* **New Command**: **`!profile`** - You can now link your Discord account to your Apex Legends statistics!
-
-* **`!apex`** - returns Apex stats commands
-* **`!profile help`** - returns help for !profile
-* **`!reddit <hot/top>`** - returns random reddit hot/top recent post on Apex Legends
-* **`!support`** - returns link to support me
-* **`!invite`** - returns bot link invite
-* **`!apvote`** - returns link to vote
-* **`!discord`** - returns discord creator
-* **`!apserver`** - returns apex legends status server
-* **`!apinfo`** - returns bot info
-* **`!drop`** - returns a random place to land
-* **`!legend`** - returns random legend to pick for the next game
-* **`!leaderboard`** (soon, will be the top 10 of the database)
+* **`a!stats <username> <platform>`** - returns apex stats
+* **`a!profile save <username> <platform>`** - link your discord account to your apex stats
+* **`a!profile display`** - returns your current saved profile
+* **`a!profile unlink`** - unlink your profile
+* **`a!leaderboard`** - returns top 10 database from our database
+* **`a!news`** - returns 6 last apex legends news
+* **`a!servers`** - returns apex legends status server
+* **`a!reddit <hot/top>`** - returns reddit recents post by categorie
+* **`a!drop`** - returns a random place to land
+* **`a!legend`** - returns random legend to pick for the next game
+* **`a!team`** - returns a random team for Apex Legends
+* **`a!ping`** - retuns bot latency
+* **`a!about`** - returns bot info
+* **`a!donate`** - returns link to support me
+* **`a!vote`** - returns link to vote
+* **`a!support`** - returns discord support
+* **`a!invite`** - returns bot link invite
+* **`a!patch`** - returns live patch note
 
 ## Few examples
 
