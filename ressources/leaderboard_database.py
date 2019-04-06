@@ -1,6 +1,6 @@
-import requests
+import ressources.SqlManagment as SqlManagment
 from ressources.tools import *
-import ressources.SqlManagment as  SqlManagment
+
 
 class CreateLeaderboard:
     def leaderboard_init(self, leaderboard : dict = SqlManagment.createLeaderboard()):
@@ -15,7 +15,7 @@ class CreateLeaderboard:
          return sorted(self.leaderboard_init().items(), key = lambda kv:(kv[1], kv[0]), reverse=True)
 
 
-    async def leaderboard_to_database(self):
+    def leaderboard_to_database(self):
         _leaderboard = self.sorted_leaderboard()
         SqlManagment.delete_table('leaderboard')
         SqlManagment.create_leaderboard()

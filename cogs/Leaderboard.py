@@ -1,8 +1,9 @@
-import discord,asyncio, datetime, time
+import datetime
+import discord
+import time
 from discord.ext import commands
-import ressources.SqlManagment
-from ressources.stats import *
 from ressources.leaderboard_database import *
+
 
 class Leaderboard(commands.Cog):
     def __init__(self, bot):
@@ -11,7 +12,6 @@ class Leaderboard(commands.Cog):
 
     @commands.command(pass_context=True)
     async def leaderboard(self, ctx):
-        repr_leaderboard = ''
         rows = SqlManagment.read_table('leaderboard')
         d = datetime.date.today()
         embed = discord.Embed(title=f"**Leaderboard ({d.day}/{d.month}/{d.year})**",

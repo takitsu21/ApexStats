@@ -12,18 +12,12 @@ class Stats:
         self.player = player
         self.platform = platform
         self.r = requests.get(f'https://public-api.tracker.gg/apex/v1/standard/profile/{platformConvert(self.platform)}/{self.player}', headers = headers).json()
-        # try:
-        #     if self.r["errors"]:
-        #     raise UnvailableServices("API DOWN")
-        #     quit()
-        # except:
-        #     pass
 
     def getStats(self):
         platform = 'xbl' if platformConvert(self.platform) == '1' else self.platform
         data = {"level":self.r['data']['metadata']['level'],
                 "name":self.r['data']['metadata']['platformUserHandle'],
-                "profile":f"https://apex.tracker.gg/profile/{platform}/{self.player}"}
+                "profile":f"https://apex.tracker.gg/profile/{platform.lower()}/{self.player}"}
         stat_tmp, legends_stat = {}, []
         for i, _data in enumerate(self.r['data']['children']):
             stat_tmp['legend'] = _data['metadata']['legend_name']

@@ -11,6 +11,8 @@ __pycache__/
 *players.db
 *ManageDB.py
 *users.txt
+*__init__.py
+*.idea
 
 # C extensions
 *.so
