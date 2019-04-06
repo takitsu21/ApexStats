@@ -11,6 +11,8 @@ class BugReport(commands.Cog):
 
     @commands.command(pass_context=True)
     async def bug(self, ctx, *message):
+        if not len(message):
+            return
         message = ' '.join(message)
         mail.send_msg(ctx.author.name, message)
         embed = discord.Embed(title='**Bug Report**',

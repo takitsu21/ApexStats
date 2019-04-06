@@ -3,8 +3,6 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 def send_msg(_from, message):
-    if not len(message):
-        return
     s = smtplib.SMTP(host='smtp.gmail.com', port=587)
     s.starttls()
 
