@@ -2,7 +2,6 @@
 #coding:utf-8
 import psycopg2, os
 
-
 def create_leaderboard():
     sql =""" CREATE TABLE IF NOT EXISTS leaderboard (
             position VARCHAR,
@@ -86,3 +85,8 @@ def delete_table(table):
     sql = f"DROP TABLE {table}"
     cur.execute(sql)
     conn.commit()
+#
+# delete_table('leaderboard')
+# create_leaderboard()
+# for i in range(10):
+#     add_position_leaderboard(str(i+1),'NAN', 'NAN')

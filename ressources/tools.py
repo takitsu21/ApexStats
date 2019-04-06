@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #coding:utf-8
-import os
+import os, requests, psycopg2
 headers={'TRN-Api-Key':os.environ['TRN_API_KEY']}
 AUTH=os.environ['AUTH']
 
