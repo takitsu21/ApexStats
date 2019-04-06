@@ -1,6 +1,4 @@
-import datetime
-import discord
-import time
+import discord, time, datetime
 from discord.ext import commands
 from ressources.leaderboard_database import *
 
