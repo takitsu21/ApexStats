@@ -12,6 +12,7 @@ __pycache__/
 *ManageDB.py
 *users.txt
 *.idea
+*__init__.py
 
 # C extensions
 *.so
