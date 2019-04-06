@@ -19,7 +19,8 @@ apex_commands = """**`a!news`** - returns 6 last apex legends news
 **`a!team`** - returns a random team for Apex Legends
 **`a!patch`** - returns live patch note"""
 
-other_commands = """**`a!ping`** - retuns bot latency
+other_commands = """**`a!bug <message>`** - send me a bug report, feedback helps a lot to improve the bot
+**`a!ping`** - retuns bot latency
 **`a!about`** - returns bot info
 **`a!donate`** - returns link to support me
 **`a!vote`** - returns link to vote
