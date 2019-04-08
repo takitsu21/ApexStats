@@ -52,7 +52,7 @@ class Help(commands.Cog):
     async def help(self,ctx):
         embed = discord.Embed(title='**Available commands:**',
                             colour=self.colour,
-                            description="Required argument : <>\nParameter available : <>(parameter1/parameter2/.../parameterN)\n[Commands website](https://apexstatistics.gitbook.io/)",
+                            description="Required argument : <>\nParameter available : <>(parameter1/parameter2/.../parameterN)\n[Commands website](https://apexstatistics.gitbook.io/)")
         embed.add_field(name="Stats commands:",value=stats_commands)
         embed.add_field(name="Apex Commands:",value=apex_commands)
         embed.add_field(name="Other commands:",value=other_commands)
