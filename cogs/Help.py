@@ -4,27 +4,29 @@
 import discord
 from discord.ext import commands
 
-stats_commands = """**`a!stats <username>`** - returns apex stats if you are on PC
-**`a!stats <username> <platform>(xbox,psn,pc)`** - returns apex stats
-**`a!profile save <username> <platform>`** - link your discord account to your apex stats
-**`a!profile display`** - returns your current saved profile
-**`a!profile unlink`** - unlink your profile
-**`a!leaderboard`** - returns top 10 database from our database"""
+stats_commands = """**`a!stats`** - Explanation about stats
+**`a!stats <username>`** - View Apex Legends statistics on PC only (shorter version)
+**`a!stats <username> <platform>(xbox,psn,pc)`** - View Apex Legends statistics
+**`a!profile save <username> <platform>`** - Link your Discord account to your Apex Legends stats
+**`a!profile display`** - View the current saved profile
+**`a!profile unlink`** - Unlink your profile
+**`a!leaderboard`** - Top 10 from database"""
 
-apex_commands = """**`a!news`** - returns 6 last apex legends news
-**`a!servers`** - returns apex legends status server
-**`a!reddit <hot/top>`** - returns reddit recents post by categorie
-**`a!drop`** - returns a random place to land
-**`a!legend`** - returns random legend to pick for the next game
-**`a!team`** - returns a random team for Apex Legends
-**`a!patch`** - returns live patch note"""
+apex_commands = """**`a!news`** - View 6 last news on Apex Legends
+**`a!servers`** - View all Apex Legends server status (ping, status, server name)
+**`a!reddit <categorie>(hot/top)`** - Recents post by categorie
+**`a!drop`** - Random place to land for the next game
+**`a!legend`** - Random legend to pick for the next game
+**`a!team`** - Entire random team for the next game
+**`a!patch`** - View live patch note"""
 
-other_commands = """**`a!bug <message>`** - send me a bug report, feedback helps a lot to improve the bot
-**`a!ping`** - retuns bot latency
-**`a!about`** - returns bot info
-**`a!donate`** - returns link to support me
-**`a!vote`** - returns link to vote
-**`a!support`** - returns discord support
+other_commands = """**`a!bug <message>`** - Send me a bug report, this will helps to improve the bot
+**`a!suggestion <message>`** - Suggestion to add for the bot, all suggestions are good don't hesitate
+**`a!ping`** - View bot latency
+**`a!about`** - Bot info
+**`a!donate`** - Link to support me
+**`a!vote`** - An other way to support me
+**`a!support`** - Discord support if you need help or want to discuss with me
 **`a!invite`** - returns bot link invite"""
 
 class Help(commands.Cog):
@@ -33,12 +35,24 @@ class Help(commands.Cog):
         self.bot = bot
         self.colour = 0xff0004
 
+    # @commands.command(pass_context=True)
+    # async def debug(self,ctx):
+    #     embed = discord.Embed(title='**debugger**',
+    #                 colour=self.colour,
+    #                 icon_url=ctx.guild.me.avatar_url)
+    #     embed.add_field(name=ctx.author,value=f"{ctx.author.id} and {ctx.author.name} and {str(ctx.author)} and {ctx.author.mention} and {str(ctx.author.mention)} and {list(self.bot.get_all_members())[0]}")
+    #     embed.set_thumbnail(url=ctx.guild.me.avatar_url)
+    #     embed.set_footer(text="Made by Taki#0853 (WIP)",
+    #                     icon_url=ctx.guild.me.avatar_url)
+    #     channel = self.bot.get_user(ctx.author.id)
+    #     await channel.send(embed=embed)
+
+
     @commands.command(pass_context=True)
     async def help(self,ctx):
         embed = discord.Embed(title='**Available commands:**',
                             colour=self.colour,
-                            description="[Commands website](https://apexstatistics.gitbook.io/workspace/)",
-                            icon_url=ctx.guild.me.avatar_url)
+                            description="Required argument : <>\nParameter available : <>(parameter1/parameter2/.../parameterN)\n[Commands website](https://apexstatistics.gitbook.io/)")
         embed.add_field(name="Stats commands:",value=stats_commands)
         embed.add_field(name="Apex Commands:",value=apex_commands)
         embed.add_field(name="Other commands:",value=other_commands)
@@ -50,4 +64,4 @@ class Help(commands.Cog):
 
 def setup(bot):
     bot.add_cog(Help(bot))
-    print("Added Help cog from cogs")
+    print("Added Help")

@@ -24,6 +24,18 @@ def create_users():
     cursor.execute(sql)
     conn.commit()
 
+def create_lfg():
+    sql =""" CREATE TABLE IF NOT EXISTS lfg (
+        discordid BIGSERIAL,
+        username VARCHAR,
+        platform VARCHAR,
+        region VARCHARk,
+        description VARCHAR
+    )
+    """
+    cursor = conn.cursor()  
+    cursor.execute(sql)
+    conn.commit()
 try:
     conn = psycopg2.connect(host=os.environ['host'],
                         database=os.environ['database'],
@@ -85,8 +97,5 @@ def delete_table(table):
     sql = f"DROP TABLE {table}"
     cur.execute(sql)
     conn.commit()
-#
-# delete_table('leaderboard')
-# create_leaderboard()
-# for i in range(10):
-#     add_position_leaderboard(str(i+1),'NAN', 'NAN')
+
+

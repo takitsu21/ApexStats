@@ -2,7 +2,7 @@ import smtplib, os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-def send_msg(_from, message):
+def send_msg(_from, message, subject):
     s = smtplib.SMTP(host='smtp.gmail.com', port=587)
     s.starttls()
 
@@ -11,7 +11,7 @@ def send_msg(_from, message):
 
     msg['From'] = f"Apex Stats - [{_from}]"
     msg['To'] = os.environ['MY_ADDR']
-    msg['Subject'] = "BUG REPORT"
+    msg['Subject'] = subject
     msg.attach(MIMEText(message, 'plain'))
     s.send_message(msg)
     del msg
