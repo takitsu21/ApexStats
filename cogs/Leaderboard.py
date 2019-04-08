@@ -1,6 +1,6 @@
 import discord, time, datetime
 from discord.ext import commands
-from ressources.leaderboard_database import *
+# from ressources.leaderboard_database import *
 
 
 class Leaderboard(commands.Cog):

@@ -11,7 +11,7 @@ __pycache__/
 *players.db
 *ManageDB.py
 *users.txt
-*.idea
+*.vscode
 *__init__.py
 
 # C extensions

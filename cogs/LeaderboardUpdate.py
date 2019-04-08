@@ -17,16 +17,10 @@ class LeaderboardUpdate(commands.Cog):
         while True:
             try:
                 await CreateLeaderboard().leaderboard_to_database()
-                # lead = CreateLeaderboard()
-                # _leaderboard = lead.sorted_leaderboard()
-                # SqlManagment.delete_table('leaderboard')
-                # SqlManagment.create_leaderboard()
-                # for i in range(10):
-                #     SqlManagment.add_position_leaderboard(str(i+1), _leaderboard[i][0], str(_leaderboard[i][1]))
             except Exception as e:
                 print(f'{type(e).__name__} : {e}')
             await asyncio.sleep(86400)
 
 def setup(bot):
     bot.add_cog(LeaderboardUpdate(bot))
-    print("Added LeaderboardUpdate Cog from cogs")
+    print("Added LeaderboardUpdate")

@@ -59,8 +59,9 @@ class Apex(commands.Cog):
 
         except Exception as e:
             embed = discord.Embed(title="**Command**: **`a!stats`**",
-                                  description="**`a!stats <username>`** - Returns Apex Legends stats for PC\n**`a!stats <username> <platform>(XBOX,PSN,PC)`**",
+                                  description="**`a!stats <username>`**\n**`a!stats <username> <platform>(pc,xbox,psn)`**",
                                   timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
+            embed.add_field(name="Stats explanation", value="- Stats are provided by [apex.tracker.gg](https://apex.tracker.gg/) API (stats might not be fully exact)\n\n- We can only get stats from selected banners\n\n- To update a legend stats you have to pick the legend wanted and then do **`a!stats <username> <platform>`**\n\n- It will keep all update you've done on your account\n\n- The «All Stats» value is just the sum of all banner **AVAILABLE** and **SELECTED** on each legends")
             embed.set_thumbnail(url=client_icon)
             embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
                              icon_url=client_icon)
@@ -69,4 +70,4 @@ class Apex(commands.Cog):
 
 def setup(bot):
     bot.add_cog(Apex(bot))
-    print("Added Apex Cog from cogs")
+    print("Added Apex")
