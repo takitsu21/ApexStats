@@ -53,7 +53,6 @@ class Help(commands.Cog):
         embed = discord.Embed(title='**Available commands:**',
                             colour=self.colour,
                             description="Required argument : <>\nParameter available : <>(parameter1/parameter2/.../parameterN)\n[Commands website](https://apexstatistics.gitbook.io/)",
-                            icon_url=ctx.guild.me.avatar_url)
         embed.add_field(name="Stats commands:",value=stats_commands)
         embed.add_field(name="Apex Commands:",value=apex_commands)
         embed.add_field(name="Other commands:",value=other_commands)
