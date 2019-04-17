@@ -19,10 +19,10 @@ class Apex(commands.Cog):
             if platform.lower() in ['pc','xbox','psn']:
                 stats = Stats(player, platform)
                 if len(player) >= 1:
-                    data = stats.getStats()
+                    data = stats.single_data()
                     embed = discord.Embed(colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                     all_value, res = '', ''
-                    embed.set_thumbnail(url = stats.iconUrl())
+                    embed.set_thumbnail(url = stats.get_icon())
                     embed.set_author(name='{} | Level {}'.format(data['name'],data['level']) ,
                                      url=data['profile'],
                                       icon_url=client_icon)
