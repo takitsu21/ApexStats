@@ -10,6 +10,14 @@ class Apex(commands.Cog):
         self.colour = 0xff0004
 
     @commands.command(pass_context=True)
+    async def map(self, ctx):
+        embed = discord.Embed(title="Map & Tier loot", colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+        embed.set_image(url="https://d1lss44hh2trtw.cloudfront.net/assets/editorial/2019/03/apex-legends-loot-tier-map.jpg")
+        embed.set_footer(text="Made by Taki#0853 (WIP)",
+                         icon_url=ctx.guild.me.avatar_url)
+        await ctx.send(embed=embed)       
+        
+    @commands.command(pass_context=True)
     async def stats(self, ctx, player : str = '', platform : str = 'pc'):
         """Displays apex stats for a given player (and platform)"""
         user_icon = ctx.author.avatar_url
