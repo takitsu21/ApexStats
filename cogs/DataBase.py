@@ -43,10 +43,10 @@ class DataBase(commands.Cog):
             return
         if mode.lower() == "save":
             if len(args) == 0:
-                await ctx.send("Please provide a username and plaftorm you want to save to your profile")
+                await ctx.send(":x: Please provide an username and the plaftorm you want to save to your profile")
                 return
             if len(args) >= 3:
-                await ctx.send("Too many arguments provided!")
+                await ctx.send(":x: Too many arguments provided!")
                 return
             if len(args) == 1:
                 embed = discord.Embed(title="Command: `a!profile`",
@@ -62,7 +62,7 @@ class DataBase(commands.Cog):
                 if platform.lower() in ['pc','xbox','psn']:
                     stats = Stats(player, platform)
                     if stats.exists():
-                        embed = discord.Embed(title="Your profile has been saved!",
+                        embed = discord.Embed(title=":white_check_mark: Your profile has been saved! :white_check_mark:",
                                                 description=f"You're in the database as `{player}` on `{platform}`",
                                                 timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
                         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
@@ -73,7 +73,7 @@ class DataBase(commands.Cog):
                         await finding.edit(content="", embed=embed)
                         return
                     else:
-                        embed = discord.Embed(title=f"Profile `{player}` on `{platform}` doesn't exist",
+                        embed = discord.Embed(title=f":x: Profile `{player}` on `{platform}` doesn't exist :x:",
                         description=f"{ctx.author.mention} This profile doesn't exist!\nRetry, you might have spelled it wrong",
                         timestamp=datetime.datetime.utcfromtimestamp(time.time()),colour=self.colour)
                         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
@@ -81,7 +81,7 @@ class DataBase(commands.Cog):
                                             icon_url=ctx.guild.me.avatar_url)
                         await finding.edit(content="", embed=embed)
                 else:
-                    embed = discord.Embed(title=f"Wrong platform",
+                    embed = discord.Embed(title=f":x: Wrong platform :x:",
                     description=f"{ctx.author.mention} Wrong platform selected!\nRetry with another platform `PC` | `XBOX` | `PSN`",
                     timestamp=datetime.datetime.utcfromtimestamp(time.time()),colour=self.colour)
                     embed.set_thumbnail(url=ctx.guild.me.avatar_url)
@@ -126,6 +126,7 @@ class DataBase(commands.Cog):
                 embed.add_field(name = '__**`All Stats`**__',
                                 value='{}'.format(all_value),
                                  inline=True)
+                embed.add_field(name=":point_down: You can vote", value="[**HERE**](https://discordbots.org/bot/551446491886125059/vote)")
                 embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
                                  icon_url=client_icon)
             await finding.edit(content='',embed=embed)

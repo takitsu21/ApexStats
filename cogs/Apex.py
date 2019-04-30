@@ -21,10 +21,9 @@ class Apex(commands.Cog):
 #             if memb.name.lower() == member:
 #                 embed = discord.Embed(title=f"{member} has been found as {memb.id} {self.bot.get_user(memb.id)}")
 #                 await ctx.send(embed=embed)
-
-    @commands.command(pass_context=True)
+            
     async def map(self, ctx):
-        embed = discord.Embed(title="Map & Tier loot", colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+        embed = discord.Embed(title="Map & loot Tier", colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
         embed.set_image(url="https://cdn.discordapp.com/attachments/564124036418895884/568389857970487298/apex-legends-loot-tier-map.jpg")
         embed.set_footer(text="Made by Taki#0853 (WIP)",
                          icon_url=ctx.guild.me.avatar_url)
@@ -63,12 +62,14 @@ class Apex(commands.Cog):
                     embed.add_field(name = '__**`All Stats`**__',
                                     value='{}'.format(all_value),
                                     inline=True)
+
+                    embed.add_field(name=":point_down: You can vote", value="[**HERE**](https://discordbots.org/bot/551446491886125059/vote)")
                     embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
                                     icon_url=client_icon)
                 await finding.edit(content='',embed=embed)
 
             else:
-                embed = discord.Embed(title="Wrong platform!",
+                embed = discord.Embed(title=":x: Wrong platform! :x:",
                 description=f'{ctx.author.mention} Wrong platform! retry with `pc` | `xbox` | `psn`')
                 embed.set_thumbnail(url=client_icon)
                 embed.set_footer(text="Made by Taki#0853 (WIP)",
@@ -85,7 +86,7 @@ class Apex(commands.Cog):
             await finding.edit(content='', embed=embed)
 
         except PlayerNotFound:
-            embed = discord.Embed(title="Stats not found!", description="Sorry but i couldn't found your Apex Legends Statistics.\nYou may have made a foul of strikes.\n\nIf you spelled it right then the API might be down.",colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed = discord.Embed(title=":x: Stats not found! :x:", description="Sorry but i couldn't found your Apex Legends Statistics.\nYou may have made a foul of strikes.\n\nIf you spelled it right then the API might be down.",colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
             embed.set_thumbnail(url = client_icon)
             embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
                             icon_url=client_icon)
