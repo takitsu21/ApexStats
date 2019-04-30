@@ -10,18 +10,24 @@ class Apex(commands.Cog):
         self.bot = bot
         self.colour = 0xff0004
 
-    @commands.command(pass_context=True)
-    async def debug(self, ctx, member):
-        # for member in ctx.message.guild.members:
-        #     print(member)
-            # for member in server.members:
-            #     print(member, member.id)
-        for memb in ctx.message.guild.members:
-            print(memb.name)
-            if memb.name.lower() == member:
-                embed = discord.Embed(title=f"{member} has been found as {memb.id} {self.bot.get_user(memb.id)}")
-                await ctx.send(embed=embed)
+#     @commands.command(pass_context=True)
+#     async def debug(self, ctx, member):
+#         # for member in ctx.message.guild.members:
+#         #     print(member)
+#             # for member in server.members:
+#             #     print(member, member.id)
+#         for memb in ctx.message.guild.members:
+#             print(memb.name)
+#             if memb.name.lower() == member:
+#                 embed = discord.Embed(title=f"{member} has been found as {memb.id} {self.bot.get_user(memb.id)}")
+#                 await ctx.send(embed=embed)
             
+    async def map(self, ctx):
+        embed = discord.Embed(title="Map & Tier loot", colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+        embed.set_image(url="https://cdn.discordapp.com/attachments/564124036418895884/568389857970487298/apex-legends-loot-tier-map.jpg")
+        embed.set_footer(text="Made by Taki#0853 (WIP)",
+                         icon_url=ctx.guild.me.avatar_url)
+        await ctx.send(embed=embed)       
 
     @commands.command(pass_context=True)
     async def stats(self, ctx, player : str = '', platform : str = 'pc'):

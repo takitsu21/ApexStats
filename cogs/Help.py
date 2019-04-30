@@ -15,6 +15,7 @@ stats_commands = """**`a!stats`** - Explanation about stats
 
 apex_commands = """**`a!news`** - View 6 last news on Apex Legends
 **`a!servers`** - View all Apex Legends server status (ping, status, server name)
+**`a!map`** - View Apex Legends map and his tier loot
 **`a!reddit <categorie>(hot/top)`** - Recents post by categorie
 **`a!drop`** - Random place to land for the next game
 **`a!legend`** - Random legend to pick for the next game
