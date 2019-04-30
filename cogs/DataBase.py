@@ -24,10 +24,22 @@ class DataBase(commands.Cog):
             row = SqlManagment.select('users', 'id', str(ctx.author.id))
             player, platform = row[0][1], row[0][2]
             if player == 'NAN':
-                await ctx.send(f'{ctx.author.mention} Your profile is not yet registered in the database')
+                embed=discord.Embed(title="Profile not registered!",
+                description=f'{ctx.author.mention} Your profile is not yet registered in the database',
+                timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
+                embed.set_thumbnail(url=ctx.guild.me.avatar_url)
+                embed.set_footer(text="Made by Taki#0853 (WIP)",
+                    icon_url=ctx.guild.me.avatar_url)
+                await ctx.send(embed=embed)
             else:
+                embed=discord.Embed(title="Profile unlinked",
+                description=f'{ctx.author.mention} `{player}` on `{platform}` has been successfully unlinked!',
+                timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
+                embed.set_thumbnail(url=ctx.guild.me.avatar_url)
+                embed.set_footer(text="Made by Taki#0853 (WIP)",
+                    icon_url=ctx.guild.me.avatar_url)
                 SqlManagment.unlink(str(ctx.author.id))
-                await ctx.send(f'{ctx.author.mention} `{player}` on `{platform}` has been successfully unlinked!')
+                await ctx.send(embed=embed)
             return
         if mode.lower() == "save":
             if len(args) == 0:
@@ -37,7 +49,7 @@ class DataBase(commands.Cog):
                 await ctx.send("Too many arguments provided!")
                 return
             if len(args) == 1:
-                embed = discord.Embed(title="__Command__: **a!profile**",
+                embed = discord.Embed(title="Command: `a!profile`",
                                       description="**`a!profile save <username> <platform>(PC, XBOX, PSN)`** - Link profile to your discord\n`**a!profile display**` - returns your current saved profile\n`**a!profile unlink**` - Unlink your profile\n`**a!profile**` - Return your Apex Legends statistics if you linked a profile before",
                                       timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
                 embed.set_thumbnail(url=ctx.guild.me.avatar_url)
@@ -61,29 +73,28 @@ class DataBase(commands.Cog):
                         await finding.edit(content="", embed=embed)
                         return
                     else:
-                        embed = discord.Embed(title=f"Profile `{player}` doesn't exist",
-                        description=f"{ctx.author.mention} This profile doesn't exist!\nRetry, you might have spelled it wrong")
+                        embed = discord.Embed(title=f"Profile `{player}` on `{platform}` doesn't exist",
+                        description=f"{ctx.author.mention} This profile doesn't exist!\nRetry, you might have spelled it wrong",
+                        timestamp=datetime.datetime.utcfromtimestamp(time.time()),colour=self.colour)
                         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
                         embed.set_footer(text="Made by Taki#0853 (WIP)",
                                             icon_url=ctx.guild.me.avatar_url)
-
                         await finding.edit(content="", embed=embed)
                 else:
-                    embed = discord.Embed(title=f"Profile `{player}` doesn't exist",
-                    description=f"{ctx.author.mention} Wrong platform selected! retry with anotherplatform(PC, XBOX, PSN)")
+                    embed = discord.Embed(title=f"Wrong platform",
+                    description=f"{ctx.author.mention} Wrong platform selected!\nRetry with another platform `PC` | `XBOX` | `PSN`)",
+                    timestamp=datetime.datetime.utcfromtimestamp(time.time()),colour=self.colour)
                     embed.set_thumbnail(url=ctx.guild.me.avatar_url)
                     embed.set_footer(text="Made by Taki#0853 (WIP)",
                                         icon_url=ctx.guild.me.avatar_url)
-
                     await finding.edit(content="", embed=embed)
-                    await finding.edit(content=f"{ctx.author.mention} Wrong platform selected! retry with anotherplatform(PC, XBOX, PSN)")
 
         if(mode.lower() == "n"):
 
             row = SqlManagment.select('users', 'id', str(ctx.author.id))
 
             if row[0][1] == "NAN":
-                embed = discord.Embed(title="**Command**: **a!profile**",colour=self.colour,
+                embed = discord.Embed(title="Command: `a!profile`",colour=self.colour,
                                       description="**Sorry but I didn't find your profile on the database.**\n\n**`a!profile save <username> <platform>(PC, XBOX, PSN)`** - Link profile to your discord\n**`a!profile display`** - returns your current saved profile\n**`a!profile unlink`** - Unlink your profile\n**`a!profile`** - Return your Apex Legends statistics if you linked a profile before",
                                       timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                 embed.set_thumbnail(url=ctx.guild.me.avatar_url)
