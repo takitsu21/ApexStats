@@ -61,8 +61,21 @@ class DataBase(commands.Cog):
                         await finding.edit(content="", embed=embed)
                         return
                     else:
-                        await finding.edit(content=f"{ctx.author.mention} This profile doesn't exist!\nRetry you might spell it wrong")
+                        embed = discord.Embed(title=f"Profile `{player}` doesn't exist",
+                        description=f"{ctx.author.mention} This profile doesn't exist!\nRetry, you might have spelled it wrong")
+                        embed.set_thumbnail(url=ctx.guild.me.avatar_url)
+                        embed.set_footer(text="Made by Taki#0853 (WIP)",
+                                            icon_url=ctx.guild.me.avatar_url)
+
+                        await finding.edit(content="", embed=embed)
                 else:
+                    embed = discord.Embed(title=f"Profile `{player}` doesn't exist",
+                    description=f"{ctx.author.mention} Wrong platform selected! retry with anotherplatform(PC, XBOX, PSN)")
+                    embed.set_thumbnail(url=ctx.guild.me.avatar_url)
+                    embed.set_footer(text="Made by Taki#0853 (WIP)",
+                                        icon_url=ctx.guild.me.avatar_url)
+
+                    await finding.edit(content="", embed=embed)
                     await finding.edit(content=f"{ctx.author.mention} Wrong platform selected! retry with anotherplatform(PC, XBOX, PSN)")
 
         if(mode.lower() == "n"):
@@ -80,7 +93,7 @@ class DataBase(commands.Cog):
                 return
             else:
                 client_icon = ctx.guild.me.avatar_url
-                finding = await ctx.send('`Finding Stats...`')
+                finding = await ctx.send('`Working...`:tools:')
                 stats = Stats(row[0][1], row[0][2])
                 data = stats.single_data()
                 embed = discord.Embed(colour=self.colour,
@@ -105,7 +118,6 @@ class DataBase(commands.Cog):
                 embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
                                  icon_url=client_icon)
             await finding.edit(content='',embed=embed)
-            stats.doRequestStatus()
 
 def setup(bot):
     bot.add_cog(DataBase(bot))

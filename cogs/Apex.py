@@ -29,7 +29,7 @@ class Apex(commands.Cog):
         user_icon = ctx.author.avatar_url
         client_icon = ctx.guild.me.avatar_url
         try:
-            finding = await ctx.send('`Finding Stats...`')
+            finding = await ctx.send('`Working...`:tools:')
             if platform.lower() in ['pc','xbox','psn']:
                 stats = Stats(player, platform)
                 if len(player) >= 1:
@@ -59,10 +59,14 @@ class Apex(commands.Cog):
                     embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
                                     icon_url=client_icon)
                 await finding.edit(content='',embed=embed)
-                stats.doRequestStatus()
 
             else:
-                await ctx.send(f'{ctx.author.mention} Wrong platform! retry with `pc` | `xbox` | `psn`')
+                embed = discord.Embed(title="Wrong platform!",
+                description=f'{ctx.author.mention} Wrong platform! retry with `pc` | `xbox` | `psn`')
+                embed.set_thumbnail(url=client_icon)
+                embed.set_footer(text="Made by Taki#0853 (WIP)",
+                icon_url=client_icon)
+                await finding.edit(content="", embed=embed)
 
         except discord.errors.HTTPException: #if len(data) > 2000
             embed = discord.Embed(title="**Too Many Stats to show!**",
