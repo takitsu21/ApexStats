@@ -82,7 +82,7 @@ class DataBase(commands.Cog):
                         await finding.edit(content="", embed=embed)
                 else:
                     embed = discord.Embed(title=f"Wrong platform",
-                    description=f"{ctx.author.mention} Wrong platform selected!\nRetry with another platform `PC` | `XBOX` | `PSN`)",
+                    description=f"{ctx.author.mention} Wrong platform selected!\nRetry with another platform `PC` | `XBOX` | `PSN`",
                     timestamp=datetime.datetime.utcfromtimestamp(time.time()),colour=self.colour)
                     embed.set_thumbnail(url=ctx.guild.me.avatar_url)
                     embed.set_footer(text="Made by Taki#0853 (WIP)",
