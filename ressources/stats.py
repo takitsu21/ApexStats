@@ -1,14 +1,19 @@
 #!/usr/bin/env python3
 #coding:utf-8
+import nest_asyncio
+
 import os, json, asyncio
 from aiohttp import ClientSession
 from ressources.tools import *
 import ressources.SqlManagment as SqlManagment
 from ressources.exceptions import *
+
+# import __init__
 # from tools import *
 # import SqlManagment as SqlManagment
 # from exceptions import *
 
+nest_asyncio.apply() #fix asyncio error
 
 class Stats:
     """Get apex legends stats"""
@@ -20,15 +25,26 @@ class Stats:
     async def req(self, session):
         url = f"https://public-api.tracker.gg/apex/v1/standard/profile/{self.platform}/{self.player}"
         async with session.get(url, headers=headers) as resp:
+            # print(resp.status)
+            # print(resp.json())
+            try:
+                assert resp.status == 200
+            except AssertionError:
+                raise PlayerNotFound(resp.status)
             return await resp.json()
 
     async def mult_req(self,player, platform, session):
         url = f"https://public-api.tracker.gg/apex/v1/standard/profile/{platformConvert(platform)}/{player}"
         async with session.get(url, headers=headers) as resp:
+            try:
+                assert resp.status == 200
+            except:
+                await asyncio.sleep(60)
+            # if resp.status != 200:
+            #     raise PlayerNotFound(str(resp.status))
             return await resp.json()
 
     async def single_request(self, player, platform):
-        global data
         async with ClientSession() as session:
             task = asyncio.ensure_future(self.req(session))
             responses = await asyncio.gather(task)
@@ -60,43 +76,49 @@ class Stats:
             print("Missing arguments")
             return
         tasks = []
-
-        acc = 0
+        # responses = []
+        acc = 1
         async with ClientSession() as session:
             for player, platform in players.items():
-                if acc % 30 == 0:
-                    await asyncio.sleep(30)
-                
-                task = asyncio.ensure_future(self.mult_req(player, platform.lower(), session))
+                if acc % 31 == 0:
+                    await asyncio.sleep(61)
+                # responses.append(self.single_request(player, platform))
+                task = asyncio.ensure_future(self.mult_req(player, platform, session))
                 tasks.append(task)
                 acc+=1
+        # print(responses)
             responses = await asyncio.gather(*tasks)
-
         leaderboard_sorted = {}
         players_keys = list(players.keys())
         players_values = list(players.values())
         for i,rtask in enumerate(responses):
             try:
                 # print(rtask['data']['metadata']['platformUserHandle'], rtask['data']['metadata']['level'])
-                leaderboard_sorted[rtask['data']['metadata']['platformUserHandle']] = rtask['data']['metadata']['level']
-            except Exception as e: 
+                # leaderboard_sorted[rtask['data']['metadata']['platformUserHandle']] = rtask['data']['metadata']['level']
+                for _all in rtask['data']['stats']:
+                    if _all['metadata']['name'] == 'Kills':
+                        leaderboard_sorted[rtask['data']['metadata']['platformUserHandle']] = int(_all['value'])
+                        print(leaderboard_sorted)
+            except Exception as e:
                 print(f"{i} {players_keys[i]} : {players_values[i]} {e} {responses[i]}")
                 continue
+        # print(leaderboard_sorted)
         return leaderboard_sorted
 
     def single_data(self):
-        loop = asyncio.get_event_loop()
-        future = asyncio.ensure_future(self.single_request(self.player,self.platform))
-        loop.run_until_complete(future)
-        return data
+        # loop = asyncio.get_event_loop()
+        # future = asyncio.ensure_future(self.single_request(self.player,self.platform))
+        # loop.run_until_complete(future)
+        # return data
+        return asyncio.run(self.single_request(self.player, self.platform))
 
     def multi_data(self, players: dict):
-        loop = asyncio.get_event_loop()
-        future = asyncio.ensure_future(self.multi_requests(players))
-        loop.run_until_complete(future)
-        # return sorted(self.leaderboard_init().items(), key = lambda kv:(kv[1], kv[0]), reverse=True)
+        # loop = asyncio.get_event_loop()
+        # future = asyncio.ensure_future(self.multi_requests(players))
+        # loop.run_until_complete(future)
+        # return sorted(leaderboard_sorted.items(), key = lambda kv:(kv[1], kv[0]), reverse=True)
 
-        return sorted(leaderboard_sorted.items(), key = lambda kv:(kv[1], kv[0]), reverse=True)
+        return sorted(asyncio.run(self.multi_requests(players)).items(), key = lambda kv:(kv[1], kv[0]), reverse=True)
 
 
     async def statsExists(self):
@@ -104,10 +126,12 @@ class Stats:
             async with ClientSession() as session:
                 task = asyncio.ensure_future(self.req(session))
                 responses = await asyncio.gather(task)
-                if responses['errors']:
-                    return False    
-        except:
-            return True
+                return True
+        except PlayerNotFound:
+            return False
+
+    def exists(self):
+        return asyncio.run(self.statsExists())
 
     def doRequestStatus(self): #Just do a request for apexlegendsstatus database
         pass
@@ -125,17 +149,20 @@ class Stats:
         return icon
     
     def get_icon(self):
-        loop = asyncio.get_event_loop()
-        future = asyncio.ensure_future(self.iconUrl())
-        loop.run_until_complete(future)
-        return icon[0]['data']['children'][0]['metadata']['icon']
+        # loop = asyncio.get_event_loop()
+        # future = asyncio.ensure_future(self.iconUrl())
+        # loop.run_until_complete(future)
+        
+        return list(asyncio.run(self.iconUrl()))[0]['data']['children'][0]['metadata']['icon']
 
-# stats = Stats("nicehat_taki","pc")
-
+# stats = Stats("nicehat_tazki","pc")
+# print(stats.single_data())
+# print(stats.multi_data(SqlManagment.createLeaderboard()))
+# print(stats.single_data()["all"])
 # players = SqlManagment.createLeaderboard()
 # print(list(players.keys())[40])
-
 # print(stats.get_icon())
+# print(list(asyncio.run(stats.iconUrl()))[0]["data"]["id"])
 # print(stats.single_data())
 # async def multiple_requests(self)
 #         global data_threaded

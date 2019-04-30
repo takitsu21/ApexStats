@@ -7,6 +7,7 @@ from discord.ext import commands
 stats_commands = """**`a!stats`** - Explanation about stats
 **`a!stats <username>`** - View Apex Legends statistics on PC only (shorter version)
 **`a!stats <username> <platform>(xbox,psn,pc)`** - View Apex Legends statistics
+**`a!profile`** - View your Apex Legends profile if registered before
 **`a!profile save <username> <platform>`** - Link your Discord account to your Apex Legends stats
 **`a!profile display`** - View the current saved profile
 **`a!profile unlink`** - Unlink your profile
