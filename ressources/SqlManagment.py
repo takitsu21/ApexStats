@@ -5,8 +5,11 @@ import psycopg2, os
 def create_leaderboard():
     sql =""" CREATE TABLE IF NOT EXISTS leaderboard (
             position VARCHAR,
+            id BIGSERIAL,
             username VARCHAR,
-            level VARCHAR
+            level VARCHAR,
+            kills VARCHAR,
+
         )
         """
     cursor = conn.cursor()
@@ -37,11 +40,7 @@ def create_lfg():
     cursor.execute(sql)
     conn.commit()
 try:
-    # conn = psycopg2.connect(host=os.environ['host'],
-    #                     database=os.environ['database'],
-    #                     user=os.environ['user'],
-    #                     password=os.environ['password'])
-    conn = psycopg2.connect(os.environ['DATABASE_URL'])
+    conn = psycopg2.connect(os.environ["DATABASE_URL"])
     create_users()
 except Exception as e:
     print(f'{type(e).__name__} {e}')

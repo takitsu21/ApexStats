@@ -4,5 +4,7 @@ bs4
 lxml
 aiohttp
 asyncio
-psycopg2
 dblpy
+psycopg2
+psycopg2-binary
+nest_asyncio
