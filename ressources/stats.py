@@ -44,7 +44,6 @@ class Stats:
         async with ClientSession() as session:
             task = asyncio.ensure_future(self.req(session))
             responses = await asyncio.gather(task)
-
         stat_tmp, legends_stat = {}, []
         platform = 'xbl' if self.platform == '1' else self.base_platform
         data = {"level":responses[0]['data']['metadata']['level'],

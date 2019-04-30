@@ -20,6 +20,7 @@ class Apex(commands.Cog):
             print(memb.name)
             if memb.name.lower() == member:
                 embed = discord.Embed(title=f"{member} has been found as {memb.id} {self.bot.get_user(memb.id)}")
+                # embed.set_footer(text="Vote [here](https://discordbots.org/bot/551446491886125059)", url="https://discordbots.org/bot/551446491886125059")
                 await ctx.send(embed=embed)
             
 
@@ -56,6 +57,8 @@ class Apex(commands.Cog):
                     embed.add_field(name = '__**`All Stats`**__',
                                     value='{}'.format(all_value),
                                     inline=True)
+
+                    embed.add_field(name=":point_down: You can vote", value="[**HERE**](https://discordbots.org/bot/551446491886125059/vote)")
                     embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
                                     icon_url=client_icon)
                 await finding.edit(content='',embed=embed)
