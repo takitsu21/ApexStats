@@ -21,7 +21,8 @@ class Apex(commands.Cog):
 #             if memb.name.lower() == member:
 #                 embed = discord.Embed(title=f"{member} has been found as {memb.id} {self.bot.get_user(memb.id)}")
 #                 await ctx.send(embed=embed)
-            
+
+    @commands.command(pass_context=True)
     async def map(self, ctx):
         embed = discord.Embed(title="Map & Tier loot", colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
         embed.set_image(url="https://cdn.discordapp.com/attachments/564124036418895884/568389857970487298/apex-legends-loot-tier-map.jpg")
