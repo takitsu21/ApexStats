@@ -69,7 +69,7 @@ class Apex(commands.Cog):
                 await finding.edit(content='',embed=embed)
 
             else:
-                embed = discord.Embed(title="Wrong platform!",
+                embed = discord.Embed(title=":x: Wrong platform! :x:",
                 description=f'{ctx.author.mention} Wrong platform! retry with `pc` | `xbox` | `psn`')
                 embed.set_thumbnail(url=client_icon)
                 embed.set_footer(text="Made by Taki#0853 (WIP)",
@@ -86,7 +86,7 @@ class Apex(commands.Cog):
             await finding.edit(content='', embed=embed)
 
         except PlayerNotFound:
-            embed = discord.Embed(title="Stats not found!", description="Sorry but i couldn't found your Apex Legends Statistics.\nYou may have made a foul of strikes.\n\nIf you spelled it right then the API might be down.",colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed = discord.Embed(title=":x: Stats not found! :x:", description="Sorry but i couldn't found your Apex Legends Statistics.\nYou may have made a foul of strikes.\n\nIf you spelled it right then the API might be down.",colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
             embed.set_thumbnail(url = client_icon)
             embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
                             icon_url=client_icon)

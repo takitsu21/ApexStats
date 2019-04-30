@@ -43,10 +43,10 @@ class DataBase(commands.Cog):
             return
         if mode.lower() == "save":
             if len(args) == 0:
-                await ctx.send("Please provide an username and the plaftorm you want to save to your profile")
+                await ctx.send(":x: Please provide an username and the plaftorm you want to save to your profile")
                 return
             if len(args) >= 3:
-                await ctx.send("Too many arguments provided!")
+                await ctx.send(":x: Too many arguments provided!")
                 return
             if len(args) == 1:
                 embed = discord.Embed(title="Command: `a!profile`",
@@ -73,7 +73,7 @@ class DataBase(commands.Cog):
                         await finding.edit(content="", embed=embed)
                         return
                     else:
-                        embed = discord.Embed(title=f"Profile `{player}` on `{platform}` doesn't exist",
+                        embed = discord.Embed(title=f":x: Profile `{player}` on `{platform}` doesn't exist :x:",
                         description=f"{ctx.author.mention} This profile doesn't exist!\nRetry, you might have spelled it wrong",
                         timestamp=datetime.datetime.utcfromtimestamp(time.time()),colour=self.colour)
                         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
