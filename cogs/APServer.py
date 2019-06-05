@@ -10,10 +10,10 @@ class APServer(commands.Cog):
 
     @commands.command(pass_context=True)
     async def patch(self,ctx):
-        patch_note = "https://www.reddit.com/r/apexlegends/comments/bpxh1f/next_patch_coming_early_next_week_here_are_the/"
+        patch_note = "https://www.reddit.com/r/apexlegends/comments/bwus7u/the_legendary_hunt_begins_today_patch_notes/"
         embed = discord.Embed(colour=self.colour,
                               timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-        embed.add_field(name="**1.1.3 Patch Notes** (19/05/2019)", value=f"[**Last patch note**]({patch_note})")
+        embed.add_field(name="**Patch Notes** (4 June 2019)", value=f"[**Last patch note**]({patch_note})")
         embed.set_thumbnail(url="https://ya-webdesign.com/images/reddit-alien-png-3.png")
         embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
         await ctx.send(embed=embed)
