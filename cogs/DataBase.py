@@ -103,32 +103,38 @@ class DataBase(commands.Cog):
                 await ctx.send(embed=embed)
                 return
             else:
-                client_icon = ctx.guild.me.avatar_url
-                finding = await ctx.send('`Working...`:tools:')
-                stats = Stats(row[0][1], row[0][2])
-                data = stats.single_data()
-                embed = discord.Embed(colour=self.colour,
-                                      timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-                all_value, res = '', ''
-                embed.set_thumbnail(url = stats.get_icon())
-                embed.set_author(name='{} | Level {}'.format(data['name'],data['level']) ,
-                                 url=data['profile'],
-                                  icon_url=client_icon)
-                for i, key in enumerate(data['legends']):
-                    legend = key[str(i)].get('legend')
-                    for value in key[str(i)]:
-                        if key[str(i)][value] != legend:
-                            res += '***{}*** : ***`{}`***\n'.format(value, key[str(i)][value])
-                    embed.add_field(name = '__`{}`__'.format(legend), value='{}'.format(res), inline=True)
-                    res = ''
-                for key, value in data['all'].items():
-                    all_value += '***{}*** : ***`{}`***\n'.format(key, value)
-                embed.add_field(name = '__**`All Stats`**__',
-                                value='{}'.format(all_value),
-                                 inline=True)
-                embed.add_field(name=":point_down: You can vote", value="[**HERE**](https://discordbots.org/bot/551446491886125059/vote)")
-                embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
-                                 icon_url=client_icon)
+                try:
+                    client_icon = ctx.guild.me.avatar_url
+                    finding = await ctx.send('`Working...`:tools:')
+                    stats = Stats(row[0][1], row[0][2])
+                    data = stats.single_data()
+                    embed = discord.Embed(colour=self.colour,
+                                          timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                    all_value, res = '', ''
+                    embed.set_thumbnail(url = stats.get_icon())
+                    embed.set_author(name='{} | Level {}'.format(data['name'],data['level']) ,
+                                     url=data['profile'],
+                                      icon_url=client_icon)
+                    for i, key in enumerate(data['legends']):
+                        legend = key[str(i)].get('legend')
+                        for value in key[str(i)]:
+                            if key[str(i)][value] != legend:
+                                res += '***{}*** : ***`{}`***\n'.format(value, key[str(i)][value])
+                        embed.add_field(name = '__`{}`__'.format(legend), value='{}'.format(res), inline=True)
+                        res = ''
+                    for key, value in data['all'].items():
+                        all_value += '***{}*** : ***`{}`***\n'.format(key, value)
+                    embed.add_field(name = '__**`All Stats`**__',
+                                    value='{}'.format(all_value),
+                                     inline=True)
+                    embed.add_field(name=":point_down: You can vote", value="[**HERE**](https://discordbots.org/bot/551446491886125059/vote)")
+                    embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
+                                     icon_url=client_icon)
+                except PlayerNotFound:
+                    embed = discord.Embed(title=":x: Stats not found! :x:", description="Sorry but i couldn't found your Apex Legends Statistics.\nYou may have made a foul of strikes.\n\nIf you spelled it right then the API might be down.",colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                    embed.set_thumbnail(url = client_icon)
+                    embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
+                                    icon_url=client_icon)
             await finding.edit(content='',embed=embed)
 
 def setup(bot):
