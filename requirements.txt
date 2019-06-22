@@ -1,8 +1,11 @@
-git+https://github.com/Rapptz/discord.py@rewrite#egg=discord.py
-requests
+discord.py
 bs4
 lxml
 aiohttp
 asyncio
-psycopg2
 dblpy
+psycopg2
+psycopg2-binary
+nest_asyncio
+uptime
+psutil

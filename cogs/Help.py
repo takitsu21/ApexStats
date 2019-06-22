@@ -7,6 +7,7 @@ from discord.ext import commands
 stats_commands = """**`a!stats`** - Explanation about stats
 **`a!stats <username>`** - View Apex Legends statistics on PC only (shorter version)
 **`a!stats <username> <platform>(xbox,psn,pc)`** - View Apex Legends statistics
+**`a!profile`** - View your Apex Legends profile if registered before
 **`a!profile save <username> <platform>`** - Link your Discord account to your Apex Legends stats
 **`a!profile display`** - View the current saved profile
 **`a!profile unlink`** - Unlink your profile
@@ -14,6 +15,7 @@ stats_commands = """**`a!stats`** - Explanation about stats
 
 apex_commands = """**`a!news`** - View 6 last news on Apex Legends
 **`a!servers`** - View all Apex Legends server status (ping, status, server name)
+**`a!map`** - View Apex Legends map and his tier loot
 **`a!reddit <categorie>(hot/top)`** - Recents post by categorie
 **`a!drop`** - Random place to land for the next game
 **`a!legend`** - Random legend to pick for the next game

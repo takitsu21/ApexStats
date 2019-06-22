@@ -5,8 +5,11 @@ import psycopg2, os
 def create_leaderboard():
     sql =""" CREATE TABLE IF NOT EXISTS leaderboard (
             position VARCHAR,
+            id BIGSERIAL,
             username VARCHAR,
-            level VARCHAR
+            level VARCHAR,
+            kills VARCHAR,
+
         )
         """
     cursor = conn.cursor()

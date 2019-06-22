@@ -2,6 +2,7 @@ import discord
 import time, datetime
 from discord.ext import commands
 from ressources.stats import *
+from ressources.exceptions import PlayerNotFound
 
 class Apex(commands.Cog):
     def __init__(self, bot):
@@ -9,13 +10,33 @@ class Apex(commands.Cog):
         self.bot = bot
         self.colour = 0xff0004
 
+#     @commands.command(pass_context=True)
+#     async def debug(self, ctx, member):
+#         # for member in ctx.message.guild.members:
+#         #     print(member)
+#             # for member in server.members:
+#             #     print(member, member.id)
+#         for memb in ctx.message.guild.members:
+#             print(memb.name)
+#             if memb.name.lower() == member:
+#                 embed = discord.Embed(title=f"{member} has been found as {memb.id} {self.bot.get_user(memb.id)}")
+#                 await ctx.send(embed=embed)
+
+    @commands.command(pass_context=True)            
+    async def map(self, ctx):
+        embed = discord.Embed(title="Map & loot Tier", colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+        embed.set_image(url="https://cdn.discordapp.com/attachments/564124036418895884/568389857970487298/apex-legends-loot-tier-map.jpg")
+        embed.set_footer(text="Made by Taki#0853 (WIP)",
+                         icon_url=ctx.guild.me.avatar_url)
+        await ctx.send(embed=embed)       
+
     @commands.command(pass_context=True)
     async def stats(self, ctx, player : str = '', platform : str = 'pc'):
         """Displays apex stats for a given player (and platform)"""
         user_icon = ctx.author.avatar_url
         client_icon = ctx.guild.me.avatar_url
         try:
-            finding = await ctx.send('`Finding Stats...`')
+            finding = await ctx.send('`Working...`:tools:')
             if platform.lower() in ['pc','xbox','psn']:
                 stats = Stats(player, platform)
                 if len(player) >= 1:
@@ -24,29 +45,37 @@ class Apex(commands.Cog):
                     all_value, res = '', ''
                     embed.set_thumbnail(url = stats.get_icon())
                     embed.set_author(name='{} | Level {}'.format(data['name'],data['level']) ,
-                                     url=data['profile'],
-                                      icon_url=client_icon)
+                                    url=data['profile'],
+                                    icon_url=client_icon)
 
                     for i, key in enumerate(data['legends']):
                         legend = key[str(i)].get('legend')
                         for value in key[str(i)]:
                             if key[str(i)][value] != legend:
-                                res += '***{}*** : {}\n'.format(value, key[str(i)][value])
-                        embed.add_field(name = '__{}__'.format(legend), value='{}'.format(res), inline=True)
+                                res += '***{}*** : ***`{}`***\n'.format(value, key[str(i)][value])
+                        # if i == 0:
+                        #     embed.add_field(name = '__`{}`__'.format(legend), value='{}'.format(res), inline=True)
+                        # else:
+                        embed.add_field(name = '__`{}`__'.format(legend), value='{}'.format(res), inline=True)
                         res = ''
-
                     for key, value in data['all'].items():
-                        all_value += '***{}*** : {}\n'.format(key, value)
-                    embed.add_field(name = '__**All Stats**__',
+                        all_value += '***{}*** : ***`{}`***\n'.format(key, value)
+                    embed.add_field(name = '__**`All Stats`**__',
                                     value='{}'.format(all_value),
-                                     inline=True)
+                                    inline=True)
+
+                    embed.add_field(name=":point_down: You can vote", value="[**HERE**](https://discordbots.org/bot/551446491886125059/vote)")
                     embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
-                                     icon_url=client_icon)
+                                    icon_url=client_icon)
                 await finding.edit(content='',embed=embed)
-                stats.doRequestStatus()
 
             else:
-                await ctx.send(f'{ctx.author.mention} Wrong platform! retry with `pc` | `xbox` | `psn`')
+                embed = discord.Embed(title=":x: Wrong platform! :x:",
+                description=f'{ctx.author.mention} Wrong platform! retry with `pc` | `xbox` | `psn`')
+                embed.set_thumbnail(url=client_icon)
+                embed.set_footer(text="Made by Taki#0853 (WIP)",
+                icon_url=client_icon)
+                await finding.edit(content="", embed=embed)
 
         except discord.errors.HTTPException: #if len(data) > 2000
             embed = discord.Embed(title="**Too Many Stats to show!**",
@@ -55,6 +84,13 @@ class Apex(commands.Cog):
             embed.set_thumbnail(url= client_icon)
             embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
                              icon_url=client_icon)
+            await finding.edit(content='', embed=embed)
+
+        except PlayerNotFound:
+            embed = discord.Embed(title=":x: Stats not found! :x:", description="Sorry but i couldn't found your Apex Legends Statistics.\nYou may have made a foul of strikes.\n\nIf you spelled it right then the API might be down.",colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed.set_thumbnail(url = client_icon)
+            embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
+                            icon_url=client_icon)
             await finding.edit(content='', embed=embed)
 
         except Exception as e:
