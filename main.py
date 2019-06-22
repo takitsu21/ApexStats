@@ -2,7 +2,7 @@
 #coding:utf-8
 import discord, re, time, datetime, os, aiohttp, asyncio
 from discord.ext import commands
-from cogs import Feedback, Leaderboard, APServer, Bot_Info, Reddit, Help, Apex, DataBase, FunCommands, LeaderboardUpdate
+from cogs import HW_usage, Feedback, Leaderboard, APServer, Bot_Info, Reddit, Help, Apex, DataBase, FunCommands, LeaderboardUpdate
 
 client = commands.Bot(command_prefix='a!', activity=discord.Game(name='Updating...'),
                       status=discord.Status('idle'), afk=True)
