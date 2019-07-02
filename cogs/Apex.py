@@ -10,17 +10,18 @@ class Apex(commands.Cog):
         self.bot = bot
         self.colour = 0xff0004
 
-#     @commands.command(pass_context=True)
-#     async def debug(self, ctx, member):
-#         # for member in ctx.message.guild.members:
-#         #     print(member)
-#             # for member in server.members:
-#             #     print(member, member.id)
-#         for memb in ctx.message.guild.members:
-#             print(memb.name)
-#             if memb.name.lower() == member:
-#                 embed = discord.Embed(title=f"{member} has been found as {memb.id} {self.bot.get_user(memb.id)}")
-#                 await ctx.send(embed=embed)
+    @commands.command(pass_context=True)
+    async def ranked(self, ctx):
+        about_ranked = "https://www.reddit.com/r/apexlegends/comments/c7w3iq/how_ranked_leagues_will_work_in_season_2_of_apex/"
+        embed = discord.Embed(title="About ranked",
+                        colour=self.colour,
+                        timestamp=datetime.datetime.utcfromtimestamp(time.time()),
+                        description=f"To know how ranked works go -> [here]({about_ranked})")
+        embed.set_thumbnail(url= ctx.guild.me.avatar_url)
+        embed.set_footer(text="data provided by apex.tracker.gg | Mady with ❤️ by Taki#0853 (WIP)",
+                        icon_url=ctx.guild.me.avatar_url)
+        await ctx.send(embed=embed, delete_after=600)
+        await ctx.message.delete(delay=600)
 
     @commands.command(pass_context=True)            
     async def map(self, ctx):
