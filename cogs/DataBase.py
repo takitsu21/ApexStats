@@ -130,6 +130,8 @@ class DataBase(commands.Cog):
                     embed.add_field(name=":point_down: You can vote", value="[**HERE**](https://discordbots.org/bot/551446491886125059/vote)")
                     embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
                                      icon_url=client_icon)
+                    await finding.edit(content='', embed=embed)
+
                 except discord.errors.HTTPException: #if len(data) > 2000
                     embed = discord.Embed(title="**Too Many Stats to show! / New data has been added to Apex Legends**",
                                           description=f"Sorry, but i couldn't show your stats. It's too big.\nYou can see your profile [__**here**__]({data['profile']}).",
@@ -156,8 +158,6 @@ class DataBase(commands.Cog):
                                      icon_url=client_icon)
                     print(e)
                     await finding.edit(content='', embed=embed)
-                finally:
-                    await finding.edit(content='',embed=embed)
 
                 
             
