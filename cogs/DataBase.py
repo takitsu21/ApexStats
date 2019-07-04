@@ -130,12 +130,37 @@ class DataBase(commands.Cog):
                     embed.add_field(name=":point_down: You can vote", value="[**HERE**](https://discordbots.org/bot/551446491886125059/vote)")
                     embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
                                      icon_url=client_icon)
+                except discord.errors.HTTPException: #if len(data) > 2000
+                    embed = discord.Embed(title="**Too Many Stats to show! / New data has been added to Apex Legends**",
+                                          description=f"Sorry, but i couldn't show your stats. It's too big.\nYou can see your profile [__**here**__]({data['profile']}).",
+                                          timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
+                    embed.set_thumbnail(url= client_icon)
+                    embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
+                                     icon_url=client_icon)
+                    await finding.edit(content='', embed=embed)
+
                 except PlayerNotFound:
                     embed = discord.Embed(title=":x: Stats not found! :x:", description="Sorry but i couldn't found your Apex Legends Statistics.\nYou may have made a foul of strikes.\n\nIf you spelled it right then the API might be down.",colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                     embed.set_thumbnail(url = client_icon)
                     embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
                                     icon_url=client_icon)
-            await finding.edit(content='',embed=embed)
+                    await finding.edit(content='', embed=embed)
+
+                except Exception as e:
+                    embed = discord.Embed(title="**Command**: **`a!stats`**",
+                                          description="**`a!stats <username>`**\n**`a!stats <username> <platform>(pc,xbox,psn)`**",
+                                          timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
+                    embed.add_field(name="Stats explanation", value="- Stats are provided by [apex.tracker.gg](https://apex.tracker.gg/) API (stats might not be fully exact)\n\n- We can only get stats from selected banners\n\n- To update a legend stats you have to pick the legend wanted and then do **`a!stats <username> <platform>`**\n\n- It will keep all update you've done on your account\n\n- The «All Stats» value is just the sum of all banner **AVAILABLE** and **SELECTED** on each legends")
+                    embed.set_thumbnail(url=client_icon)
+                    embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
+                                     icon_url=client_icon)
+                    print(e)
+                    await finding.edit(content='', embed=embed)
+                finally:
+                    await finding.edit(content='',embed=embed)
+
+                
+            
 
 def setup(bot):
     bot.add_cog(DataBase(bot))
