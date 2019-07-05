@@ -1,3 +1,4 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/ikbq3x7q7wj1e3h5?svg=true)](https://ci.appveyor.com/project/takitsu21/botdiscord)
 # Apex Stats
 
 * This bot gives your Apex Legends statistics and has other features (You can save your Apex profile to Discord for example).
