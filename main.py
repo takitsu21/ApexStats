@@ -46,12 +46,12 @@ async def on_ready():
             if acc % 2 == 0:
                 t += 10
                 acc += 1
-                await client.change_presence(activity=discord.Activity(name='[a!help] & {} servers (Issue with Wattson)'.format(len(client.guilds)), type=3))
+                await client.change_presence(activity=discord.Activity(name='[a!help] & {} servers'.format(len(client.guilds)), type=3))
                 await asyncio.sleep(10)
             else:
                 t += 10
                 acc += 1
-                await client.change_presence(activity=discord.Activity(name='[a!help] & {} users (Issue with Wattson)'.format(nb_users), type=3))
+                await client.change_presence(activity=discord.Activity(name='[a!help] & {} users'.format(nb_users), type=3))
                 await asyncio.sleep(10)
         nb_users = 0
 
