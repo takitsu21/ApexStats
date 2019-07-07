@@ -45,16 +45,20 @@ class Stats:
             task = asyncio.ensure_future(self.req(session))
             responses = await asyncio.gather(task)
         stat_tmp, legends_stat = {}, []
+        acc = 0
         platform = 'xbl' if self.platform == '1' else self.base_platform
         data = {"level":responses[0]['data']['metadata']['level'],
                 "name":responses[0]['data']['metadata']['platformUserHandle'],
                 "profile":f"https://apex.tracker.gg/profile/{platform}/{responses[0]['data']['metadata']['platformUserHandle']}"}
         for i, _data in enumerate(responses[0]['data']['children']):
-            stat_tmp['legend'] = _data['metadata']['legend_name']
-            for stat in _data['stats']:
-                stat_tmp[stat['metadata']['name']] = str(stat['displayValue'])
-            legends_stat.append({str(i):stat_tmp})
-            stat_tmp = {}
+            if _data['metadata']['legend_name'] != "Unknown":
+                stat_tmp['legend'] = _data['metadata']['legend_name']
+                for stat in _data['stats']:
+                    stat_tmp[stat['metadata']['name']] = str(stat['displayValue'])
+                # stat_tmp[_data["stats"][i]["metadata"]["name"]] = str(_data["stats"][i]["displayValue"])
+                legends_stat.append({str(acc):stat_tmp})
+                stat_tmp = {}
+                acc+=1
 
         data['legends'] = legends_stat
         all_stats = {}
