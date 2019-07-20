@@ -3,6 +3,14 @@ import time, datetime
 from discord.ext import commands
 from ressources.stats import *
 from ressources.exceptions import PlayerNotFound
+from ressources.tools import generate_url_profile
+
+async def e_send(ctx, embed=None, delay=None):
+    """Clean messages with a delay"""
+    await ctx.send(embed=embed, delete_after=delay)
+    await ctx.message.delete(delay=delay)
+
+
 
 class Apex(commands.Cog):
     def __init__(self, bot):
@@ -31,80 +39,90 @@ class Apex(commands.Cog):
                          icon_url=ctx.guild.me.avatar_url)
         await ctx.send(embed=embed)       
 
-    @commands.command(pass_context=True)
+    def embed_stats(self, ctx, data):
+        legend, res, overview = "", "", ""
+        embed = discord.Embed(
+            colour=self.colour,
+            timestamp=datetime.datetime.utcfromtimestamp(time.time())
+        )
+        embed.set_thumbnail(url = data["segments"][0]["stats"]["rankScore"]["metadata"]["iconUrl"])
+        embed.set_author(
+            name='{0} | Level {1} | Elo : {2}'.format(
+            data["platformInfo"]["platformUserHandle"],
+            int(data["segments"][0]["stats"]["level"]["value"]),
+            data["segments"][0]["stats"]["rankScore"]["displayValue"]
+        ),
+            url=generate_url_profile(data["platformInfo"]["platformSlug"],data["platformInfo"]["platformUserHandle"]),
+            icon_url=data["platformInfo"]["avatarUrl"]
+        )
+        for i, stats in enumerate(data["segments"]):
+            try:
+
+                if i == 0:
+                    for i, children in enumerate(stats["stats"]):
+                        if i > 0:
+                            overview += '**{}** : `{}`\n'.format(stats["stats"][children]["displayName"], str(int(stats["stats"][children]["value"])))
+
+                else:
+                    legend = stats["metadata"]["name"]
+                    for children in stats["stats"]:
+                        res += '**{}** : `{}`\n'.format(stats["stats"][children]["displayName"], str(int(stats["stats"][children]["value"])))
+                    if len(res)>0:
+                        embed.add_field(name = '__`{}`__'.format(legend), value='{}'.format(res), inline=True)
+                        res = ''
+            except Exception as e:
+                print(f"{type(e).__name__} : {e}")
+        embed.add_field(name = f'__`Lifetime`__', value='{}'.format(overview), inline=True)
+        embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg", icon_url=ctx.guild.me.avatar_url)
+        return embed
+
+    @commands.command(aliases=["s"])
     async def stats(self, ctx, player : str = '', platform : str = 'pc'):
         """Displays apex stats for a given player (and platform)"""
-        user_icon = ctx.author.avatar_url
         client_icon = ctx.guild.me.avatar_url
         try:
-            finding = await ctx.send('`Working...`:tools:')
             if platform.lower() in ['pc','xbox','psn']:
                 stats = Stats(player, platform)
                 if len(player) >= 1:
-                    data = stats.single_data()
-                    embed = discord.Embed(colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-                    all_value, res = '', ''
-                    embed.set_thumbnail(url = stats.get_icon())
-                    embed.set_author(name='{} | Level {}'.format(data['name'],data['level']) ,
-                                    url=data['profile'],
-                                    icon_url=client_icon)
-
-                    for i, key in enumerate(data['legends']):
-                        legend = key[str(i)].get('legend')
-                        for value in key[str(i)]:
-                            if key[str(i)][value] != legend:
-                                res += '***{}*** : ***`{}`***\n'.format(value, key[str(i)][value])
-                        # if i == 0:
-                        #     embed.add_field(name = '__`{}`__'.format(legend), value='{}'.format(res), inline=True)
-                        # else:
-                        embed.add_field(name = '__`{}`__'.format(legend), value='{}'.format(res), inline=True)
-                        res = ''
-                    for key, value in data['all'].items():
-                        all_value += '***{}*** : ***`{}`***\n'.format(key, value)
-                    embed.add_field(name = '__**`All Stats`**__',
-                                    value='{}'.format(all_value),
-                                    inline=True)
-
-                    embed.add_field(name=":point_down: You can vote", value="[**HERE**](https://discordbots.org/bot/551446491886125059/vote)")
-                    embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
-                                    icon_url=client_icon)
-                await finding.edit(content='',embed=embed)
-
+                    data = run(stats.data())
+                    embed = self.embed_stats(ctx, data)
             else:
                 embed = discord.Embed(title=":x: Wrong platform! :x:",
                 description=f'{ctx.author.mention} Wrong platform! retry with `pc` | `xbox` | `psn`')
                 embed.set_thumbnail(url=client_icon)
-                embed.set_footer(text="Made by Taki#0853 (WIP)",
+                embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
                 icon_url=client_icon)
-                await finding.edit(content="", embed=embed)
+            await ctx.send(embed=embed, delete_after=500)
+            await ctx.message.delete(delay=500)
 
-        except discord.errors.HTTPException: #if len(data) > 2000
+        except discord.errors.HTTPException as e: #if len(data) > 2000
             embed = discord.Embed(title="**Too Many Stats to show!**",
-                                  description=f"Sorry, but i couldn't show your stats. It's too big.\nYou can see your profile [__**here**__]({data['profile']}).",
-                                  timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
+                                description=f"Sorry, but i couldn't show your stats. It's too big.\nYou can see your profile [__**here**__]({generate_url_profile(data['platformInfo']['platformSlug'],data['platformInfo']['platformUserHandle'])})",
+                                timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
             embed.set_thumbnail(url= client_icon)
-            embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
+            embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
                              icon_url=client_icon)
-            await finding.edit(content='', embed=embed)
+            await ctx.send(embed=embed, delete_after=60)
+            await ctx.message.delete(delay=60)
 
         except PlayerNotFound:
-            embed = discord.Embed(title=":x: Stats not found! :x:", description="Sorry but i couldn't found your Apex Legends Statistics.\nYou may have made a foul of strikes.\n\nIf you spelled it right then the API might be down.",colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed = discord.Embed(title="❌Stats not found!❌", description="Sorry but i couldn't found your Apex Legends Statistics.\nYou may have made a foul of strikes.\n\nIf you spelled it right then the API might be down.",colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
             embed.set_thumbnail(url = client_icon)
-            embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
+            embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
                             icon_url=client_icon)
-            await finding.edit(content='', embed=embed)
-
+            await ctx.send(embed=embed, delete_after=20)
+            await ctx.message.delete(delay=20)
         except Exception as e:
             embed = discord.Embed(title="**Command**: **`a!stats`**",
                                   description="**`a!stats <username>`**\n**`a!stats <username> <platform>(pc,xbox,psn)`**",
                                   timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
             embed.add_field(name="Stats explanation", value="- Stats are provided by [apex.tracker.gg](https://apex.tracker.gg/) API (stats might not be fully exact)\n\n- We can only get stats from selected banners\n\n- To update a legend stats you have to pick the legend wanted and then do **`a!stats <username> <platform>`**\n\n- It will keep all update you've done on your account\n\n- The «All Stats» value is just the sum of all banner **AVAILABLE** and **SELECTED** on each legends")
             embed.set_thumbnail(url=client_icon)
-            embed.set_footer(text="data provided by apex.tracker.gg | Made by Taki#0853 (WIP)",
+            embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
                              icon_url=client_icon)
             print(e)
-            await finding.edit(content='', embed=embed)
-
+            await ctx.send(embed=embed, delete_after=20)
+            await ctx.message.delete(delay=20)
 def setup(bot):
     bot.add_cog(Apex(bot))
     print("Added Apex")
