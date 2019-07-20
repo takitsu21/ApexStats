@@ -33,13 +33,13 @@ class Stats:
         global url
         url = f"https://public-api.tracker.gg/v2/apex/standard/profile/{self.platform}/{self.player}"
         async with ClientSession() as session:
-            task = asyncio.ensure_future(self.req(session))
-            responses = await asyncio.gather(task)            
-        return responses["data"]
+            # task = asyncio.ensure_future(self.req(session))
+            responses = await asyncio.gather(self.fetch(sesion))            
+        return responses[0]["data"]
 
     async def exists(self):
         try:
-            self.data()
+            run(self.data())
             return True
         except PlayerNotFound:
             return False
@@ -49,6 +49,3 @@ def run(func = lambda x: x):
     return asyncio.run(func)
 
 
-if __name__ == "__main__":
-    stats = Stats("nicehat_taki", "pc")
-    print(stats.data())
