@@ -5,12 +5,11 @@ import discord
 from discord.ext import commands
 
 stats_commands = """**`a!stats`** - Explanation about stats
-**`<a!stats | a!s> <username> <pc | xbox | psn>`** - View Apex Legends statistics
+**`<a!stats | a!s> <username> <pc | xbox | psn>`** - View Apex Legends statistics -> Example `a!s nicehat_taki pc`
 **`<a!profile |a!p>`** - View your Apex Legends profile if registered before
-**`a!profile save <username> <pc | xbox | psn>`** - Link your Discord account to your Apex Legends stats
-**`a!profile display`** - View the current saved profile
-**`a!profile unlink`** - Unlink your profile
-**`a!leaderboard`** - Top 10 from database"""
+**`<a!profile |a!p> save <USERNAME> <pc | xbox | psn>`** - Link your Discord account to your Apex Legends stats -> Example `a!p save nicehat_taki pc`
+**`<a!profile |a!p> display`** - View the current saved profile
+**`<a!profile |a!p> unlink`** - Unlink your profile"""
 
 apex_commands = """**`a!news`** - View 6 last news on Apex Legends
 **`a!servers`** - View all Apex Legends server status (ping, status, server name)
@@ -30,7 +29,7 @@ other_commands = """**`a!bug <message>`** - Send me a bug report, this will help
 **`a!vote`** - An other way to support me
 **`a!support`** - Discord support if you need help or want to discuss with me
 **`a!invite`** - returns bot link invite
-**`<a!help | a!h> - returns bot's commands"""
+**`<a!help | a!h>`** - returns bot's commands"""
 
 class Help(commands.Cog):
     """Help commands"""

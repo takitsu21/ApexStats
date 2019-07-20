@@ -49,7 +49,7 @@ class ApexStatus:
                 if latency_normalize.lower() == 'high latency':
                     latency_normalize = '⚠️'
                 elif latency_normalize.lower() == 'down':
-                    latency_normalize = '❌'
+                    latency_normalize = '`❌`'
                 else:
                     latency_normalize = '✔️'
                 info_server['ping'] = ms_normalize

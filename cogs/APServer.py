@@ -28,8 +28,8 @@ class APServer(commands.Cog):
                                    colour=self.colour)
             embed.set_thumbnail(url=ctx.guild.me.avatar_url)
             embed.set_footer(text="using apexlegendsstatus.com | Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
-            await ctx.send(embed=embed, delete_after=60)
-            await ctx.message.delete(delay=60)       
+            await ctx.send(embed=embed, delete_after=120)
+            await ctx.message.delete(delay=120)       
  
         except Exception as e:
             embed = discord.Embed(title='__**Apex Servers Status**__', description='[Apex Server Status](https://apexlegendsstatus.com/datacenters)', colour=self.colour)
