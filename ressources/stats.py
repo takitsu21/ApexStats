@@ -33,8 +33,8 @@ class Stats:
         global url
         url = f"https://public-api.tracker.gg/v2/apex/standard/profile/{self.platform}/{self.player}"
         async with ClientSession() as session:
-            # task = asyncio.ensure_future(self.req(session))
-            responses = await asyncio.gather(self.fetch(session))            
+            task = asyncio.ensure_future(self.fetch(session))
+            responses = await asyncio.gather(task)            
         return responses[0]["data"]
 
     async def exists(self):
