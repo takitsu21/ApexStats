@@ -3,6 +3,7 @@
 import discord, re, time, datetime, os, aiohttp, asyncio
 from discord.ext import commands
 from cogs import *
+from ressources.__init__ import *
 
 client = commands.Bot(command_prefix='a!', activity=discord.Game(name='Updating...'),
                       status=discord.Status('idle'), afk=True)

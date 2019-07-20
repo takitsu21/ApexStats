@@ -49,7 +49,6 @@ class Help(commands.Cog):
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
         await ctx.author.send(embed=embed)
-        await ctx.message.delete()
 
 def setup(bot):
     bot.add_cog(Help(bot))

@@ -11,10 +11,10 @@ class Bot_Info(commands.Cog):
     @commands.command(pass_context=True)
     async def donate(self,ctx):
         embed = discord.Embed(title='**Donate** :',
-                               description='[__**Patreon**__](https://www.patreon.com/takitsu) or here [__**Buy me a Kofi**__](https://ko-fi.com/takitsu)',
+                               description='[__**Patreon**__](https://www.patreon.com/takitsu)',
                                 colour=self.colour)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
-        embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
+        embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
         await ctx.send(embed = embed)
 
     @commands.command(pass_context=True)
@@ -23,7 +23,7 @@ class Bot_Info(commands.Cog):
                                description='[**Click here**](https://discordapp.com/invite/wTxbQYb)',
                                 colour=self.colour)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
-        embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
+        embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
 
         await ctx.send(embed = embed)
 
@@ -33,7 +33,7 @@ class Bot_Info(commands.Cog):
                                description='[**here**](https://discordapp.com/oauth2/authorize?client_id=551446491886125059&scope=bot&permissions=52224)',
                                 colour=self.colour)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
-        embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
+        embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
 
         await ctx.send(embed = embed)
 
@@ -43,7 +43,7 @@ class Bot_Info(commands.Cog):
                                description='[**Click here**](https://discordbots.org/bot/551446491886125059/vote)',
                                 colour=self.colour)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
-        embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
+        embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
         await ctx.send(embed = embed)
 
     @commands.command(pass_context=True)
@@ -69,7 +69,7 @@ class Bot_Info(commands.Cog):
         embed.add_field(name = "Website", value="[**here**](https://apexstatistics.gitbook.io/workspace/)")
         embed.add_field(name="**Creator**",value="Taki#0853",inline=True)
         embed.add_field(name="*Contributor*",value="RedstonedLife#8787",inline=True)
-        embed.set_footer(text="Made by Taki#0853 (WIP)",
+        embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                          icon_url=ctx.guild.me.avatar_url)
 
         await ctx.send(embed=embed)

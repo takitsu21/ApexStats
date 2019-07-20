@@ -5,13 +5,6 @@ from ressources.stats import *
 from ressources.exceptions import PlayerNotFound
 from ressources.tools import generate_url_profile
 
-async def e_send(ctx, embed=None, delay=None):
-    """Clean messages with a delay"""
-    await ctx.send(embed=embed, delete_after=delay)
-    await ctx.message.delete(delay=delay)
-
-
-
 class Apex(commands.Cog):
     def __init__(self, bot):
         """Display apex stats"""
@@ -28,8 +21,7 @@ class Apex(commands.Cog):
         embed.set_thumbnail(url= ctx.guild.me.avatar_url)
         embed.set_footer(text="data provided by apex.tracker.gg | Mady with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
-        await ctx.send(embed=embed, delete_after=600)
-        await ctx.message.delete(delay=600)
+        await ctx.send(embed=embed)
 
     @commands.command(pass_context=True)            
     async def map(self, ctx):
@@ -92,8 +84,7 @@ class Apex(commands.Cog):
                 embed.set_thumbnail(url=client_icon)
                 embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
                 icon_url=client_icon)
-            await ctx.send(embed=embed, delete_after=500)
-            await ctx.message.delete(delay=500)
+            await ctx.send(embed=embed)
 
         except discord.errors.HTTPException as e: #if len(data) > 2000
             embed = discord.Embed(title="**Too Many Stats to show!**",
@@ -102,16 +93,14 @@ class Apex(commands.Cog):
             embed.set_thumbnail(url= client_icon)
             embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
                              icon_url=client_icon)
-            await ctx.send(embed=embed, delete_after=60)
-            await ctx.message.delete(delay=60)
+            await ctx.send(embed=embed)
 
         except PlayerNotFound:
             embed = discord.Embed(title="❌Stats not found!❌", description="Sorry but i couldn't found your Apex Legends Statistics.\nYou may have made a foul of strikes.\n\nIf you spelled it right then the API might be down.",colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
             embed.set_thumbnail(url = client_icon)
             embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
                             icon_url=client_icon)
-            await ctx.send(embed=embed, delete_after=20)
-            await ctx.message.delete(delay=20)
+            await ctx.send(embed=embed)
         except Exception as e:
             embed = discord.Embed(title="**Command**: **`a!stats`**",
                                   description="**`a!stats <username>`**\n**`a!stats <username> <platform>(pc,xbox,psn)`**",
@@ -121,8 +110,7 @@ class Apex(commands.Cog):
             embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
                              icon_url=client_icon)
             print(e)
-            await ctx.send(embed=embed, delete_after=20)
-            await ctx.message.delete(delay=20)
+            await ctx.send(embed=embed)
 def setup(bot):
     bot.add_cog(Apex(bot))
     print("Added Apex")

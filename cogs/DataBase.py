@@ -56,8 +56,7 @@ class DataBase(commands.Cog):
             SqlManagment.addUser(str(ctx.author.id),"NAN")
         if mode.lower() == "display":
             user = SqlManagment.select('users', 'id', str(ctx.author.id))
-            await ctx.send(f"{ctx.author.mention} You're in the database as `{user[0][1]}` on `{user[0][2]}`", delete_after=30)
-            await ctx.message.delete(delay=30)
+            await ctx.send(f"{ctx.author.mention} You're in the database as `{user[0][1]}` on `{user[0][2]}`")
             return
         if mode.lower() == 'unlink':
             row = SqlManagment.select('users', 'id', str(ctx.author.id))
@@ -69,8 +68,7 @@ class DataBase(commands.Cog):
                 embed.set_thumbnail(url=ctx.guild.me.avatar_url)
                 embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                     icon_url=ctx.guild.me.avatar_url)
-                await ctx.send(embed=embed, delete_after=60)
-                await ctx.message.delete(delay=60)
+                await ctx.send(embed=embed)
             else:
                 embed=discord.Embed(title="Profile unlinked",
                 description=f'{ctx.author.mention} `{player}` on `{platform}` has been successfully unlinked!',
@@ -80,17 +78,13 @@ class DataBase(commands.Cog):
                     icon_url=ctx.guild.me.avatar_url)
                 SqlManagment.unlink(str(ctx.author.id))
                 await ctx.author.send(embed=embed)
-                await ctx.message.delete()
-
             return
         if mode.lower() == "save":
             if len(args) == 0:
-                await ctx.send("❌Please provide an username and the plaftorm you want to save to your profile", delete_after=30)
-                await ctx.message.delete(delay=30)
+                await ctx.send("❌Please provide an username and the plaftorm you want to save to your profile")
                 return
             if len(args) >= 3:
-                await ctx.send("❌Too many arguments provided!", delete_after=30)
-                await ctx.message.delete(delay=30)
+                await ctx.send("❌Too many arguments provided!")
                 return
             if len(args) == 1:
                 embed = discord.Embed(title="Command: `a!profile`",
@@ -113,8 +107,7 @@ class DataBase(commands.Cog):
                                             icon_url=ctx.guild.me.avatar_url)
                         SqlManagment.change("users",str(ctx.author.id),"username",str(player))
                         SqlManagment.change("users",str(ctx.author.id),"platform",str(platform))
-                        await ctx.send(embed=embed, delete_after=120)
-                        await ctx.message.delete(delay=120)                           
+                        await ctx.send(embed=embed)
                         return
                     else:
                         embed = discord.Embed(title=f"❌Profile `{player}` on `{platform}` doesn't exist ❌",
@@ -130,8 +123,7 @@ class DataBase(commands.Cog):
                     embed.set_thumbnail(url=ctx.guild.me.avatar_url)
                     embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                                         icon_url=ctx.guild.me.avatar_url)
-                await ctx.send(embed=embed, delete_after=120)
-                await ctx.message.delete(delay=120)    
+                await ctx.send(embed=embed)
         if(mode.lower() == "n"):
 
             row = SqlManagment.select('users', 'id', str(ctx.author.id))
@@ -143,8 +135,7 @@ class DataBase(commands.Cog):
                 embed.set_thumbnail(url=ctx.guild.me.avatar_url)
                 embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                                  icon_url=ctx.guild.me.avatar_url)
-                await ctx.send(embed=embed, delete_after=120)
-                await ctx.message.delete(delay=120)                
+                await ctx.send(embed=embed)
                 return
             else:
                 try:
@@ -152,9 +143,7 @@ class DataBase(commands.Cog):
                     stats = Stats(row[0][1], row[0][2])
                     data = run(stats.data())
                     embed = self.embed_stats(ctx, data)
-                    await ctx.send(embed=embed, delete_after=500)
-                    await ctx.message.delete(delay=500)
-
+                    await ctx.send(embed=embed)
                 except discord.errors.HTTPException: #if len(data) > 2000
                     embed = discord.Embed(title="**Too Many Stats to show! / New data has been added to Apex Legends**",
                                           description=f"Sorry, but i couldn't show your stats. It's too big.\nYou can see your profile [__**here**__]({data['profile']}).",
@@ -162,15 +151,13 @@ class DataBase(commands.Cog):
                     embed.set_thumbnail(url= client_icon)
                     embed.set_footer(text="data provided by apex.tracker.gg | Made with ❤️ by Taki#0853 (WIP)",
                                      icon_url=client_icon)
-                    await ctx.send(embed=embed, delete_after=100)
-                    await ctx.message.delete(delay=100)
+                    await ctx.send(embed=embed)
                 except PlayerNotFound:
                     embed = discord.Embed(title="❌Stats not found!❌", description="Sorry but i couldn't found your Apex Legends Statistics.\nYou may have made a foul of strikes.\n\nIf you spelled it right then the API might be down.",colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                     embed.set_thumbnail(url = client_icon)
                     embed.set_footer(text="data provided by apex.tracker.gg | Made with ❤️ by Taki#0853 (WIP)",
                                     icon_url=client_icon)
-                    await ctx.send(embed=embed, delete_after=60)
-                    await ctx.message.delete(delay=60)
+                    await ctx.send(embed=embed)
                 except Exception as e:
                     embed = discord.Embed(title="**Command**: **`a!stats`**",
                                           description="**`a!stats <username>`**\n**`a!stats <username> <platform>(pc,xbox,psn)`**",
@@ -180,8 +167,7 @@ class DataBase(commands.Cog):
                     embed.set_footer(text="data provided by apex.tracker.gg | Made with ❤️ by Taki#0853 (WIP)",
                                      icon_url=client_icon)
                     print(e)
-                    await ctx.send(embed=embed, delete_after=180)
-                    await ctx.message.delete(delay=180)
+                    await ctx.send(embed=embed)
                 
             
 
