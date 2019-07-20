@@ -5,6 +5,7 @@ lxml
 aiohttp
 asyncio
 dblpy
+psycopg2
 psycopg2-binary
 nest_asyncio
 uptime
