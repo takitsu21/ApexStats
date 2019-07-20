@@ -47,11 +47,11 @@ class ApexStatus:
                 soup_latency_msg = BeautifulSoup(str(self.page.find_all("h4", class_="card-title")[i]), features='lxml')
                 latency_normalize = unicodedata.normalize("NFKD", soup_latency_msg.get_text())
                 if latency_normalize.lower() == 'high latency':
-                    latency_normalize = ' :warning:'+9*' '
+                    latency_normalize = '⚠️'
                 elif latency_normalize.lower() == 'down':
-                    latency_normalize = ':x:'+ 14 * ' '
+                    latency_normalize = '❌'
                 else:
-                    latency_normalize = ':white_check_mark:'
+                    latency_normalize = '✔️'
                 info_server['ping'] = ms_normalize
                 info_server['latency_msg'] = latency_normalize
                 status[server_normalize.lstrip()] = info_server

@@ -17,7 +17,7 @@ class Feedback(commands.Cog):
                                 description=f"{ctx.author.mention} Message too short!\nAt least 3 words required",
                                 icon_url=ctx.guild.me.avatar_url)
             embed.set_thumbnail(url=ctx.guild.me.avatar_url)
-            embed.set_footer(text="Made by Taki#0853 (WIP)",
+            embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                             icon_url=ctx.guild.me.avatar_url)
             await ctx.send(embed=embed)
             return
@@ -28,7 +28,7 @@ class Feedback(commands.Cog):
                             description=f"{ctx.author.mention} Your suggestion has been sent!\nThanks for the feedback",
                             icon_url=ctx.guild.me.avatar_url)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
-        embed.set_footer(text="Made by Taki#0853 (WIP)",
+        embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
         await ctx.send(embed=embed)
 
@@ -40,7 +40,7 @@ class Feedback(commands.Cog):
                     description=f"{ctx.author.mention} Message too short!\nAt least 3 words required",
                     icon_url=ctx.guild.me.avatar_url)
             embed.set_thumbnail(url=ctx.guild.me.avatar_url)
-            embed.set_footer(text="Made by Taki#0853 (WIP)",
+            embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                             icon_url=ctx.guild.me.avatar_url)
             await ctx.send(embed=embed)
             return
@@ -51,7 +51,7 @@ class Feedback(commands.Cog):
                             description=f"{ctx.author.mention} Your bug report has been sent!\nThanks for the feedback",
                             icon_url=ctx.guild.me.avatar_url)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
-        embed.set_footer(text="Made by Taki#0853 (WIP)",
+        embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
         await ctx.send(embed=embed)
 

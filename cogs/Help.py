@@ -5,9 +5,8 @@ import discord
 from discord.ext import commands
 
 stats_commands = """**`a!stats`** - Explanation about stats
-**`a!stats <username>`** - View Apex Legends statistics on PC only (shorter version)
-**`a!stats <username> <pc | xbox | psn>`** - View Apex Legends statistics
-**`a!profile`** - View your Apex Legends profile if registered before
+**`<a!stats | a!s> <username> <pc | xbox | psn>`** - View Apex Legends statistics
+**`<a!profile |a!p>`** - View your Apex Legends profile if registered before
 **`a!profile save <username> <pc | xbox | psn>`** - Link your Discord account to your Apex Legends stats
 **`a!profile display`** - View the current saved profile
 **`a!profile unlink`** - Unlink your profile
@@ -30,7 +29,8 @@ other_commands = """**`a!bug <message>`** - Send me a bug report, this will help
 **`a!donate`** - Link to support me
 **`a!vote`** - An other way to support me
 **`a!support`** - Discord support if you need help or want to discuss with me
-**`a!invite`** - returns bot link invite"""
+**`a!invite`** - returns bot link invite
+**`<a!help | a!h> - returns bot's commands"""
 
 class Help(commands.Cog):
     """Help commands"""
@@ -38,7 +38,7 @@ class Help(commands.Cog):
         self.bot = bot
         self.colour = 0xff0004
 
-    @commands.command(pass_context=True)
+    @commands.command(aliases=["h"])
     async def help(self,ctx):
         embed = discord.Embed(title='**Available commands:**',
                             colour=self.colour,
@@ -47,10 +47,10 @@ class Help(commands.Cog):
         embed.add_field(name="Apex Commands:",value=apex_commands)
         embed.add_field(name="Other commands:",value=other_commands)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
-        embed.set_footer(text="Made by Taki#0853 (WIP)",
+        embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
-
         await ctx.author.send(embed=embed)
+        await ctx.message.delete()
 
 def setup(bot):
     bot.add_cog(Help(bot))

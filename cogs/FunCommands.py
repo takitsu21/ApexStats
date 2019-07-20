@@ -103,7 +103,7 @@ class FunCommands(commands.Cog):
         embed.add_field(name="__Location__",value=landings[land]["Name"],inline=True)
         embed.add_field(name="__Loot Tier__",value=landings[land]["Tier"],inline=True)
         embed.set_image(url=landings[land]["ICON_URL"])
-        embed.set_footer(text="command created by RedstonedLife#8787 | Made by Taki#0853 (WIP)",
+        embed.set_footer(text="command created by RedstonedLife#8787 | Made with ❤️ by Taki#0853 (WIP)",
                          icon_url = ctx.guild.me.avatar_url)
         await ctx.send(embed=embed)
 

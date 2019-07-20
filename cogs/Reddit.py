@@ -11,11 +11,11 @@ class Reddit(commands.Cog):
     @commands.command(pass_context=True)
     async def reddit(self, ctx, parameter: str = 'nan'):
         if parameter == 'nan':
-            embed = (discord.Embed(title='Command: !reddit',
-                                   description='!reddit <hot/top/best> - Return recent hot/top/best on r/apexlegends',
+            embed = (discord.Embed(title='Command: a!reddit',
+                                   description='a!reddit <hot | top | best> - Return recent hot/top/best on r/apexlegends',
                                     colour=self.colour))
             embed.set_thumbnail(url=self.redditIcon)
-            embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
+            embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
             await ctx.send(embed = embed)
             return
         try:
@@ -26,21 +26,21 @@ class Reddit(commands.Cog):
                                                description=desc,
                                                 colour=self.colour)
                 embed.set_thumbnail(url=self.redditIcon)
-                embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
+                embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
                 await searchReddit.edit(content = '', embed = embed)
             else:
-                embed = (discord.Embed(title='Command: !reddit',
-                                       description=f'Wrong argument provided, `{parameter}` is not recognized sorry!\nTry with <hot/top/best>',
+                embed = (discord.Embed(title='Command: a!reddit',
+                                       description=f'Wrong argument provided, `{parameter}` is not recognized sorry!\nTry with `a!reddit <hot | top | best>`',
                                         colour=self.colour))
                 embed.set_thumbnail(url=self.redditIcon)
-                embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
+                embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
                 await ctx.send(embed = embed)
         except Exception as e:
-            embed = (discord.Embed(title='Command: !reddit',
-                                   description='!reddit <hot/top/best> - Return recent hot/top/best on r/apexlegends',
+            embed = (discord.Embed(title='Command: a!reddit',
+                                   description='a!reddit a!reddit <hot | top | best> - Return recent hot/top/best on r/apexlegends',
                                     colour=self.colour))
             embed.set_thumbnail(url=self.redditIcon)
-            embed.set_footer(text="Made by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
+            embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
             print(e)
             await ctx.send(embed = embed)
 
