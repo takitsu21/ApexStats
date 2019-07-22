@@ -78,7 +78,7 @@ class Apex(commands.Cog):
                     embed = embed_stats(ctx, data)
 
             else:
-                embed = discord.Embed(title=":x: Wrong platform! :x:",
+                embed = discord.Embed(title="❌Wrong platform!❌",
                 description=f'{ctx.author.mention} Wrong platform! retry with `pc` | `xbox` | `psn`')
                 embed.set_thumbnail(url=ctx.guild.me.avatar_url)
 
