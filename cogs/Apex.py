@@ -67,7 +67,7 @@ class Apex(commands.Cog):
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg", icon_url=ctx.guild.me.avatar_url)
         return embed
 
-    @commands.command(pass_context=True, aliases=["s"])
+    @commands.command(aliases=["s"])
     async def stats(self, ctx, player : str = '', platform : str = 'pc'):
         """Displays apex stats for a given player (and platform)"""
         try:

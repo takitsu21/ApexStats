@@ -62,7 +62,7 @@ class DataBase(commands.Cog):
             row = SqlManagment.select('users', 'id', str(ctx.author.id))
             player, platform = row[0][1], row[0][2]
             if player == 'NAN':
-                embed=discord.Embed(title="Profile not registered!",
+                embed=discord.Embed(title="⚠️Profile not registered!",
                 description=f'{ctx.author.mention} Your profile is not yet registered in the database',
                 timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
                 embed.set_thumbnail(url=ctx.guild.me.avatar_url)
@@ -99,7 +99,7 @@ class DataBase(commands.Cog):
                 if platform.lower() in ['pc','xbox','psn']:
                     stats = Stats(player, platform)
                     if stats.exists():
-                        embed = discord.Embed(title=":white_check_mark: Your profile has been saved! :white_check_mark:",
+                        embed = discord.Embed(title="✔️Your profile has been saved!✔️",
                                                 description=f"You're in the database as `{player}` on `{platform}`",
                                                 timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
                         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
@@ -110,7 +110,7 @@ class DataBase(commands.Cog):
                         await ctx.send(embed=embed)
                         return
                     else:
-                        embed = discord.Embed(title=f"❌Profile `{player}` on `{platform}` doesn't exist ❌",
+                        embed = discord.Embed(title=f"❌Profile `{player}` on `{platform}` doesn't exist❌",
                         description=f"{ctx.author.mention} This profile doesn't exist!\nRetry, you might have spelled it wrong",
                         timestamp=datetime.datetime.utcfromtimestamp(time.time()),colour=self.colour)
                         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
@@ -143,7 +143,7 @@ class DataBase(commands.Cog):
                     stats = Stats(row[0][1], row[0][2])
                     data = run(stats.data())
                     embed = self.embed_stats(ctx, data)
-                    await ctx.send(embed=embed)
+                    return await ctx.send(embed=embed)
                 except discord.errors.HTTPException: #if len(data) > 2000
                     embed = discord.Embed(title="**Too Many Stats to show! / New data has been added to Apex Legends**",
                                           description=f"Sorry, but i couldn't show your stats. It's too big.\nYou can see your profile [__**here**__]({data['profile']}).",

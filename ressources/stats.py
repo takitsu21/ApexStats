@@ -35,6 +35,7 @@ class Stats:
         async with ClientSession() as session:
             task = asyncio.ensure_future(self.fetch(session))
             responses = await asyncio.gather(task)
+        print(responses)
         data = responses[0]["data"]
         return data
 
