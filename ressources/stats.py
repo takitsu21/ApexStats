@@ -40,7 +40,7 @@ class Stats:
 
     def exists(self):
         try:
-            data = asyncio.run(self.data())
+            data = run(self.data())
             return True
         except PlayerNotFound:
             return False
