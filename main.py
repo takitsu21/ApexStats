@@ -56,6 +56,5 @@ async def on_ready(ctx):
     #             acc += 1
     #             await client.change_presence(activity=discord.Activity(name='[a!help] & {} users'.format(nb_users), type=3))
     #             await asyncio.sleep(10)
-        nb_users = 0
 
 client.run(os.environ['TOKEN'])
