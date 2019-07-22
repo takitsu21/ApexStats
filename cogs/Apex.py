@@ -74,9 +74,40 @@ class Apex(commands.Cog):
             if platform.lower() in ['pc','xbox','psn']:
                 stats = Stats(player, platform)
                 if len(player) >= 1:
-                    data = run(stats.data())
-                    embed = embed_stats(ctx, data)
+                    data = asyncio.run(stats.data())
+                    legend, res, overview = "", "", ""
+                    embed = discord.Embed(
+                        colour=self.colour,
+                        timestamp=datetime.datetime.utcfromtimestamp(time.time())
+                    )
+                    embed.set_thumbnail(url = data["segments"][0]["stats"]["rankScore"]["metadata"]["iconUrl"])
+                    embed.set_author(
+                        name='{0} | Level {1} | Elo : {2}'.format(
+                        data["platformInfo"]["platformUserHandle"],
+                        int(data["segments"][0]["stats"]["level"]["value"]),
+                        data["segments"][0]["stats"]["rankScore"]["displayValue"]
+                    ),
+                        url=generate_url_profile(data["platformInfo"]["platformSlug"],data["platformInfo"]["platformUserHandle"]),
+                        icon_url=data["platformInfo"]["avatarUrl"]
+                    )
+                    for i, stats in enumerate(data["segments"]):
+                        try:
 
+                            if i == 0:
+                                for i, children in enumerate(stats["stats"]):
+                                    if i > 0:
+                                        overview += '**{}** : `{}`\n'.format(stats["stats"][children]["displayName"], str(int(stats["stats"][children]["value"])))
+
+                            else:
+                                legend = stats["metadata"]["name"]
+                                for children in stats["stats"]:
+                                    res += '**{}** : `{}`\n'.format(stats["stats"][children]["displayName"], str(int(stats["stats"][children]["value"])))
+                                if len(res)>0:
+                                    embed.add_field(name = '__`{}`__'.format(legend), value='{}'.format(res), inline=True)
+                                    res = ''
+                        except Exception as e:
+                            print(f"{type(e).__name__} : {e}")
+                    embed.add_field(name = f'__`Lifetime`__', value='{}'.format(overview), inline=True)
             else:
                 embed = discord.Embed(title="❌Wrong platform!❌",
                 description=f'{ctx.author.mention} Wrong platform! retry with `pc` | `xbox` | `psn`')

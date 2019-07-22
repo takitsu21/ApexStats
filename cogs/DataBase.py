@@ -141,7 +141,7 @@ class DataBase(commands.Cog):
                 try:
                     client_icon = ctx.guild.me.avatar_url
                     stats = Stats(row[0][1], row[0][2])
-                    data = run(stats.data())
+                    data = asyncio.run(stats.data())
                     embed = self.embed_stats(ctx, data)
                     return await ctx.send(embed=embed)
                 except discord.errors.HTTPException: #if len(data) > 2000
