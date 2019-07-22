@@ -1,5 +1,4 @@
-import discord
-import time, datetime
+import time, datetime, asyncio, discord
 from discord.ext import commands
 from ressources.stats import *
 from ressources.exceptions import PlayerNotFound
@@ -76,7 +75,7 @@ class Apex(commands.Cog):
             if platform.lower() in ['pc','xbox','psn']:
                 stats = Stats(player, platform)
                 if len(player) >= 1:
-                    data = run(stats.data())
+                    data = asyncio.run(stats.data())
                     embed = self.embed_stats(ctx, data)
             else:
                 embed = discord.Embed(title=":x: Wrong platform! :x:",
@@ -84,7 +83,6 @@ class Apex(commands.Cog):
                 embed.set_thumbnail(url=client_icon)
                 embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
                 icon_url=client_icon)
-            await ctx.send(embed=embed)
 
         except discord.errors.HTTPException as e: #if len(data) > 2000
             embed = discord.Embed(title="**Too Many Stats to show!**",
@@ -93,14 +91,12 @@ class Apex(commands.Cog):
             embed.set_thumbnail(url= client_icon)
             embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
                              icon_url=client_icon)
-            await ctx.send(embed=embed)
 
         except PlayerNotFound:
             embed = discord.Embed(title="❌Stats not found!❌", description="Sorry but i couldn't found your Apex Legends Statistics.\nYou may have made a foul of strikes.\n\nIf you spelled it right then the API might be down.",colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
             embed.set_thumbnail(url = client_icon)
             embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
                             icon_url=client_icon)
-            await ctx.send(embed=embed)
         except Exception as e:
             embed = discord.Embed(title="**Command**: **`a!stats`**",
                                   description="**`a!stats <username>`**\n**`a!stats <username> <platform>(pc,xbox,psn)`**",
@@ -110,7 +106,8 @@ class Apex(commands.Cog):
             embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
                              icon_url=client_icon)
             print(e)
-            await ctx.send(embed=embed)
+        return await ctx.send(embed=embed)
+
 def setup(bot):
     bot.add_cog(Apex(bot))
     print("Added Apex")

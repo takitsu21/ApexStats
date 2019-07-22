@@ -37,9 +37,9 @@ class Stats:
             responses = await asyncio.gather(task)            
         return responses[0]["data"]
 
-    async def exists(self):
+    def exists(self):
         try:
-            run(self.data())
+            data = asyncio.run(self.data())
             return True
         except PlayerNotFound:
             return False
@@ -47,5 +47,6 @@ class Stats:
 def run(func = lambda x: x):
     """asyncio runner function using python 3.7"""
     return asyncio.run(func)
+
 
 
