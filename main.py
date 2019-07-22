@@ -24,7 +24,7 @@ async def on_guild_join(ctx):
     # pass
 
 @client.event
-async def on_ready(ctx):
+async def on_ready():
     await client.wait_until_ready() # Waiting for the bot to be ready
     client.remove_command("help") # To remove the default created help command, so later the bot can add its own.
     # Adding Cogs
