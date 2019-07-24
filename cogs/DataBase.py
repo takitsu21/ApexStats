@@ -139,44 +139,12 @@ class DataBase(commands.Cog):
                 return
             else:
                 try:
+                    finding = await ctx.send("`👀👀Searching...`")
                     client_icon = ctx.guild.me.avatar_url
                     stats = Stats(row[0][1], row[0][2])
-                    data = asyncio.run(stats.data())
-                    legend, res, overview = "", "", ""
-                    embed = discord.Embed(
-                        colour=self.colour,
-                        timestamp=datetime.datetime.utcfromtimestamp(time.time())
-                    )
-                    embed.set_thumbnail(url = data["segments"][0]["stats"]["rankScore"]["metadata"]["iconUrl"])
-                    embed.set_author(
-                        name='{0} | Level {1} | Elo : {2}'.format(
-                        data["platformInfo"]["platformUserHandle"],
-                        int(data["segments"][0]["stats"]["level"]["value"]),
-                        data["segments"][0]["stats"]["rankScore"]["displayValue"]
-                    ),
-                        url=generate_url_profile(data["platformInfo"]["platformSlug"],data["platformInfo"]["platformUserHandle"]),
-                        icon_url=data["platformInfo"]["avatarUrl"]
-                    )
-                    for i, stats in enumerate(data["segments"]):
-                        try:
-
-                            if i == 0:
-                                for i, children in enumerate(stats["stats"]):
-                                    if i > 0:
-                                        overview += '**{}** : `{}`\n'.format(stats["stats"][children]["displayName"], str(int(stats["stats"][children]["value"])))
-
-                            else:
-                                legend = stats["metadata"]["name"]
-                                for children in stats["stats"]:
-                                    res += '**{}** : `{}`\n'.format(stats["stats"][children]["displayName"], str(int(stats["stats"][children]["value"])))
-                                if len(res)>0:
-                                    embed.add_field(name = '__`{}`__'.format(legend), value='{}'.format(res), inline=True)
-                                    res = ''
-                        except Exception as e:
-                            print(f"{type(e).__name__} : {e}")
-                    embed.add_field(name = f'__`Lifetime`__', value='{}'.format(overview), inline=True)
-                    embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg", icon_url=ctx.guild.me.avatar_url)
-                    return await ctx.send(embed=embed)
+                    data = stats.data()
+                    embed = self.embed_stats(ctx, data)
+                    return await finding.edit(content="", embed=embed)
                 except discord.errors.HTTPException: #if len(data) > 2000
                     embed = discord.Embed(title="**Too Many Stats to show! / New data has been added to Apex Legends**",
                                           description=f"Sorry, but i couldn't show your stats. It's too big.\nYou can see your profile [__**here**__]({data['profile']}).",
@@ -184,13 +152,13 @@ class DataBase(commands.Cog):
                     embed.set_thumbnail(url= client_icon)
                     embed.set_footer(text="data provided by apex.tracker.gg | Made with ❤️ by Taki#0853 (WIP)",
                                      icon_url=client_icon)
-                    await ctx.send(embed=embed)
+                    await finding.edit(content="", embed=embed)
                 except PlayerNotFound:
                     embed = discord.Embed(title="❌Stats not found!❌", description="Sorry but i couldn't found your Apex Legends Statistics.\nYou may have made a foul of strikes.\n\nIf you spelled it right then the API might be down.",colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
                     embed.set_thumbnail(url = client_icon)
                     embed.set_footer(text="data provided by apex.tracker.gg | Made with ❤️ by Taki#0853 (WIP)",
                                     icon_url=client_icon)
-                    await ctx.send(embed=embed)
+                    await finding.edit(content="", embed=embed)
                 except Exception as e:
                     embed = discord.Embed(title="**Command**: **`a!stats`**",
                                           description="**`a!stats <username>`**\n**`a!stats <username> <platform>(pc,xbox,psn)`**",
@@ -200,9 +168,10 @@ class DataBase(commands.Cog):
                     embed.set_footer(text="data provided by apex.tracker.gg | Made with ❤️ by Taki#0853 (WIP)",
                                      icon_url=client_icon)
                     print(e)
-                    await ctx.send(embed=embed)
+                    await finding.edit(content="", embed=embed)
                 
             
 
 def setup(bot):
     bot.add_cog(DataBase(bot))
+    print(f"{__file__}")

@@ -34,6 +34,6 @@ async def on_ready():
         except Exception as e:
             print(f"{file} can't be loaded :\n {type(e).__name__} : {e}")
     print('All cogs loaded!')
-    await client.change_presence(activity=discord.Activity(name='[a!help]', type=3))
+    await client.change_presence(activity=discord.Activity(name='[a!help] | Apex Legends', type=3))
 
 client.run(os.environ['TOKEN'])
