@@ -112,4 +112,3 @@ class Apex(commands.Cog):
 
 def setup(bot):
     bot.add_cog(Apex(bot))
-    print(f"{__file__}")

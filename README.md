@@ -10,15 +10,15 @@
 
 | Command | Description |
 | ------- | ----------- |
-| **`a!help`** | View all commands available |
-| **`a!stats <username> <platform>(pc,xbox,psn)`** | View Apex Legends statistics |
-| **`a!profile save <username> <platform>(pc,xbox,psn)`** | Link your Discord account to your Apex Legends stats |
-| **`a!profile display`** | View the current saved profile |
-| **`a!profile unlink`** | Unlink your profile |
-| **`a!leaderboard`** | Top 10 from database |
+| **`<a!help | a!h>`** | View all commands available |
+| **`<a!stats | a!s> [USERNAME] <pc | xbox | psn>`** | View Apex Legends statistics |
+| **`a!profile save [USERNAME] <pc | xbox | psn>`** | Link your Discord account to your Apex Legends stats |
+| **`<a!profile | a!p>`** | Show your Apex Legends stats if profile registered |
+| **`<a!profile | a!p> display`** | View the current saved profile |
+| **`<a!profile | a!p> unlink`** | Unlink your profile |
 | **`a!news`** | View 6 last news on Apex Legends |
 | **`a!servers`** | View all Apex Legends server status (ping, status, server name) |
-| **`a!reddit <categorie>(hot/top)`** | Recents post by categorie |
+| **`a!reddit <hot | top>`** | Recents post by categorie |
 | **`a!drop`** | Random place to land for the next game |
 | **`a!legend`** | Random legend to pick for the next game |
 | **`a!team`** | Entire random team for the next game |
@@ -29,16 +29,17 @@
 | **`a!support`** | Discord support if you need help |
 | **`a!invite`** | If you want to send discord invite link for a friend |
 | **`a!patch`** | View live patch note |
-| **`a!suggestion <message>`** | Suggestion to add for the bot, all suggestions are good don't hesitate |
-| **`a!bug <message>`** | Send me a bug report, this will helps to improve the bot |
+| **`a!map`** | View Apex Legends map and it's loot tier |
+| **`a!suggestion [MESSAGE]`** | Suggestion to add for the bot, all suggestions are good don't hesitate |
+| **`a!bug [MESSAGE]`** | Send me a bug report, this will helps to improve the bot |
 
 ## Few examples
 
-![Example Apex stats](https://i.imgur.com/ZL5YGUX.png)
+![Example Apex stats](https://cdn.discordapp.com/attachments/556841627466072064/603623745353023500/unknown.png)
 
-![Save your profile](https://i.imgur.com/HspuDV2.png)
+![Save your profile](https://cdn.discordapp.com/attachments/594933144327684117/603668631766827197/unknown.png)
 
-![See your profile](https://i.imgur.com/rwhpu5L.png)
+![See your profile](https://cdn.discordapp.com/attachments/594933144327684117/603668839305314354/unknown.png)
 
 ## Built With
 

@@ -31,6 +31,7 @@ async def on_ready():
         try:
             if file.endswith(".py"):
                 client.load_extension(f'cogs.{file.split(".")[0]}')
+                print(f"{file} loaded")
         except Exception as e:
             print(f"{file} can't be loaded :\n {type(e).__name__} : {e}")
     print('All cogs loaded!')
