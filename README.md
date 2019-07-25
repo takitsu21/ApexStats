@@ -10,12 +10,12 @@
 
 | Command | Description |
 | ------- | ----------- |
-| **`<a!help | a!h>`** | View all commands available |
-| **`<a!stats | a!s> [USERNAME] <pc | xbox | psn>`** | View Apex Legends statistics |
-| **`a!profile save [USERNAME] <pc | xbox | psn>`** | Link your Discord account to your Apex Legends stats |
-| **`<a!profile | a!p>`** | Show your Apex Legends stats if profile registered |
-| **`<a!profile | a!p> display`** | View the current saved profile |
-| **`<a!profile | a!p> unlink`** | Unlink your profile |
+| **`<a!help / a!h>`** | View all commands available |
+| **`<a!stats / a!s> [USERNAME] <pc | xbox | psn>`** | View Apex Legends statistics |
+| **`<a!profile / a!p> save [USERNAME] <pc | xbox | psn>`** | Link your Discord account to your Apex Legends stats |
+| **`<a!profile / a!p>`** | Show your Apex Legends stats if profile registered |
+| **`<a!profile / a!p> display`** | View the current saved profile |
+| **`<a!profile / a!p> unlink`** | Unlink your profile |
 | **`a!news`** | View 6 last news on Apex Legends |
 | **`a!servers`** | View all Apex Legends server status (ping, status, server name) |
 | **`a!reddit <hot | top>`** | Recents post by categorie |
