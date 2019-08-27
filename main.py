@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
 #coding:utf-8
-import discord, re, time, datetime, os, aiohttp, asyncio
+import discord, re, time, datetime, os, asyncio
 from discord.ext import commands
 from cogs import *
 
 client = commands.Bot(command_prefix='a!', activity=discord.Game(name='Updating...'),
                       status=discord.Status('idle'), afk=True)
 
-@client.event
-async def on_guild_join(ctx):
-    embed = discord.Embed(title='**Nice to meet you!**',
-                        colour=0xff0004,
-                        description= "Thanks for inviting me!")
-    embed.add_field(name="**Prefix**", value="`a!`")
-    embed.add_field(name="**About Apex Stats**",
-                    value="Type `a!help` to get all the commands!")
-    embed.set_footer(text="Made by Taki#0853 (WIP)")
-    await ctx.owner.send(embed = embed)
+# @client.event
+# async def on_guild_join(ctx):
+#     embed = discord.Embed(title='**Nice to meet you!**',
+#                         colour=0xff0004,
+#                         description= "Thanks for inviting me!")
+#     embed.add_field(name="**Prefix**", value="`a!`")
+#     embed.add_field(name="**About Apex Stats**",
+#                     value="Type `a!help` to get all the commands!")
+#     embed.set_footer(text="Made by Taki#0853 (WIP)")
+#     await ctx.owner.send(embed = embed)
 
 # @client.event
 # async def on_member_join(ctx):
