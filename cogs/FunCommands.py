@@ -109,12 +109,12 @@ class FunCommands(commands.Cog):
 
     @commands.command(pass_context=True)
     async def legend(self,ctx):
-        legends = ["Bangalore","Bloodhound","Lifeline","Pathfinder","Gibraltar","Wraith","Caustic","Mirage", "Octane"]
+        legends = ["Bangalore","Bloodhound","Lifeline","Pathfinder","Gibraltar","Wraith","Caustic","Mirage", "Octane", "Wattson"]
         await ctx.author.send(" Next game choose `{}`".format(random.choice(legends)))
 
     @commands.command(pass_context=True)
     async def team(self, ctx):
-        legends = ["Bangalore","Bloodhound","Lifeline","Pathfinder","Gibraltar","Wraith","Caustic","Mirage", "Octane"]
+        legends = ["Bangalore","Bloodhound","Lifeline","Pathfinder","Gibraltar","Wraith","Caustic","Mirage", "Octane", "Wattson"]
         await ctx.send("{} Here is your team : `{}`, `{}`, `{}` HF".format(ctx.author.mention, legends.pop(legends.index(random.choice(legends))), legends.pop(legends.index(random.choice(legends))), legends.pop(legends.index(random.choice(legends)))))
 
 
