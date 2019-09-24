@@ -1,18 +1,17 @@
-import dbl, os
+import dbl
 import discord
 from discord.ext import commands
 
 import asyncio
 import logging
 
-dblToken = os.environ["DBL_TOKEN"]
 
 class DiscordBotsOrgAPI(commands.Cog):
     """Handles interactions with the discordbots.org API"""
 
     def __init__(self, bot):
         self.bot = bot
-        self.token =  dblToken# set this to your DBL token
+        self.token = "" # set this to your DBL token
         self.dblpy = dbl.Client(self.bot, self.token)
         self.updating = self.bot.loop.create_task(self.update_stats())
 

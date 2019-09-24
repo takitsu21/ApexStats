@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 #coding:utf-8
-import os, requests
+import os
+import requests
 from ressources.tools import *
 from ressources.exceptions import *
 
 class Stats:
-    """Get apex legends stats"""
+    """Make request"""
     def __init__(self, player: str = "", platform: str = 'pc'):
         self.player = player
         self.base_platform = platform.lower()

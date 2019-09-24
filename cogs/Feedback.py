@@ -1,13 +1,16 @@
-import discord,asyncio, datetime, time
+import discord
+import asyncio
+import datetime
+import time
 from discord.ext import commands
-import ressources.mail_handler as mail
-
 
 class Feedback(commands.Cog):
-    """Send feedback to the dev"""
+    """Send feedback to me"""
     def __init__(self, bot):
         self.bot = bot
         self.colour = 0xff0004
+        self._id = 162200556234866688
+        self.dm_me = self.bot.get_user(self._id)
 
     @commands.command(pass_context=True)
     async def suggestion(self, ctx, *message):
@@ -19,18 +22,17 @@ class Feedback(commands.Cog):
             embed.set_thumbnail(url=ctx.guild.me.avatar_url)
             embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                             icon_url=ctx.guild.me.avatar_url)
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         message = ' '.join(message)
-        mail.send_msg(ctx.author, message, "SUGGESTION")
+        await self.dm_me.send(f"[{ctx.author}] -> {message}")
         embed = discord.Embed(title='**Suggestion**',
                             colour=self.colour,
-                            description=f"{ctx.author.mention} Your suggestion has been sent!\nThanks for the feedback",
+                            description=f"{ctx.author.mention} Your suggestion has been sent @Taki#0853\nThanks for the feedback",
                             icon_url=ctx.guild.me.avatar_url)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
-        await ctx.send(embed=embed)
+        return await ctx.send(embed=embed)
 
     @commands.command(pass_context=True)
     async def bug(self, ctx, *message):
@@ -42,20 +44,17 @@ class Feedback(commands.Cog):
             embed.set_thumbnail(url=ctx.guild.me.avatar_url)
             embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                             icon_url=ctx.guild.me.avatar_url)
-            await ctx.send(embed=embed)
-            return
+            return await ctx.send(embed=embed)
         message = ' '.join(message)
-        mail.send_msg(ctx.author, message, "BUG REPORT")
+        await self.dm_me.send(f"[{ctx.author}] -> {message}")
         embed = discord.Embed(title='**Bug Report**',
                             colour=self.colour,
-                            description=f"{ctx.author.mention} Your bug report has been sent!\nThanks for the feedback",
+                            description=f"{ctx.author.mention} Your bug report has been sent @Taki#0853\nThanks for the feedback",
                             icon_url=ctx.guild.me.avatar_url)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
-        await ctx.send(embed=embed)
-
+        return await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Feedback(bot))
-    print("Added Feedback")

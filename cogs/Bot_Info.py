@@ -11,7 +11,7 @@ class Bot_Info(commands.Cog):
     @commands.command(pass_context=True)
     async def donate(self,ctx):
         embed = discord.Embed(title='**Donate** :',
-                               description='[__**Patreon**__](https://www.patreon.com/takitsu)',
+                                description='[__**Patreon**__](https://www.patreon.com/takitsu)',
                                 colour=self.colour)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)

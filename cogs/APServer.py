@@ -1,10 +1,12 @@
-import discord, datetime, time
+import discord
+import datetime
+import time
 from discord.ext import commands
 import ressources.web_scrapper as server
 
 
 class APServer(commands.Cog):
-    def __init__(self,bot):
+    def __init__(self, bot):
         self.bot = bot
         self.colour = 0xff0004
 
@@ -21,20 +23,18 @@ class APServer(commands.Cog):
     @commands.command(pass_context=True)
     async def servers(self,ctx):
         try:
+            finding = await ctx.send("`Checking servers...`")
             Aps = server.ApexStatus()
             embed = discord.Embed(title='**Apex Servers Status**',
                                   description=f'{Aps.status()}',
                                    colour=self.colour)
             embed.set_thumbnail(url=ctx.guild.me.avatar_url)
-            embed.set_footer(text="using apexlegendsstatus.com | Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
-            await ctx.send(embed=embed)
- 
-        except Exception as e:
+            embed.set_footer(text="using apexlegendsstatus.com | Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url) 
+        except Exception:
             embed = discord.Embed(title='__**Apex Servers Status**__', description='[Apex Server Status](https://apexlegendsstatus.com/datacenters)', colour=self.colour)
             embed.set_thumbnail(url=ctx.guild.me.avatar_url)
             embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
-            print(f'{type(e).__name__} : {e}')
-            await ctx.send(embed=embed)
+        await finding.edit(content="", embed=embed)
 
 def setup(bot):
     bot.add_cog(APServer(bot))
