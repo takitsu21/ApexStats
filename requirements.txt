@@ -1,6 +1,6 @@
 discord.py
 bs4
-requests
+aiohttp_requests
 lxml
 asyncio
 dblpy

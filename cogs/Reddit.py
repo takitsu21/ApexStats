@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-import ressources.web_scrapper as reddit
+import src.web_scrapper as reddit
 
 class Reddit(commands.Cog):
     def __init__(self,bot):
@@ -11,17 +11,18 @@ class Reddit(commands.Cog):
     @commands.command(pass_context=True)
     async def reddit(self, ctx, parameter: str = 'nan'):
         if parameter == 'nan':
-            embed = (discord.Embed(title='Command: a!reddit',
-                                   description='a!reddit <hot | top | best> - Return recent hot/top/best on r/apexlegends',
-                                    colour=self.colour))
+            embed = discord.Embed(
+                                title='Command: a!reddit',
+                                description='a!reddit <hot | top | best> - Return recent hot/top/best on r/apexlegends',
+                                colour=self.colour
+                                )
             embed.set_thumbnail(url=self.redditIcon)
             embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
-            await ctx.send(embed = embed)
-            return
+            return await ctx.send(embed = embed)
         try:
             if parameter in ['hot','top','best']:
                 searchReddit = await ctx.send(f'`Looking for reddit {parameter} recents posts...`')
-                desc = reddit.redditPost(parameter)
+                desc = reddit.get_post(parameter)
                 embed = discord.Embed(title=f'**Reddit {parameter}** recents posts in the last 24 hours',
                                                description=desc,
                                                 colour=self.colour)
@@ -36,9 +37,11 @@ class Reddit(commands.Cog):
                 embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
                 await ctx.send(embed = embed)
         except Exception as e:
-            embed = (discord.Embed(title='Command: a!reddit',
-                                   description='a!reddit a!reddit <hot | top | best> - Return recent hot/top/best on r/apexlegends',
-                                    colour=self.colour))
+            embed = discord.Embed(
+                                title='Command: a!reddit',
+                                description='a!reddit a!reddit <hot | top | best> - Return recent hot/top/best on r/apexlegends',
+                                colour=self.colour
+                                )
             embed.set_thumbnail(url=self.redditIcon)
             embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
             print(e)
@@ -46,4 +49,3 @@ class Reddit(commands.Cog):
 
 def setup(bot):
     bot.add_cog(Reddit(bot))
-    print("Added Reddit cog from cogs")

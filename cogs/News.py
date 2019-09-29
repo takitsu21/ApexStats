@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-import ressources.web_scrapper as _news
+import src.web_scrapper as news
 
 class News(commands.Cog):
     def __init__(self,bot):
@@ -8,9 +8,18 @@ class News(commands.Cog):
         self.colour = 0xff0004
 
     @commands.command(pass_context=True)
-    async def news(self, ctx, lang: str = 'en'):
-        finding = await ctx.send('`Looking for news...`')
-        news = _news.ApexNews(lang)
+    async def patch(self,ctx):
+        patch_note = "https://www.reddit.com/r/apexlegends/comments/c8bul6/season_2_battle_charge_begins_patch_notes_here/"
+        embed = discord.Embed(colour=self.colour,
+                              timestamp=dt.datetime.utcfromtimestamp(time.time()))
+        embed.add_field(name="**Patch Notes** (Last -> 2 July 2019)", value=f"[**Live patch**]({patch_note})\n[**06.20.2019**](https://www.reddit.com/r/apexlegends/comments/c2zc07/pc_client_patch_live_today_6202019/)\n[**06.04.2019**](https://www.reddit.com/r/apexlegends/comments/bwus7u/the_legendary_hunt_begins_today_patch_notes/)")
+        embed.set_thumbnail(url="https://ya-webdesign.com/images/reddit-alien-png-3.png")
+        embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
+        await ctx.send(embed=embed)
+
+    @commands.command(pass_context=True)
+    async def news(self, ctx):
+        finding = await ctx.send('📡`Fetching news...`📡')
         desc = news.get_news()
         embed = discord.Embed(title='**Apex News** (from recent to oldest)',
                                 description=desc,
@@ -22,4 +31,3 @@ class News(commands.Cog):
 
 def setup(bot):
     bot.add_cog(News(bot))
-    print("Added News cog from cogs")

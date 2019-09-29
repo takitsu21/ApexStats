@@ -1,11 +1,9 @@
 import time
 import datetime
-import asyncio
 import discord
 from discord.ext import commands
-from ressources.stats import *
-from ressources.exceptions import PlayerNotFound
-from ressources.tools import generate_url_profile
+from src.stats import *
+from src.utils import generate_url_profile
 
 class Apex(commands.Cog):
     def __init__(self, bot):
@@ -96,8 +94,7 @@ class Apex(commands.Cog):
                 description=f'{ctx.author.mention} Wrong platform! retry with `pc` | `xbox` | `psn`')
                 embed.set_thumbnail(url=ctx.guild.me.avatar_url)
                 embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg", icon_url=ctx.guild.me.avatar_url)
-        except discord.errors.HTTPException as e: #if len(data) > 2000
-            print(type(e).__name__, e)
+        except discord.errors.HTTPException: #if len(data) > 2000
             embed = discord.Embed(title="**Too Many Stats to show!**",
                                 description=f"Sorry, but i couldn't show your stats. It's too big.\nYou can see your profile [__**here**__]({generate_url_profile(data['platformInfo']['platformSlug'], player)})",
                                 timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)

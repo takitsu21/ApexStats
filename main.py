@@ -1,14 +1,10 @@
 # !/usr/bin/env python3
 # coding:utf-8
 import discord
-import re
-import time
-import datetime
 import os
-import asyncio
 from discord.ext import commands
 from cogs import *
-from ressources import __init__
+from src import __init__
 
 client = commands.Bot(command_prefix='a!', activity=discord.Game(name='Updating...'),
                       status=discord.Status('dnd'))
@@ -16,18 +12,17 @@ client = commands.Bot(command_prefix='a!', activity=discord.Game(name='Updating.
 @client.event
 async def on_ready():
     await client.wait_until_ready() # waiting internal cache to be ready
-    client.remove_command("help") 
+    client.remove_command("help")
     loaded = None
     fail = str()
-    # Adding Cogs
-    for file in os.listdir("cogs/"):
+    for file in os.listdir("cogs/"): # Adding Cogs
         try:
             if file.endswith(".py"):
                 client.load_extension(f'cogs.{file.split(".")[0]}')
                 print(f"{file} loaded")
         except Exception as e:
             print(f"{file} can't be loaded :\n {type(e).__name__} : {e}")
-            fail += file + " "
+            fail += file + ", "
             loaded = False
     if loaded is None:
         print('All cogs loaded!')

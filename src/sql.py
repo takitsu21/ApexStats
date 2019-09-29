@@ -1,0 +1,83 @@
+#!/usr/bin/env python3
+#coding:utf-8
+import psycopg2
+import os
+
+def create_leaderboard():
+    sql =""" CREATE TABLE IF NOT EXISTS leaderboard (
+            position VARCHAR,
+            id BIGSERIAL,
+            username VARCHAR,
+            level VARCHAR,
+            kills VARCHAR,
+        )
+        """
+    cursor = conn.cursor()
+    cursor.execute(sql)
+    conn.commit()
+
+def create_users():
+    sql =""" CREATE TABLE IF NOT EXISTS users (
+            id BIGSERIAL,
+            username VARCHAR,
+            platform VARCHAR
+        )
+        """
+    cursor = conn.cursor()
+    cursor.execute(sql)
+    conn.commit()
+
+def create_lfg():
+    sql =""" CREATE TABLE IF NOT EXISTS lfg (
+        discordid BIGSERIAL,
+        username VARCHAR,
+        platform VARCHAR,
+        region VARCHAR,
+        description VARCHAR
+    )
+    """
+    cursor = conn.cursor()
+    cursor.execute(sql)
+    conn.commit()
+try:
+    conn = psycopg2.connect(os.environ["DATABASE_URL"])
+except Exception as e:
+    print(f'{type(e).__name__} {e}')
+
+def addUser(id_number, user, platform: str = 'pc'):
+    cursor = conn.cursor()
+    sql = "INSERT INTO users(id,username, platform) VALUES(%s, %s, %s);"
+    cursor.execute(sql, (id_number, user, platform,))
+    conn.commit()
+
+def select(table, row, value):
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM {} WHERE {} = {}".format(table, row, value))
+    rows = cursor.fetchall()
+    return rows
+
+def change(table, user, value, newValue):
+    cursor = conn.cursor()
+    sql_command = f"UPDATE {table} SET {value} = '{newValue}' WHERE id={user};"
+    print(sql_command)
+    cursor.execute(sql_command, (table, value, newValue, user,))
+    conn.commit()
+
+def unlink(value):
+    cur = conn.cursor()
+    cur.execute("DELETE FROM users WHERE id = {}".format(value))
+    conn.commit()
+
+def read_table(table):
+    cur = conn.cursor()
+    cur.execute(f"SELECT * FROM {table}")
+    rows = cur.fetchall()
+    return rows
+#
+def delete_table(table):
+    cur = conn.cursor()
+    sql = f"DROP TABLE {table}"
+    cur.execute(sql)
+    conn.commit()
+
+

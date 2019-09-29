@@ -1,4 +1,7 @@
-import discord, asyncio, random, time, datetime
+import discord
+import random
+import time
+import datetime
 from discord.ext import commands
 
 landings = {
@@ -97,26 +100,39 @@ class FunCommands(commands.Cog):
     @commands.command(pass_context=True)
     async def drop(self,ctx):
         land = random.choice(list(landings.keys()))
-        embed = discord.Embed(title="Next game land at",
-                              color=self.colour,
-                              timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-        embed.add_field(name="__Location__",value=landings[land]["Name"],inline=True)
-        embed.add_field(name="__Loot Tier__",value=landings[land]["Tier"],inline=True)
+        embed = discord.Embed(
+                title="Next game land at",
+                color=self.colour,
+                timestamp=datetime.datetime.utcfromtimestamp(time.time())
+            )
+        embed.add_field(name="__Location__", value=landings[land]["Name"], inline=True)
+        embed.add_field(name="__Loot Tier__", value=landings[land]["Tier"], inline=True)
         embed.set_image(url=landings[land]["ICON_URL"])
         embed.set_footer(text="command created by RedstonedLife#8787 | Made with ❤️ by Taki#0853 (WIP)",
-                         icon_url = ctx.guild.me.avatar_url)
+                        icon_url = ctx.guild.me.avatar_url)
         await ctx.send(embed=embed)
+
+    @staticmethod
+    def randomize(legends: list):
+        return legends.pop(legends.index(random.choice(legends)))
 
     @commands.command(pass_context=True)
     async def legend(self,ctx):
-        legends = ["Bangalore","Bloodhound","Lifeline","Pathfinder","Gibraltar","Wraith","Caustic","Mirage", "Octane", "Wattson"]
+        legends = [
+            "Bangalore","Bloodhound","Lifeline",
+            "Pathfinder","Gibraltar","Wraith",
+            "Caustic","Mirage", "Octane", "Wattson"
+            ]
         await ctx.send(" Next game choose `{}`".format(random.choice(legends)))
 
     @commands.command(pass_context=True)
     async def team(self, ctx):
-        legends = ["Bangalore","Bloodhound","Lifeline","Pathfinder","Gibraltar","Wraith","Caustic","Mirage", "Octane", "Wattson"]
-        await ctx.send("{} Here is your team : Player 1 -> `{}`, Player 2 -> `{}`,  Player 3 -> `{}` GOGOGO 🔫🔫".format(ctx.author.mention, legends.pop(legends.index(random.choice(legends))), legends.pop(legends.index(random.choice(legends))), legends.pop(legends.index(random.choice(legends)))))
+        legends = [
+            "Bangalore","Bloodhound","Lifeline",
+            "Pathfinder","Gibraltar","Wraith",
+            "Caustic","Mirage", "Octane", "Wattson"
+            ]
+        await ctx.send(f"{ctx.author.mention} Here is your team : Player 1 -> `{self.randomize(legends)}`, Player 2 -> `{self.randomize(legends)}`,  Player 3 -> `{self.randomize(legends)}` GOGOGO 🔫🔫")
 
 def setup(bot):
     bot.add_cog(FunCommands(bot))
-    print("Added Apex Cog from cogs")

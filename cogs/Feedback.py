@@ -1,6 +1,4 @@
 import discord
-import asyncio
-import datetime
 import time
 from discord.ext import commands
 
@@ -24,7 +22,7 @@ class Feedback(commands.Cog):
                             icon_url=ctx.guild.me.avatar_url)
             return await ctx.send(embed=embed)
         message = ' '.join(message)
-        await self.dm_me.send(f"[{ctx.author}] -> {message}")
+        await self.dm_me.send(f"[{ctx.author} - SUGGEST] -> {message}")
         embed = discord.Embed(title='**Suggestion**',
                             colour=self.colour,
                             description=f"{ctx.author.mention} Your suggestion has been sent @Taki#0853\nThanks for the feedback",
@@ -46,7 +44,7 @@ class Feedback(commands.Cog):
                             icon_url=ctx.guild.me.avatar_url)
             return await ctx.send(embed=embed)
         message = ' '.join(message)
-        await self.dm_me.send(f"[{ctx.author}] -> {message}")
+        await self.dm_me.send(f"[{ctx.author} - BUG] -> {message}")
         embed = discord.Embed(title='**Bug Report**',
                             colour=self.colour,
                             description=f"{ctx.author.mention} Your bug report has been sent @Taki#0853\nThanks for the feedback",

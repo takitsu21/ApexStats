@@ -1,7 +1,7 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/ikbq3x7q7wj1e3h5?svg=true)](https://ci.appveyor.com/project/takitsu21/botdiscord)
+[![PyPI pyversions](https://img.shields.io/badge/python-3.7-blue)](https://www.python.org/) [![Build status](https://ci.appveyor.com/api/projects/status/ikbq3x7q7wj1e3h5?svg=true)](https://ci.appveyor.com/project/takitsu21/botdiscord) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/11ae101e96c34e7784d2f947d7510c89)](https://www.codacy.com/manual/takitsu21/BotDiscord?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=takitsu21/BotDiscord&amp;utm_campaign=Badge_Grade) [![Discord](https://img.shields.io/discord/556268083681951759?color=blue&label=discord)](http://discord.gg/wTxbQYb) [![GitHub](https://img.shields.io/github/license/takitsu21/BotDiscord)](LICENCE)
 # Apex Stats
 
-* This bot gives your Apex Legends statistics and has other features (You can save your Apex profile to Discord for example).
+* This bot gives you your Apex Legends statistics and has other features (You can save your Apex profile to Discord for example).
 <p align="center"><a href="https://discordbots.org/bot/551446491886125059" >
   <img src="https://discordbots.org/api/widget/551446491886125059.svg?usernamecolor=FFFFFF&topcolor=000000" alt="Apex Stats" />
  </a></p>
@@ -35,15 +35,15 @@
 
 ## Few examples
 
-![Example Apex stats](https://cdn.discordapp.com/attachments/556841627466072064/603623745353023500/unknown.png)
+![Example Apex stats](https://i.imgur.com/qhk7HJU.png)
 
-![Save your profile](https://cdn.discordapp.com/attachments/594933144327684117/603668631766827197/unknown.png)
+![Save your profile](https://i.imgur.com/wa7JLZk.png)
 
-![See your profile](https://cdn.discordapp.com/attachments/594933144327684117/603668839305314354/unknown.png)
+![See your profile](https://i.imgur.com/tn8nv9L.png)
 
 ## Built With
 
-* [discord.py](https://discordpy.readthedocs.io/en/rewrite/) rewrite
+* [discord.py](https://discordpy.readthedocs.io/en/latest/)
 
 ## Author
 
@@ -59,4 +59,4 @@ This project is licensed under the GNU General Public License v3.0 License - see
 
 ### Deployment
 
-* Using Heroku environnement to deploy the bot.
+* AWS Amazon linux servers

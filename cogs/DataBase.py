@@ -1,12 +1,10 @@
 import discord
 import time
 import datetime
-import asyncio
 from discord.ext import commands
-import ressources.SqlManagment as SqlManagment
-from ressources.stats import *
-from ressources.exceptions import *
-from ressources.tools import generate_url_profile
+import src.sql as sql
+from src.stats import *
+from src.utils import generate_url_profile
 
 class DataBase(commands.Cog):
     """Save player profile and get player stats"""
@@ -61,15 +59,15 @@ class DataBase(commands.Cog):
 
     @commands.command(aliases=["p"])
     async def profile(self,ctx, mode : str = "N", *args):
-        userDb = SqlManagment.select('users', 'id', str(ctx.author.id))
+        userDb = sql.select('users', 'id', str(ctx.author.id))
         if not len(userDb):
-            SqlManagment.addUser(str(ctx.author.id),"NAN")
+            sql.addUser(str(ctx.author.id),"NAN")
         if mode.lower() == "display":
-            user = SqlManagment.select('users', 'id', str(ctx.author.id))
+            user = sql.select('users', 'id', str(ctx.author.id))
             await ctx.send(f"{ctx.author.mention} You're in the database as `{user[0][1]}` on `{user[0][2]}`")
             return
         if mode.lower() == 'unlink':
-            row = SqlManagment.select('users', 'id', str(ctx.author.id))
+            row = sql.select('users', 'id', str(ctx.author.id))
             player, platform = row[0][1], row[0][2]
             if player == 'NAN':
                 embed=discord.Embed(title="⚠️Profile not registered!",
@@ -86,7 +84,7 @@ class DataBase(commands.Cog):
                 embed.set_thumbnail(url=ctx.guild.me.avatar_url)
                 embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                     icon_url=ctx.guild.me.avatar_url)
-                SqlManagment.unlink(str(ctx.author.id))
+                sql.unlink(str(ctx.author.id))
                 await ctx.author.send(embed=embed)
             return
         if mode.lower() == "save":
@@ -112,8 +110,8 @@ class DataBase(commands.Cog):
                         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
                         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                                             icon_url=ctx.guild.me.avatar_url)
-                        SqlManagment.change("users",str(ctx.author.id),"username",str(' '.join(player.split("%20"))))
-                        SqlManagment.change("users",str(ctx.author.id),"platform",str(platform))
+                        sql.change("users",str(ctx.author.id),"username",str(' '.join(player.split("%20"))))
+                        sql.change("users",str(ctx.author.id),"platform",str(platform))
                         return await ctx.send(embed=embed)
                     else:
                         embed = discord.Embed(title=f"❌Profile `{player}` on `{platform}` doesn't exist❌",
@@ -131,7 +129,7 @@ class DataBase(commands.Cog):
                                         icon_url=ctx.guild.me.avatar_url)
                 await ctx.send(embed=embed)
         if(mode.lower() == "n"):
-            row = SqlManagment.select('users', 'id', str(ctx.author.id))
+            row = sql.select('users', 'id', str(ctx.author.id))
 
             if row[0][1] == "NAN":
                 embed = discord.Embed(title="Command: `a!profile`",colour=self.colour,

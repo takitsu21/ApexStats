@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-#coding:utf-8
+# !/usr/bin/env python3
+# coding:utf-8
 
 import discord
 from discord.ext import commands
@@ -41,10 +41,10 @@ class Help(commands.Cog):
     async def help(self,ctx):
         embed = discord.Embed(title='**Available commands:**',
                             colour=self.colour,
-                            description="`[RequiredArgument] <ParameterToChoose>`\n[Commands website](https://apexstatistics.gitbook.io/)")
-        embed.add_field(name="Stats commands:",value=stats_commands)
-        embed.add_field(name="Apex Commands:",value=apex_commands)
-        embed.add_field(name="Other commands:",value=other_commands)
+                            description="`[RequiredArgument] <ParameterToChoose>`\n[Source code and commands](https://takitsu21.github.io/ApexStats/)")
+        embed.add_field(name="Stats commands:", value=stats_commands)
+        embed.add_field(name="Apex Commands:", value=apex_commands)
+        embed.add_field(name="Other commands:", value=other_commands)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
