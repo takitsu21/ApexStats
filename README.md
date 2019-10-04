@@ -1,7 +1,8 @@
-[![PyPI pyversions](https://img.shields.io/badge/python-3.7-blue)](https://www.python.org/) [![Build status](https://ci.appveyor.com/api/projects/status/ikbq3x7q7wj1e3h5?svg=true)](https://ci.appveyor.com/project/takitsu21/botdiscord) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/11ae101e96c34e7784d2f947d7510c89)](https://www.codacy.com/manual/takitsu21/BotDiscord?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=takitsu21/BotDiscord&amp;utm_campaign=Badge_Grade) [![Discord](https://img.shields.io/discord/556268083681951759?color=blue&label=discord)](http://discord.gg/wTxbQYb) [![GitHub](https://img.shields.io/github/license/takitsu21/BotDiscord)](LICENCE)
+[![PyPI pyversions](https://img.shields.io/badge/python-3.7-blue)](https://www.python.org/) ![AppVeyor](https://img.shields.io/appveyor/ci/takitsu21/ApexStats) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b39e2c3164c1424785fcdf6723c9ddc1)](https://www.codacy.com/manual/takitsu21/ApexStats?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=takitsu21/ApexStats&amp;utm_campaign=Badge_Grade) [![Discord](https://img.shields.io/discord/556268083681951759?color=blue&label=discord)](http://discord.gg/wTxbQYb) [![GitHub](https://img.shields.io/github/license/takitsu21/ApexStats)](LICENCE)
 # Apex Stats
 
 * This bot gives you your Apex Legends statistics and has other features (You can save your Apex profile to Discord for example).
+
 <p align="center"><a href="https://discordbots.org/bot/551446491886125059" >
   <img src="https://discordbots.org/api/widget/551446491886125059.svg?usernamecolor=FFFFFF&topcolor=000000" alt="Apex Stats" />
  </a></p>
@@ -16,6 +17,7 @@
 | **`<a!profile / a!p>`** | Show your Apex Legends stats if profile registered |
 | **`<a!profile / a!p> display`** | View the current saved profile |
 | **`<a!profile / a!p> unlink`** | Unlink your profile |
+| **`a!history [USERNAME] <pc / xbox / psn>`** | View player's recent matches |
 | **`a!news`** | View 6 last news on Apex Legends |
 | **`a!servers`** | View all Apex Legends server status (ping, status, server name) |
 | **`a!reddit <hot / top>`** | Recents post by categorie |

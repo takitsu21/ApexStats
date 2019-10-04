@@ -1,5 +1,4 @@
 import dbl
-import discord
 from discord.ext import commands
 
 import asyncio
@@ -11,7 +10,7 @@ class DiscordBotsOrgAPI(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.token = "" # set this to your DBL token
+        self.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1MTQ0NjQ5MTg4NjEyNTA1OSIsImJvdCI6dHJ1ZSwiaWF0IjoxNTY5MjU2NjUyfQ.QOv2Anb7ykWxyI09QYArSZFmFb1wVsHFJMjjfHRl-vA" # set this to your DBL token
         self.dblpy = dbl.Client(self.bot, self.token)
         self.updating = self.bot.loop.create_task(self.update_stats())
 

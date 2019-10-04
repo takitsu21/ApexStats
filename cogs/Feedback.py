@@ -1,5 +1,4 @@
 import discord
-import time
 from discord.ext import commands
 
 class Feedback(commands.Cog):

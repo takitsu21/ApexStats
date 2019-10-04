@@ -1,11 +1,6 @@
-from src.utils import run, _request, PlayerNotFound, platform_convert
+from src.utils import _request, PlayerNotFound, platform_convert, headers
 import os
 import datetime as dt
-import asyncio
-
-# from __init__ import *
-
-headers = {'TRN-Api-Key': os.environ['TRN_API_KEY']}
 
 def get_match_history(player, platform):
     mh_url = f"https://public-api.tracker.gg/v2/apex/standard/profile/{platform_convert(platform)}/{player}/sessions"
@@ -25,5 +20,3 @@ def parse_history(history):
             match = f"`{d.month}/{d.day}` - **{metadata['character']['displayValue']}** - Level `{match_stat['level']['value']}` - `{match_stat['kills']['value']}` kills"
             all_matches.append(match)
     return all_matches
-
-# print(parse_history(get_match_history("termk47", "xbox")))

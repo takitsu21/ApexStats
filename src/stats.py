@@ -1,5 +1,4 @@
-from src.utils import platform_convert, run, _request, headers
-import asyncio
+from src.utils import platform_convert, _request, headers
 
 class PlayerNotFound(Exception):
     pass
@@ -27,3 +26,16 @@ class Stats:
             return True
         except PlayerNotFound:
             return False
+    
+    @staticmethod
+    def parse_rank_url(url):
+        url = url.split("/")
+        rank = url[len(url)-1]
+        i = 0
+        res = str()
+        while rank[i].isalpha() and rank[i] != ".":
+            res += rank[i]
+            i += 1
+        if res == "apex":
+            res += " predator"
+        return res.capitalize()

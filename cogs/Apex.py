@@ -13,7 +13,7 @@ class Apex(commands.Cog):
 
     @commands.command(pass_context=True)
     async def ranked(self, ctx):
-        about_ranked = "https://www.reddit.com/r/apexlegends/comments/c7w3iq/how_ranked_leagues_will_work_in_season_2_of_apex/"
+        about_ranked = "https://www.ea.com/games/apex-legends/news/ranked-league-series-2"
         embed = discord.Embed(title="About ranked",
                         colour=self.colour,
                         timestamp=datetime.datetime.utcfromtimestamp(time.time()),
@@ -23,13 +23,15 @@ class Apex(commands.Cog):
                         icon_url=ctx.guild.me.avatar_url)
         await ctx.send(embed=embed)
 
-    @commands.command(pass_context=True)            
+    @commands.command(pass_context=True)          
     async def map(self, ctx):
-        embed = discord.Embed(title="Map & loot Tier", colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+        embed = discord.Embed(title="Map & loot Tier",
+                            colour=self.colour,
+                            timestamp=datetime.datetime.utcfromtimestamp(time.time()))
         embed.set_image(url="https://i.imgur.com/SuGEoSs.jpg")
         embed.set_footer(text="Mad with ❤️ by Taki#0853 (WIP)",
                          icon_url=ctx.guild.me.avatar_url)
-        await ctx.send(embed=embed)     
+        await ctx.send(embed=embed)  
 
     def embed_stats(self, ctx, data):
         legend, res, overview = "", "", ""
@@ -65,8 +67,10 @@ class Apex(commands.Cog):
                         res = ''
             except Exception as e:
                 print(f"{type(e).__name__} : {e}")
-        embed.add_field(name = f'__`Lifetime`__', value='{}'.format(overview), inline=True)
-        embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg", icon_url=ctx.guild.me.avatar_url)
+        embed.add_field(name = f'__`Lifetime`__', value='{}'.format(overview),
+                        inline=True)
+        embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
+                        icon_url=ctx.guild.me.avatar_url)
         return embed
 
     @staticmethod
@@ -85,8 +89,8 @@ class Apex(commands.Cog):
             info = self.parse_user(list(args), platform)
             player, platform = info[0], info[1]
             if platform in ['pc','xbox','psn']:
-                stats = Stats(player, platform)
                 if len(player) >= 1:
+                    stats = Stats(player, platform)
                     data = stats.data()
                     embed = self.embed_stats(ctx, data)
             else:
@@ -97,10 +101,12 @@ class Apex(commands.Cog):
         except discord.errors.HTTPException: #if len(data) > 2000
             embed = discord.Embed(title="**Too Many Stats to show!**",
                                 description=f"Sorry, but i couldn't show your stats. It's too big.\nYou can see your profile [__**here**__]({generate_url_profile(data['platformInfo']['platformSlug'], player)})",
-                                timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
+                                timestamp=datetime.datetime.utcfromtimestamp(time.time()),
+                                colour=self.colour)
             embed.set_thumbnail(url= ctx.guild.me.avatar_url)
         except PlayerNotFound:
-            embed = discord.Embed(title="❌Stats not found!❌", description="Sorry but i couldn't found your Apex Legends Statistics.\nYou may have made a foul of strikes.\n\nIf you spelled it right then the API might be down.",colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+            embed = discord.Embed(title="❌Stats not found!❌",
+                                description="Sorry but i couldn't found your Apex Legends Statistics.\nYou may have made a foul of strikes.\n\nIf you spelled it right then the API might be down.",colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
             embed.set_thumbnail(url = ctx.guild.me.avatar_url)
         except Exception as e:
             print(type(e).__name__, e)

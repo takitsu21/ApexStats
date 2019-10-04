@@ -83,11 +83,9 @@ class Bot_Info(commands.Cog):
         before = time.monotonic()
         message = await ctx.send("🏓Pong!")
         ping = (time.monotonic() - before) * 1000
-        embed = discord.Embed(  
-                            colour=self.colour, 
+        embed = discord.Embed(colour=0xff00,
                             title="Apex Stats ping",
-                            description=f"🏓{int(ping)} ms"
-                            )
+                            description=f"🏓{int(ping)} ms")
         await message.edit(content="", embed=embed)
 
 def setup(bot):

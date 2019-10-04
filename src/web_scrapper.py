@@ -1,7 +1,7 @@
 import re
 import unicodedata
 from bs4 import BeautifulSoup
-from src.utils import _request, run
+from src.utils import _request
 
 user_agent = {'User-Agent':'Mozilla/5.0 (Windows NT x.y; Win64; x64; rv:10.0) Gecko/20100101 Firefox/10.0'}
 reddit = 'https://www.reddit.com'
@@ -17,10 +17,10 @@ def get_subj_title(a) -> str:
     _a = a.split('/')
     return _a[len(_a)-2]
 
-def get_post(filter) -> str:
-    """Returns reddit url filtered by categorie 
+def get_post(categorie) -> str:
+    """Returns reddit url filtered by categorie
     -> returns urls filtered"""
-    url = f"{reddit}/r/apexlegends/{filter}"
+    url = f"{reddit}/r/apexlegends/{categorie}"
     content = _request(url, headers=user_agent, call="text")
     page = BeautifulSoup(content, features="lxml")
     reddit_post, check_list = [], []
@@ -58,7 +58,7 @@ def get_server_status():
 
 def status() -> str:
     """servers status
-    -> returns formated string about servers for discord"""
+    -> returns formatted string about servers for discord"""
     res = ''
     acc = 0
     server_status = get_server_status().items()

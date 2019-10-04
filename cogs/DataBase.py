@@ -64,8 +64,7 @@ class DataBase(commands.Cog):
             sql.addUser(str(ctx.author.id),"NAN")
         if mode.lower() == "display":
             user = sql.select('users', 'id', str(ctx.author.id))
-            await ctx.send(f"{ctx.author.mention} You're in the database as `{user[0][1]}` on `{user[0][2]}`")
-            return
+            return await ctx.send(f"{ctx.author.mention} You're in the database as `{user[0][1]}` on `{user[0][2]}`")
         if mode.lower() == 'unlink':
             row = sql.select('users', 'id', str(ctx.author.id))
             player, platform = row[0][1], row[0][2]

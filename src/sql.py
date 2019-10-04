@@ -1,48 +1,24 @@
-#!/usr/bin/env python3
-#coding:utf-8
+# coding:utf-8
 import psycopg2
 import os
+from src.config import Config
 
-def create_leaderboard():
-    sql =""" CREATE TABLE IF NOT EXISTS leaderboard (
-            position VARCHAR,
+try:
+    conn = psycopg2.connect(Config()._dbu_token())
+except Exception as e:
+    logger.exception(f"Fail to connect to the DB", exc_info=True)
+
+def create_roles_rank():
+    sql = """CREATE TABLE IF NOT EXISTS rank (
             id BIGSERIAL,
             username VARCHAR,
-            level VARCHAR,
-            kills VARCHAR,
-        )
-        """
-    cursor = conn.cursor()
-    cursor.execute(sql)
-    conn.commit()
-
-def create_users():
-    sql =""" CREATE TABLE IF NOT EXISTS users (
-            id BIGSERIAL,
-            username VARCHAR,
-            platform VARCHAR
-        )
-        """
-    cursor = conn.cursor()
-    cursor.execute(sql)
-    conn.commit()
-
-def create_lfg():
-    sql =""" CREATE TABLE IF NOT EXISTS lfg (
-        discordid BIGSERIAL,
-        username VARCHAR,
-        platform VARCHAR,
-        region VARCHAR,
-        description VARCHAR
+            platform VARCHAR,
+            rank VARCHAR
     )
     """
     cursor = conn.cursor()
     cursor.execute(sql)
     conn.commit()
-try:
-    conn = psycopg2.connect(os.environ["DATABASE_URL"])
-except Exception as e:
-    print(f'{type(e).__name__} {e}')
 
 def addUser(id_number, user, platform: str = 'pc'):
     cursor = conn.cursor()
@@ -80,4 +56,8 @@ def delete_table(table):
     cur.execute(sql)
     conn.commit()
 
-
+def add_rank(id, username, platform, rank):
+    cur = conn.cursor()
+    sql = f"INSERT INTO rank(id, username, platform, rank) VALUES({id}, '{username}', '{platform}', '{rank}')"
+    cur.execute(sql)
+    conn.commit
