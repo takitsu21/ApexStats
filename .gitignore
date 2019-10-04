@@ -1,9 +1,11 @@
 # Byte-compiled / optimized / DLL files
+
 __pycache__/
 *.py[cod]
 *$py.class
 *test.py
-*discord.log
+config.ini
+*.log
 *git.py
 *test.json
 *status.html
