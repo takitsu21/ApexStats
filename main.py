@@ -45,7 +45,7 @@ class ApexStats(commands.Bot, Config):
 
     def run(self, *args, **kwargs):
         try:
-            self.loop.run_until_complete(self.start(self._dt_token()))
+            self.loop.run_until_complete(self.start(self._do_token()))
         except KeyboardInterrupt:
             self.loop.run_until_complete(self.logout())
             for task in asyncio.all_tasks(self.loop):
