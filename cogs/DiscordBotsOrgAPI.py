@@ -27,5 +27,5 @@ class DiscordBotsOrgAPI(commands.Cog):
 
 def setup(bot):
     global logger
-    logger = logging.getLogger('bot')
+    logger = logging.getLogger('apex-stats')
     bot.add_cog(DiscordBotsOrgAPI(bot))

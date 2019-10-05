@@ -8,7 +8,7 @@ from discord.ext import commands
 from cogs import *
 import logging
 from aiohttp import ClientSession
-from src.config import Config
+from src.config import _dt_token, _do_token
 
 logger = logging.getLogger("apex-stats")
 logger.setLevel(logging.INFO)
@@ -16,7 +16,7 @@ handler = logging.FileHandler(filename='apex-stats.log', encoding='utf-8', mode=
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
 
-class ApexStats(commands.Bot, Config):
+class ApexStats(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix='a!', activity=discord.Game(name='Updating...'),
                         status=discord.Status('dnd'))
@@ -45,7 +45,7 @@ class ApexStats(commands.Bot, Config):
 
     def run(self, *args, **kwargs):
         try:
-            self.loop.run_until_complete(self.start(self._do_token()))
+            self.loop.run_until_complete(self.start(_dt_token()))
         except KeyboardInterrupt:
             self.loop.run_until_complete(self.logout())
             for task in asyncio.all_tasks(self.loop):

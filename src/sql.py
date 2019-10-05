@@ -1,12 +1,12 @@
 # coding:utf-8
 import psycopg2
 import os
-from src.config import Config
+from src.config import _dbu_token
 
 try:
-    conn = psycopg2.connect(Config()._dbu_token())
+    conn = psycopg2.connect(_dbu_token())
 except Exception as e:
-    logger.exception(f"Fail to connect to the DB", exc_info=True)
+    print(type(e).__name__, e)
 
 def create_roles_rank():
     sql = """CREATE TABLE IF NOT EXISTS rank (

@@ -1,8 +1,8 @@
 import os
 import requests
-from src.config import Config
+from src.config import _api_token
 
-headers = {'TRN-Api-Key': Config()._api_token()}
+headers = {'TRN-Api-Key': _api_token()}
 
 class RequestError(Exception):
     pass
@@ -18,7 +18,11 @@ def generate_url_profile(platform, player):
     """generate link to the website profile"""
     return f"https://tracker.gg/apex/profile/{platform}/{player}/overview"
 
-def _request(url, headers: dict = None, cookies: dict = None, call=None):
+def _request(
+    url,
+    headers: dict = None,
+    cookies: dict = None,
+    call=None):
     try:
         r = requests.get(url, headers=headers, cookies=cookies)
         if r.status_code == 200:
