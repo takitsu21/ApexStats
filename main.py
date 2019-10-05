@@ -45,7 +45,7 @@ class ApexStats(commands.Bot):
 
     def run(self, *args, **kwargs):
         try:
-            self.loop.run_until_complete(self.start(_dt_token()))
+            self.loop.run_until_complete(self.start(_do_token()))
         except KeyboardInterrupt:
             self.loop.run_until_complete(self.logout())
             for task in asyncio.all_tasks(self.loop):
@@ -58,10 +58,24 @@ class ApexStats(commands.Bot):
                 logger.debug("Pending tasks has been cancelled.")
             finally:
                 logger.error("Shutting down")
-        except discord.LoginFailure:
-            logger.critical("Invalid token")
-        except Exception:
-            logger.critical("Fatal exception", exc_info=True)
+        # try:
+        #     self.loop.run_until_complete(self.start(_do_token()))
+        # except KeyboardInterrupt:
+        #     self.loop.run_until_complete(self.logout())
+        #     for task in asyncio.all_tasks(self.loop):
+        #         task.cancel()
+        #     try:
+        #         self.loop.run_until_complete(
+        #             asyncio.gather(*asyncio.all_tasks(self.loop))
+        #         )
+        #     except asyncio.CancelledError:
+        #         logger.debug("Pending tasks has been cancelled.")
+        #     finally:
+        #         logger.error("Shutting down")
+        # except discord.LoginFailure:
+        #     logger.critical("Invalid token")
+        # except Exception:
+        #     logger.critical("Fatal exception", exc_info=True)
 
 if __name__ == "__main__":
     bot = ApexStats()

@@ -28,7 +28,7 @@ class Apex(commands.Cog):
         embed = discord.Embed(title="Map & loot Tier",
                             colour=self.colour,
                             timestamp=datetime.datetime.utcfromtimestamp(time.time()))
-        embed.set_image(url="https://i.imgur.com/SuGEoSs.jpg")
+        embed.set_image(url="https://i.redd.it/qnb34smk41q31.jpg")
         embed.set_footer(text="Mad with ❤️ by Taki#0853 (WIP)",
                          icon_url=ctx.guild.me.avatar_url)
         await ctx.send(embed=embed)  

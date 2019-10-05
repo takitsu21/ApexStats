@@ -6,7 +6,7 @@ from src.config import _dbu_token
 try:
     conn = psycopg2.connect(_dbu_token())
 except Exception as e:
-    print(type(e).__name__, e)
+    pass
 
 def create_roles_rank():
     sql = """CREATE TABLE IF NOT EXISTS rank (

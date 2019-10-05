@@ -45,7 +45,3 @@ class Equipment(Enum):
     BACKPACK = "https://www.apexdata.gg/assets/equipment/backpack-feb7b18e30abcf360ee15f094e74bba84f30adc9832711dd1bb48282e8b5190e.png"
     def __str__(self):
         return f'{self.value}'
-
-
-if __name__ == "__main__":
-    print(getattr(WeaponIcon, "frag-grenade".replace("-", "").upper()))

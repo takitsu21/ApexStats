@@ -57,8 +57,6 @@ class Weapons:
     def weapon(self):
         r = _request(f"{self.base_url}{self.name}.json", call="json")
         return r[0]
-        # r = requests.get(f"{self.base_url}{self.name}.json")
-        # return r.json()[0]
 
     @staticmethod
     def f_mode(fire_modes):

@@ -27,7 +27,8 @@ class Help(commands.Cog):
         **`a!legend`** - Random legend to pick for the next game
         **`a!team`** - Entire random team for the next game
         **`a!patch`** - View live patch note
-        **`a!ranked`** - View info about how ranked works"""
+        **`a!ranked`** - View info about how ranked works
+        **`a!weapons`** - List all weapon commands to get their informations"""
         other_commands = """**`a!bug [MESSAGE]`** - Send me a bug report, this will helps to improve the bot
         **`a!suggestion [MESSAGE]`** - Suggestion to add for the bot, all suggestions are good don't hesitate
         **`a!ping`** - View bot latency
