@@ -17,6 +17,7 @@
 | **`<a!profile / a!p>`** | Show your Apex Legends stats if profile registered |
 | **`<a!profile / a!p> display`** | View the current saved profile |
 | **`<a!profile / a!p> unlink`** | Unlink your profile |
+| **`a!weapons`** | List all weapon commands to get their informations |
 | **`a!history [USERNAME] <pc / xbox / psn>`** | View player's recent matches |
 | **`a!news`** | View 6 last news on Apex Legends |
 | **`a!servers`** | View all Apex Legends server status (ping, status, server name) |
@@ -42,6 +43,8 @@
 ![Save your profile](https://i.imgur.com/wa7JLZk.png)
 
 ![See your profile](https://i.imgur.com/tn8nv9L.png)
+
+![Weapon Information](https://i.imgur.com/c36VP1Z.png)
 
 ## Built With
 
