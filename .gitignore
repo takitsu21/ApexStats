@@ -14,7 +14,6 @@ config.ini
 *ManageDB.py
 *users.txt
 *.vscode
-*__init__.py
 
 # C extensions
 *.so
