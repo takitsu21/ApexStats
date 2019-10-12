@@ -8,8 +8,10 @@ from discord.ext import commands
 from cogs import *
 import logging
 from aiohttp import ClientSession
-from src.config import _dt_token, _do_token
-
+from src.config import _d_token
+from discord.utils import find
+import datetime
+import time
 logger = logging.getLogger("apex-stats")
 logger.setLevel(logging.INFO)
 handler = logging.FileHandler(filename='apex-stats.log', encoding='utf-8', mode='w')
@@ -22,6 +24,7 @@ class ApexStats(commands.Bot):
                         status=discord.Status('dnd'))
         self.remove_command("help")
         self._load_extensions()
+        self.colour = 0xff0004
 
     def _load_extensions(self):
         for file in os.listdir("cogs/"):
@@ -32,20 +35,51 @@ class ApexStats(commands.Bot):
             except:
                 logger.exception(f"Fail to load {file}")
 
+    async def on_guild_join(self, guild):
+        general = find(lambda x: x.name == "general", guild.text_channels)
+        if general and general.permissions_for(guild.me).send_messages:
+            embed = discord.Embed(
+                    title="Nice to meet you!",
+                    description="Below are the infos about Apex Stats",
+                    timestamp=datetime.datetime.utcfromtimestamp(time.time()),
+                    color=self.colour
+                )
+            embed.set_thumbnail(url=guild.me.avatar_url)
+            embed.add_field(name="Vote",
+                            value="[Click here](https://discordbots.org/bot/551446491886125059/vote)")
+            embed.add_field(name="Invite Apex Stats",
+                            value="[Click here](https://discordapp.com/oauth2/authorize?client_id=551446491886125059&scope=bot&permissions=1543825472)")
+            embed.add_field(name="Discord Support",
+                            value="[Click here](https://discordapp.com/invite/wTxbQYb)")
+            embed.add_field(name="Donate",value="[Click here](https://www.patreon.com/takitsu)")
+            embed.add_field(name = "Source code and commands", value="[Click here](https://takitsu21.github.io/ApexStats/)")
+            embed.add_field(name="Help command",value="a!help") 
+            nb_users = 0
+            for s in self.guilds:
+                nb_users += len(s.members)
+
+            embed.add_field(name="Servers", value=len(self.guilds))
+            embed.add_field(name="Members", value=nb_users)
+            embed.add_field(name="**Creator**", value="Taki#0853")
+            embed.add_field(name="*Contributor*", value="RedstonedLife#8787")
+            embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
+                            icon_url=guild.me.avatar_url)
+            await general.send(embed=embed)
+
     async def on_ready(self):
         await self.wait_until_ready() # waiting internal cache to be ready
         logger.info(f"Logged in as {self.user}")
         while True:
             await self.change_presence(
-                                activity=discord.Activity(
-                                        name=f'[a!help] | {len(self.guilds)} servers',
-                                        type=3)
+                            activity=discord.Activity(
+                                    name=f'[a!help] | {len(self.guilds)} servers',
+                                    type=3)
                             )
             await asyncio.sleep(60*3)
 
     def run(self, *args, **kwargs):
         try:
-            self.loop.run_until_complete(self.start(_do_token()))
+            self.loop.run_until_complete(self.start(_d_token(debug=True)))
         except KeyboardInterrupt:
             self.loop.run_until_complete(self.logout())
             for task in asyncio.all_tasks(self.loop):
@@ -58,24 +92,6 @@ class ApexStats(commands.Bot):
                 logger.debug("Pending tasks has been cancelled.")
             finally:
                 logger.error("Shutting down")
-        # try:
-        #     self.loop.run_until_complete(self.start(_do_token()))
-        # except KeyboardInterrupt:
-        #     self.loop.run_until_complete(self.logout())
-        #     for task in asyncio.all_tasks(self.loop):
-        #         task.cancel()
-        #     try:
-        #         self.loop.run_until_complete(
-        #             asyncio.gather(*asyncio.all_tasks(self.loop))
-        #         )
-        #     except asyncio.CancelledError:
-        #         logger.debug("Pending tasks has been cancelled.")
-        #     finally:
-        #         logger.error("Shutting down")
-        # except discord.LoginFailure:
-        #     logger.critical("Invalid token")
-        # except Exception:
-        #     logger.critical("Fatal exception", exc_info=True)
 
 if __name__ == "__main__":
     bot = ApexStats()

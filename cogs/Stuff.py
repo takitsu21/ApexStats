@@ -132,6 +132,12 @@ class Stuff(commands.Cog):
         embed = wp.embed_w(ctx, wp.weapon())
         await ctx.send(embed=embed)
 
+    @commands.command(aliases=["charger"])
+    async def chargerrifle(self, ctx):
+        wp = Weapons("charger-rifle")
+        embed = wp.embed_w(ctx, wp.weapon())
+        await ctx.send(embed=embed)
+
     @commands.command()
     async def weapons(self, ctx):
         embed = discord.Embed(
@@ -159,6 +165,7 @@ class Stuff(commands.Cog):
         embed.add_field(name="Longbow", value="**a!longbow**", inline=False)
         embed.add_field(name="Triple Take", value="**a!tripletake**", inline=False)
         embed.add_field(name="Kraber", value="**a!kraber**", inline=False)
+        # embed.add_field(name="Charger Rifle", value="**a!chargerrifle**", inline=False)
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
         await ctx.send(embed=embed)

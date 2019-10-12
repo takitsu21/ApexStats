@@ -5,6 +5,7 @@ from discord.ext import commands
 import src.sql as sql
 from src.stats import *
 from src.utils import generate_url_profile
+from src.decorators import trigger_typing
 
 class DataBase(commands.Cog):
     """Save player profile and get player stats"""
@@ -58,6 +59,7 @@ class DataBase(commands.Cog):
         return user, platform
 
     @commands.command(aliases=["p"])
+    @trigger_typing
     async def profile(self,ctx, mode : str = "N", *args):
         userDb = sql.select('users', 'id', str(ctx.author.id))
         if not len(userDb):

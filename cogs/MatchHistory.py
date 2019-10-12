@@ -3,6 +3,7 @@ from discord.ext import commands
 from src.match_history import *
 import datetime as dt
 import time
+from src.decorators import trigger_typing
 
 class MatchHistory(commands.Cog):
     def __init__(self, bot):
@@ -24,12 +25,13 @@ class MatchHistory(commands.Cog):
             length_m = len(m)
 
         embed = discord.Embed(
-                    colour=self.colour,
-                    timestamp=dt.datetime.utcfromtimestamp(time.time()),
-                    description=m
+                        colour=self.colour,
+                        timestamp=dt.datetime.utcfromtimestamp(time.time()),
+                        description=m
                     )
         embed.set_author(name=player + " - Recent matches")
-        embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg", icon_url=ctx.guild.me.avatar_url)
+        embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
+                        icon_url=ctx.guild.me.avatar_url)
         return embed
 
     @staticmethod
@@ -40,7 +42,8 @@ class MatchHistory(commands.Cog):
             user = '%20'.join(args)
         return user, platform
 
-    @commands.command(pass_context=True)
+    @commands.command()
+    @trigger_typing
     async def history(self, ctx, *args, platform="pc"):
         try:
             finding = await ctx.send("`📡Fetching data...📡`")

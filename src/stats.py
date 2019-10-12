@@ -22,7 +22,7 @@ class Stats:
             r = _request(URL, headers=headers, call="json")
             return r["data"]
         except Exception:
-            raise PlayerNotFound(r.status_code)
+            raise PlayerNotFound("Request failed")
 
     def exists(self) -> bool:
         """Check if a player exist"""
@@ -45,7 +45,6 @@ class Stats:
             res += " predator"
         return res.capitalize()
 
-
 class Weapons:
     def __init__(self, name, _type="weapons"):
         self.api_key = _wapi_token()
@@ -55,9 +54,11 @@ class Weapons:
         self.formatted_name = self.formatted_enum(self.name)
 
     def weapon(self):
-        r = _request(f"{self.base_url}{self.name}.json", call="json")
-        return r[0]
-
+        try:
+            r = _request(f"{self.base_url}{self.name}.json", call="json")
+            return r[0]
+        except IndexError:
+            return r
     @staticmethod
     def f_mode(fire_modes):
         try:
@@ -78,7 +79,7 @@ class Weapons:
             embed.set_author(name=weapon_data["name"].capitalize(),
                             icon_url=getattr(AmmoType, weapon_data["ammo_type"].upper()))
             embed.add_field(name="Damage", value=weapon_data["damage"], inline=True)
-            embed.add_field(name="HS damage", value=weapon_data["headshot_damage"], inline=True)
+            embed.add_field(name="Headshot damage", value=weapon_data["headshot_damage"], inline=True)
             embed.add_field(name="DPS", value=weapon_data["damage_per_second"], inline=True)
             embed.add_field(name="Magazine size", value=weapon_data["ammo_capacity"], inline=True)
             try:
@@ -92,5 +93,5 @@ class Weapons:
             embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                             icon_url=ctx.guild.me.avatar_url)
         else:
-            pass
+            pass # grenades, etc...
         return embed

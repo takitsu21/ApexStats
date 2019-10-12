@@ -4,6 +4,10 @@ import discord
 from discord.ext import commands
 from src.stats import *
 from src.utils import generate_url_profile
+from src.decorators import trigger_typing
+import logging
+
+logger = logging.getLogger("apex-stats")
 
 class Apex(commands.Cog):
     def __init__(self, bot):
@@ -11,7 +15,8 @@ class Apex(commands.Cog):
         self.bot = bot
         self.colour = 0xff0004
 
-    @commands.command(pass_context=True)
+    @commands.command()
+    @trigger_typing
     async def ranked(self, ctx):
         about_ranked = "https://www.ea.com/games/apex-legends/news/ranked-league-series-2"
         embed = discord.Embed(title="About ranked",
@@ -23,7 +28,8 @@ class Apex(commands.Cog):
                         icon_url=ctx.guild.me.avatar_url)
         await ctx.send(embed=embed)
 
-    @commands.command(pass_context=True)          
+    @commands.command(pass_context=True)
+    @trigger_typing        
     async def map(self, ctx):
         embed = discord.Embed(title="Map & loot Tier",
                             colour=self.colour,
@@ -31,7 +37,7 @@ class Apex(commands.Cog):
         embed.set_image(url="https://i.redd.it/qnb34smk41q31.jpg")
         embed.set_footer(text="Mad with ❤️ by Taki#0853 (WIP)",
                          icon_url=ctx.guild.me.avatar_url)
-        await ctx.send(embed=embed)  
+        await ctx.send(embed=embed)
 
     def embed_stats(self, ctx, data):
         legend, res, overview = "", "", ""
@@ -82,8 +88,27 @@ class Apex(commands.Cog):
         return user, platform
 
     @commands.command(aliases=["s"])
+    @trigger_typing
     async def stats(self, ctx, *args, platform = "pc"):
         """Displays apex stats for a given player (and platform)"""
+        if not(len(args)):
+            embed = discord.Embed(title="**Command**: **`a!stats`**",
+                                description="**`a!stats [USERNAME]`**\n**`a!stats [USERNAME] < pc | xbox | psn >`**",
+                                timestamp=datetime.datetime.utcfromtimestamp(time.time()),
+                                colour=self.colour)
+            embed.add_field(name="Stats explanation", 
+                            value="- Stats are provided by [apex.tracker.gg](https://apex.tracker.gg/)"
+                            " API (stats might not be fully exact)\n\n-"
+                            " We can only get stats from selected banners\n\n"
+                            "- To update a legend stats you have to pick the legend"
+                            " wanted and then do **`a!stats [USERNAME] < pc | xbox | psn >`**\n\n"
+                            "- It will keep all update you've done on your account\n\n"
+                            "- The «Lifetime» value is just the sum of all banner"
+                            " **AVAILABLE** and **SELECTED** on each legends")
+            embed.set_thumbnail(url=ctx.guild.me.avatar_url)
+            embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
+                            icon_url=ctx.guild.me.avatar_url)
+            return await ctx.send(embed=embed)
         try:
             finding = await ctx.send("`📡Fetching data...📡`")
             info = self.parse_user(list(args), platform)
@@ -97,7 +122,9 @@ class Apex(commands.Cog):
                 embed = discord.Embed(title="❌Wrong platform!❌", colour=self.colour,
                 description=f'{ctx.author.mention} Wrong platform! retry with `pc` | `xbox` | `psn`')
                 embed.set_thumbnail(url=ctx.guild.me.avatar_url)
-                embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg", icon_url=ctx.guild.me.avatar_url)
+                embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
+                                icon_url=ctx.guild.me.avatar_url)
+                return await finding.edit(content="", embed=embed)
         except discord.errors.HTTPException: #if len(data) > 2000
             embed = discord.Embed(title="**Too Many Stats to show!**",
                                 description=f"Sorry, but i couldn't show your stats. It's too big.\nYou can see your profile [__**here**__]({generate_url_profile(data['platformInfo']['platformSlug'], player)})",
@@ -106,17 +133,22 @@ class Apex(commands.Cog):
             embed.set_thumbnail(url= ctx.guild.me.avatar_url)
         except PlayerNotFound:
             embed = discord.Embed(title="❌Stats not found!❌",
-                                description="Sorry but i couldn't found your Apex Legends Statistics.\nYou may have made a foul of strikes.\n\nIf you spelled it right then the API might be down.",colour=self.colour, timestamp=datetime.datetime.utcfromtimestamp(time.time()))
+                                description="Sorry but i couldn't found your Apex Legends Statistics.\n"
+                                "You may have made a foul of strikes.\n\n"
+                                "If you spelled it right then the API might be down.",
+                                colour=self.colour,
+                                timestamp=datetime.datetime.utcfromtimestamp(time.time()))
             embed.set_thumbnail(url = ctx.guild.me.avatar_url)
         except Exception as e:
-            print(type(e).__name__, e)
-            embed = discord.Embed(title="**Command**: **`a!stats`**",
-                                  description="**`a!stats [USERNAME]`**\n**`a!stats [USERNAME] < pc | xbox | psn >`**",
-                                  timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
-            embed.add_field(name="Stats explanation", value="- Stats are provided by [apex.tracker.gg](https://apex.tracker.gg/) API (stats might not be fully exact)\n\n- We can only get stats from selected banners\n\n- To update a legend stats you have to pick the legend wanted and then do **`a!stats [USERNAME] < pc | xbox | psn >`**\n\n- It will keep all update you've done on your account\n\n- The «Lifetime» value is just the sum of all banner **AVAILABLE** and **SELECTED** on each legends")
+            logging.error(f"{type(e).__name__} : {e}")
+            embed = discord.Embed(title="Unknown error",
+                                  description="Oops an unknown error occured sorry!",
+                                  timestamp=datetime.datetime.utcfromtimestamp(time.time()),
+                                  colour=self.colour)
             embed.set_thumbnail(url=ctx.guild.me.avatar_url)
-        embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg", icon_url=ctx.guild.me.avatar_url)
-        await finding.edit(content="",embed=embed)
+        embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
+                        icon_url=ctx.guild.me.avatar_url)
+        await finding.edit(content="", embed=embed)
 
 def setup(bot):
     bot.add_cog(Apex(bot))

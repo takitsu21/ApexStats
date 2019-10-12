@@ -24,7 +24,8 @@ def _request(
     cookies: dict = None,
     call=None):
     try:
-        r = requests.get(url, headers=headers, cookies=cookies)
+        r = requests.get(url, headers=headers,
+                        cookies=cookies)
         if r.status_code == 200:
             if call is not None:
                 if call == "text":

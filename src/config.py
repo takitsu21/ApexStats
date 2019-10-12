@@ -5,14 +5,11 @@ def _wapi_token():
     config.read("config.ini")
     return config["TOKENS"]["weapon_api_key"]
 
-def _do_token():
+def _d_token(debug=False):
     config = configparser.ConfigParser()
     config.read("config.ini")
-    return config["TOKENS"]["discord_o"]
-
-def _dt_token():
-    config = configparser.ConfigParser()
-    config.read("config.ini")
+    if not debug:
+        return config["TOKENS"]["discord_o"]
     return config["TOKENS"]["discord_t"]
     
 def _dbu_token():
