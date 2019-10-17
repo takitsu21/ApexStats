@@ -12,6 +12,7 @@ from src.config import _d_token
 from discord.utils import find
 import datetime
 import time
+
 logger = logging.getLogger("apex-stats")
 logger.setLevel(logging.INFO)
 handler = logging.FileHandler(filename='apex-stats.log', encoding='utf-8', mode='w')
@@ -79,7 +80,7 @@ class ApexStats(commands.Bot):
 
     def run(self, *args, **kwargs):
         try:
-            self.loop.run_until_complete(self.start(_d_token(debug=True)))
+            self.loop.run_until_complete(self.start(_d_token()))
         except KeyboardInterrupt:
             self.loop.run_until_complete(self.logout())
             for task in asyncio.all_tasks(self.loop):

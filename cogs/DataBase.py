@@ -4,7 +4,7 @@ import datetime
 from discord.ext import commands
 import src.sql as sql
 from src.stats import *
-from src.utils import generate_url_profile
+from src.utils import generate_url_profile, better_formatting
 from src.decorators import trigger_typing
 
 class DataBase(commands.Cog):
@@ -34,20 +34,15 @@ class DataBase(commands.Cog):
         for i, stats in enumerate(data["segments"]):
             try:
                 if i == 0:
-                    for i, children in enumerate(stats["stats"]):
-                        if i > 0:
-                            overview += '*{}* : `{}`\n'.format(stats["stats"][children]["displayName"], str(int(stats["stats"][children]["value"])))
-
+                    overview = better_formatting(stats["stats"])
                 else:
+                    res = better_formatting(stats["stats"])
                     legend = stats["metadata"]["name"]
-                    for children in stats["stats"]:
-                        res += '*{}* : `{}`\n'.format(stats["stats"][children]["displayName"], str(int(stats["stats"][children]["value"])))
-                    if len(res) > 0:
-                        embed.add_field(name = '__`{}`__'.format(legend), value='{}'.format(res), inline=True)
-                        res = ''
+                    embed.add_field(name = '__{}__'.format(legend), value='```css\n{}```'.format(res))
+                    res = ''
             except Exception as e:
                 print(f"{type(e).__name__} : {e}")
-        embed.add_field(name = f'__`Lifetime`__', value='{}'.format(overview), inline=True)
+        embed.add_field(name = f'__Lifetime__', value='```css\n{}```'.format(overview))
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg", icon_url=ctx.guild.me.avatar_url)
         return embed
 
@@ -106,9 +101,9 @@ class DataBase(commands.Cog):
                     stats = Stats(player, platform)
                     if stats.exists():
                         embed = discord.Embed(title="✔️Your profile has been saved!✔️",
-                                                description=f"You're profile is successfully linked!'",
+                                                description=f"You're profile is successfully linked!",
                                                 timestamp=datetime.datetime.utcfromtimestamp(time.time()), colour=self.colour)
-                        embed.set_thumbnail(url=ctx.guild.me.avatar_url)
+                        embed.set_thumbnail(url=ctx.author.avatar_url)
                         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                                             icon_url=ctx.guild.me.avatar_url)
                         sql.change("users",str(ctx.author.id),"username",str(' '.join(player.split("%20"))))

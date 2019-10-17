@@ -2,6 +2,9 @@
 import psycopg2
 import os
 from src.config import _dbu_token
+import logging
+
+logger = logging.getLogger("apex-stats")
 
 try:
     conn = psycopg2.connect(_dbu_token())
@@ -35,7 +38,7 @@ def select(table, row, value):
 def change(table, user, value, newValue):
     cursor = conn.cursor()
     sql_command = f"UPDATE {table} SET {value} = '{newValue}' WHERE id={user};"
-    print(sql_command)
+    logger.info(sql_command)
     cursor.execute(sql_command, (table, value, newValue, user,))
     conn.commit()
 
@@ -49,7 +52,7 @@ def read_table(table):
     cur.execute(f"SELECT * FROM {table}")
     rows = cur.fetchall()
     return rows
-#
+
 def delete_table(table):
     cur = conn.cursor()
     sql = f"DROP TABLE {table}"

@@ -134,9 +134,15 @@ class Stuff(commands.Cog):
 
     @commands.command(aliases=["charger"])
     async def chargerrifle(self, ctx):
-        wp = Weapons("charger-rifle")
+        wp = Weapons("chargerrifle")
         embed = wp.embed_w(ctx, wp.weapon())
         await ctx.send(embed=embed)
+
+    # @commands.command()
+    # async def chargerrifle(self, ctx):
+    #     wp = Weapons("charger-rifle")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
     @commands.command()
     async def weapons(self, ctx):

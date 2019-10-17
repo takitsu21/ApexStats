@@ -50,26 +50,27 @@ class Bot_Info(commands.Cog):
         await ctx.send(embed = embed)
 
     @commands.command(pass_context=True)
-    async def about(self,ctx):
+    async def about(self, ctx):
         embed = discord.Embed(
                             timestamp=datetime.datetime.utcfromtimestamp(time.time()),
                             color=self.colour
                         )
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
         embed.add_field(name="Vote",
-                        value="[**here**](https://discordbots.org/bot/551446491886125059/vote)")
+                        value="[Click here](https://discordbots.org/bot/551446491886125059/vote)")
         embed.add_field(name="Invite Apex Stats",
-                        value="[**here**](https://discordapp.com/oauth2/authorize?client_id=557656875319951372&scope=bot&permissions=1543825472)")
-        embed.add_field(name="Support",
-                        value="[**here**](https://discordapp.com/invite/wTxbQYb)")
-        embed.add_field(name="Prefix",value="a!")
+                        value="[Click here](https://discordapp.com/oauth2/authorize?client_id=551446491886125059&scope=bot&permissions=1543825472)")
+        embed.add_field(name="Discord Support",
+                        value="[Click here](https://discordapp.com/invite/wTxbQYb)")
+        embed.add_field(name="Donate",value="[Click here](https://www.patreon.com/takitsu)")
+        embed.add_field(name = "Source code and commands", value="[Click here](https://takitsu21.github.io/ApexStats/)")
+        embed.add_field(name="Help command",value="a!help") 
         nb_users = 0
         for s in self.bot.guilds:
             nb_users += len(s.members)
 
         embed.add_field(name="Servers", value=len(self.bot.guilds))
         embed.add_field(name="Members", value=nb_users)
-        embed.add_field(name = "Website", value="[**here**](https://takitsu21.github.io/ApexStats/)")
         embed.add_field(name="**Creator**", value="Taki#0853")
         embed.add_field(name="*Contributor*", value="RedstonedLife#8787")
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",

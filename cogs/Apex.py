@@ -3,7 +3,7 @@ import datetime
 import discord
 from discord.ext import commands
 from src.stats import *
-from src.utils import generate_url_profile
+from src.utils import generate_url_profile, better_formatting
 from src.decorators import trigger_typing
 import logging
 
@@ -60,20 +60,15 @@ class Apex(commands.Cog):
         for i, stats in enumerate(data["segments"]):
             try:
                 if i == 0:
-                    for i, children in enumerate(stats["stats"]):
-                        if i > 0:
-                            overview += '*{}* : `{}`\n'.format(stats["stats"][children]["displayName"], str(int(stats["stats"][children]["value"])))
-
+                    overview = better_formatting(stats["stats"])
                 else:
+                    res = better_formatting(stats["stats"])
                     legend = stats["metadata"]["name"]
-                    for children in stats["stats"]:
-                        res += '*{}* : `{}`\n'.format(stats["stats"][children]["displayName"], str(int(stats["stats"][children]["value"])))
-                    if len(res) > 0:
-                        embed.add_field(name = '__`{}`__'.format(legend), value='{}'.format(res), inline=True)
-                        res = ''
+                    embed.add_field(name = '__{}__'.format(legend), value='```css\n{}```'.format(res), inline=True)
+                    res = ''
             except Exception as e:
                 print(f"{type(e).__name__} : {e}")
-        embed.add_field(name = f'__`Lifetime`__', value='{}'.format(overview),
+        embed.add_field(name = f'__Lifetime__', value='```css\n{}```'.format(overview),
                         inline=True)
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
                         icon_url=ctx.guild.me.avatar_url)

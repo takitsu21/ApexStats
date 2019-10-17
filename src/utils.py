@@ -39,3 +39,17 @@ def _request(
                 raise RequestError(r.status_code)
     except Exception as e:
         pass
+
+def better_formatting(stats_segments) -> str:
+    _buffer_dn = []
+    _buffer_v = []
+    res = ""
+    for children in stats_segments:
+        _buffer_dn.append(stats_segments[children]["displayName"])
+        _buffer_v.append(int(stats_segments[children]["value"]))
+    max_to_format = max(map(len, _buffer_dn))
+    buff_zip = zip(_buffer_dn, _buffer_v)
+    if len(_buffer_dn):
+        for (dn, v) in buff_zip:
+            res += f"{dn.ljust(max_to_format, ' ')} : {v}\n"
+    return res
