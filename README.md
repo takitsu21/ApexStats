@@ -38,11 +38,11 @@
 
 ## Few examples
 
-![Example Apex profile statistics](https://i.imgur.com/qhk7HJU.png)
+![Example Apex profile statistics](https://i.imgur.com/kIzhNHt.png)
 
-![Save your profile](https://i.imgur.com/wa7JLZk.png)
+![Save your profile](https://i.imgur.com/rsULDOb.png)
 
-![See your saved profile stats](https://i.imgur.com/tn8nv9L.png)
+![See your saved profile stats](https://i.imgur.com/1UHVCgK.png)
 
 ![Weapon Information](https://i.imgur.com/c36VP1Z.png)
 
