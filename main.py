@@ -12,6 +12,7 @@ from src.config import _d_token
 from discord.utils import find
 import datetime
 import time
+from discord.ext.commands import when_mentioned_or
 
 logger = logging.getLogger("apex-stats")
 logger.setLevel(logging.INFO)
@@ -21,7 +22,7 @@ logger.addHandler(handler)
 
 class ApexStats(commands.Bot):
     def __init__(self):
-        super().__init__(command_prefix='a!', activity=discord.Game(name='Updating...'),
+        super().__init__(command_prefix=when_mentioned_or('a!'), activity=discord.Game(name='Updating...'),
                         status=discord.Status('dnd'))
         self.remove_command("help")
         self._load_extensions()
@@ -62,7 +63,7 @@ class ApexStats(commands.Bot):
             embed.add_field(name="Servers", value=len(self.guilds))
             embed.add_field(name="Members", value=nb_users)
             embed.add_field(name="**Creator**", value="Taki#0853")
-            embed.add_field(name="*Contributor*", value="RedstonedLife#8787")
+            embed.add_field(name="*Contributor*", value="RedstonedLife#0001")
             embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                             icon_url=guild.me.avatar_url)
             await general.send(embed=embed)
@@ -74,7 +75,7 @@ class ApexStats(commands.Bot):
             await self.change_presence(
                             activity=discord.Activity(
                                     name=f'[a!help] | {len(self.guilds)} servers',
-                                    type=3)
+                                    type=3,status=discord.Status('offline'))
                             )
             await asyncio.sleep(60*3)
 

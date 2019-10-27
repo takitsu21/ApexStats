@@ -72,7 +72,7 @@ class Bot_Info(commands.Cog):
         embed.add_field(name="Servers", value=len(self.bot.guilds))
         embed.add_field(name="Members", value=nb_users)
         embed.add_field(name="**Creator**", value="Taki#0853")
-        embed.add_field(name="*Contributor*", value="RedstonedLife#8787")
+        embed.add_field(name="*Contributor*", value="RedstonedLife#0001")
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
 

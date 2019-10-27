@@ -51,5 +51,5 @@ def better_formatting(stats_segments) -> str:
     buff_zip = zip(_buffer_dn, _buffer_v)
     if len(_buffer_dn):
         for (dn, v) in buff_zip:
-            res += f"{dn.ljust(max_to_format, ' ')} : {v}\n"
+            res += f"{dn.ljust(max_to_format, ' ')} {v}\n"
     return res

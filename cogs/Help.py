@@ -13,7 +13,7 @@ logger = logging.getLogger("apex-stats")
 
 class Help(commands.Cog):
     """Help commands"""
-    def __init__(self,bot):
+    def __init__(self, bot):
         self.bot = bot
         self.colour = 0xff0004
 
@@ -29,7 +29,7 @@ class Help(commands.Cog):
         embed.add_field(name=u"\u2699 About Apex Stats", value="View commands about the bot")
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
-        return embed
+        return embed    
 
     @commands.command(aliases=["h"])
     @commands.bot_has_permissions(manage_messages=True, add_reactions=True)
@@ -38,6 +38,7 @@ class Help(commands.Cog):
         await ctx.message.delete()
         stats_commands = """**`<a!stats | a!s>`** - Explanation about stats\n
         **`<a!stats | a!s> [USERNAME] <pc | xbox | psn>`** - View Apex Legends statistics -> Example `a!s nicehat_taki pc`\n
+        **`<a!stats | a!s> [USERNAME]`** - View Apex Legends statistics for PC only (shortcut) -> Example `a!s nicehat_taki\n
         **`<a!profile | a!p>`** - View your Apex Legends profile if registered before\n
         **`<a!profile | a!p> save [USERNAME] <pc | xbox | psn>`** - Link your Discord account to your Apex Legends stats -> Example `a!p save nicehat_taki pc`\n
         **`<a!profile | a!p> display`** - View the current saved profile\n
@@ -48,13 +49,11 @@ class Help(commands.Cog):
         **`a!legend`** - Random legend to pick for the next game\n
         **`a!team`** - Entire random team for the next game\n
         **`a!weapons`** - List all weapon commands to get their informations"""
-
         news_command = """**`a!servers`** - View all Apex Legends server status (ping, status, server name)\n
         **`a!reddit <hot | top>`** - Recents post by categorie\n
         **`a!patch`** - View live patch note\n
         **`a!news`** - View last 6 news on EA website\n
         **`a!ranked`** - View info about how ranked works (updated)"""
-
         other_commands = """**`a!bug [MESSAGE]`** - Send me a bug report, this will helps to improve the bot\n
         **`a!suggestion [MESSAGE]`** - Suggestion to add for the bot, all suggestions are good don't hesitate\n
         **`a!ping`** - View bot latency\n
@@ -123,7 +122,6 @@ class Help(commands.Cog):
         **`a!patch`** - View live patch note
         **`a!news`** - View last 6 news on EA website
         **`a!ranked`** - View info about how ranked works (updated)"""
-
         other_commands = """**`a!bug [MESSAGE]`** - Send me a bug report, this will helps to improve the bot
         **`a!suggestion [MESSAGE]`** - Suggestion to add for the bot, all suggestions are good don't hesitate
         **`a!ping`** - View bot latency

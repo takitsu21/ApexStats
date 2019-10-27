@@ -56,9 +56,11 @@ class Weapons:
     def weapon(self):
         try:
             r = _request(f"{self.base_url}{self.name}.json", call="json")
+            print(r)
             return r[0]
         except IndexError:
             return r
+
     @staticmethod
     def f_mode(fire_modes):
         try:
@@ -70,7 +72,7 @@ class Weapons:
     def formatted_enum(weapon):
         return weapon.replace("-", "").upper()
 
-    def embed_w(self, ctx,  weapon_data, is_weapon=True):
+    def embed_w(self, ctx, weapon_data, is_weapon=True):
         embed = discord.Embed(
                     colour=0xff0004,
                     timestamp=dt.datetime.utcfromtimestamp(t.time())
@@ -78,17 +80,17 @@ class Weapons:
         if is_weapon:
             embed.set_author(name=weapon_data["name"].capitalize(),
                             icon_url=getattr(AmmoType, weapon_data["ammo_type"].upper()))
-            embed.add_field(name="Damage", value=weapon_data["damage"], inline=True)
-            embed.add_field(name="Headshot damage", value=weapon_data["headshot_damage"], inline=True)
-            embed.add_field(name="DPS", value=weapon_data["damage_per_second"], inline=True)
-            embed.add_field(name="Magazine size", value=weapon_data["ammo_capacity"], inline=True)
+            embed.add_field(name="Damage", value=weapon_data["damage"])
+            embed.add_field(name="Headshot damage", value=weapon_data["headshot_damage"])
+            embed.add_field(name="DPS", value=weapon_data["damage_per_second"])
+            embed.add_field(name="Magazine size", value=weapon_data["ammo_capacity"])
             try:
-                embed.add_field(name="Bullets per shot", value=weapon_data["damage_modifier"], inline=True)
+                embed.add_field(name="Bullets per shot", value=weapon_data["damage_modifier"])
             except: pass
-            embed.add_field(name="Fire mode", value=self.f_mode(weapon_data), inline=True)
-            embed.add_field(name="RPM", value=weapon_data["rate_of_fire"], inline=True)
-            embed.add_field(name="Tactical reload", value=f'{weapon_data["tactical_reload"]} s', inline=True)
-            embed.add_field(name="Empty reload", value=f'{weapon_data["empty_reload"]} s', inline=True)
+            embed.add_field(name="Fire mode", value=self.f_mode(weapon_data))
+            embed.add_field(name="RPM", value=weapon_data["rate_of_fire"])
+            embed.add_field(name="Tactical reload", value=f'{weapon_data["tactical_reload"]} s')
+            embed.add_field(name="Empty reload", value=f'{weapon_data["empty_reload"]} s')
             embed.set_image(url=getattr(WeaponIcon, self.formatted_name))
             embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                             icon_url=ctx.guild.me.avatar_url)
