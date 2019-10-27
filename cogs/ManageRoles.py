@@ -11,9 +11,9 @@ class ManageRoles(commands.Cog):
 
     def embed_save_profile(self, ctx):
         embed=discord.Embed(title="⚠️Profile not registered!",
-                            description=f'{ctx.author.mention} Your profile is not yet registered in the database',
-                            timestamp=datetime.datetime.utcfromtimestamp(time.time()), 
-                            colour=self.colour)
+                        description=f'{ctx.author.mention} Your profile is not yet registered in the database',
+                        timestamp=datetime.datetime.utcfromtimestamp(time.time()),
+                        colour=self.colour)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)

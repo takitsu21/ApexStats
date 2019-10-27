@@ -37,7 +37,7 @@ def _request(
                 return r
             else:
                 raise RequestError(r.status_code)
-    except Exception as e:
+    except Exception:
         pass
 
 def better_formatting(stats_segments) -> str:

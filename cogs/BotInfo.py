@@ -64,7 +64,7 @@ class Bot_Info(commands.Cog):
                         value="[Click here](https://discordapp.com/invite/wTxbQYb)")
         embed.add_field(name="Donate",value="[Click here](https://www.patreon.com/takitsu)")
         embed.add_field(name = "Source code and commands", value="[Click here](https://takitsu21.github.io/ApexStats/)")
-        embed.add_field(name="Help command",value="a!help") 
+        embed.add_field(name="Help command",value="a!help")
         nb_users = 0
         for s in self.bot.guilds:
             nb_users += len(s.members)

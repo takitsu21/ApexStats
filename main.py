@@ -3,11 +3,9 @@
 import discord
 import os
 import asyncio
-import configparser
 from discord.ext import commands
 from cogs import *
 import logging
-from aiohttp import ClientSession
 from src.config import _d_token
 from discord.utils import find
 import datetime
@@ -34,7 +32,7 @@ class ApexStats(commands.Bot):
                 if file.endswith(".py"):
                     self.load_extension(f'cogs.{file[:-3]}')
                     logger.info(f"{file} loaded")
-            except:
+            except Exception:
                 logger.exception(f"Fail to load {file}")
 
     async def on_guild_join(self, guild):
@@ -55,7 +53,7 @@ class ApexStats(commands.Bot):
                             value="[Click here](https://discordapp.com/invite/wTxbQYb)")
             embed.add_field(name="Donate",value="[Click here](https://www.patreon.com/takitsu)")
             embed.add_field(name = "Source code and commands", value="[Click here](https://takitsu21.github.io/ApexStats/)")
-            embed.add_field(name="Help command",value="a!help") 
+            embed.add_field(name="Help command",value="a!help")
             nb_users = 0
             for s in self.guilds:
                 nb_users += len(s.members)

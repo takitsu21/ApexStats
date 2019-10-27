@@ -11,7 +11,7 @@ def _d_token(debug=False):
     if not debug:
         return config["TOKENS"]["discord_o"]
     return config["TOKENS"]["discord_t"]
-    
+
 def _dbu_token():
     config = configparser.ConfigParser()
     config.read("config.ini")

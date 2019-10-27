@@ -53,7 +53,7 @@ class Stuff(commands.Cog):
         wp = Weapons("alternator")
         embed = wp.embed_w(ctx, wp.weapon())
         await ctx.send(embed=embed)
-    
+
     @commands.command()
     async def prowler(self, ctx):
         wp = Weapons("prowler")

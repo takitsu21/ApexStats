@@ -29,7 +29,7 @@ class Apex(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command(pass_context=True)
-    @trigger_typing        
+    @trigger_typing 
     async def map(self, ctx):
         embed = discord.Embed(title="Map & loot Tier",
                             colour=self.colour,
@@ -91,7 +91,7 @@ class Apex(commands.Cog):
                                 description="**`a!stats [USERNAME]`**\n**`a!stats [USERNAME] < pc | xbox | psn >`**",
                                 timestamp=datetime.datetime.utcfromtimestamp(time.time()),
                                 colour=self.colour)
-            embed.add_field(name="Stats explanation", 
+            embed.add_field(name="Stats explanation",
                             value="- Stats are provided by [apex.tracker.gg](https://apex.tracker.gg/)"
                             " API (stats might not be fully exact)\n\n-"
                             " We can only get stats from selected banners\n\n"

@@ -4,8 +4,6 @@
 import discord
 from discord.ext import commands
 import asyncio
-import datetime as dt
-import time as t
 from src.decorators import trigger_typing
 import logging
 
@@ -29,7 +27,7 @@ class Help(commands.Cog):
         embed.add_field(name=u"\u2699 About Apex Stats", value="View commands about the bot")
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
-        return embed    
+        return embed 
 
     @commands.command(aliases=["h"])
     @commands.bot_has_permissions(manage_messages=True, add_reactions=True)
@@ -146,7 +144,7 @@ class Help(commands.Cog):
                             description="Please could you provide the following permissions "
                             "to Apex Stats to have access to all of the features\n-> Manage messages, Add reactions, Manage nicknames\nThank you!",
                             colour=self.colour)
-        
+
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)

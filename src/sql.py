@@ -1,6 +1,5 @@
 # coding:utf-8
 import psycopg2
-import os
 from src.config import _dbu_token
 import logging
 
@@ -9,7 +8,7 @@ logger = logging.getLogger("apex-stats")
 try:
     conn = psycopg2.connect(_dbu_token())
 except Exception as e:
-    pass
+    logger.error(f"{type(e).__name__} : {e}")
 
 def create_roles_rank():
     sql = """CREATE TABLE IF NOT EXISTS rank (
@@ -25,42 +24,45 @@ def create_roles_rank():
 
 def addUser(id_number, user, platform: str = 'pc'):
     cursor = conn.cursor()
-    sql = "INSERT INTO users(id,username, platform) VALUES(%s, %s, %s);"
+    sql = "INSERT INTO users(id, username, platform) VALUES(%s, %s, %s);"
     cursor.execute(sql, (id_number, user, platform,))
     conn.commit()
 
 def select(table, row, value):
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM {} WHERE {} = {}".format(table, row, value))
+    sql = "SELECT * FROM %s WHERE %s = %s;"
+    cursor.execute(sql, (table, row, value,))
     rows = cursor.fetchall()
     return rows
 
 def change(table, user, value, newValue):
     cursor = conn.cursor()
-    sql_command = f"UPDATE {table} SET {value} = '{newValue}' WHERE id={user};"
+    sql_command = "UPDATE %s SET %s = %s WHERE id=%s;"
     logger.info(sql_command)
     cursor.execute(sql_command, (table, value, newValue, user,))
     conn.commit()
 
 def unlink(value):
     cur = conn.cursor()
-    cur.execute("DELETE FROM users WHERE id = {}".format(value))
+    sql = "DELETE FROM users WHERE id = %s"
+    cur.execute(sql, (value,))
     conn.commit()
 
 def read_table(table):
     cur = conn.cursor()
-    cur.execute(f"SELECT * FROM {table}")
+    sql = "SELECT * FROM %s"
+    cur.execute(sql, (table,))
     rows = cur.fetchall()
     return rows
 
 def delete_table(table):
     cur = conn.cursor()
-    sql = f"DROP TABLE {table}"
-    cur.execute(sql)
+    sql = "DROP TABLE %s"
+    cur.execute(sql, (table,))
     conn.commit()
 
-def add_rank(id, username, platform, rank):
+def add_rank(_id, username, platform, rank):
     cur = conn.cursor()
-    sql = f"INSERT INTO rank(id, username, platform, rank) VALUES({id}, '{username}', '{platform}', '{rank}')"
-    cur.execute(sql)
-    conn.commit
+    sql = "INSERT INTO rank(id, username, platform, rank) VALUES(%s, %s, %s, %s);"
+    cur.execute(sql, (_id, username, platform, rank,))
+    conn.commit()

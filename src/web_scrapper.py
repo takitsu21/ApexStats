@@ -1,5 +1,4 @@
 import re
-import unicodedata
 from bs4 import BeautifulSoup
 from src.utils import _request
 

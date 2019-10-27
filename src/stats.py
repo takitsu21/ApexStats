@@ -65,7 +65,7 @@ class Weapons:
     def f_mode(fire_modes):
         try:
             return ' or '.join(fire_modes["fire_modes"].keys()).capitalize()
-        except:
+        except Exception:
             return "Unknown"
     
     @staticmethod
@@ -86,7 +86,7 @@ class Weapons:
             embed.add_field(name="Magazine size", value=weapon_data["ammo_capacity"])
             try:
                 embed.add_field(name="Bullets per shot", value=weapon_data["damage_modifier"])
-            except: pass
+            except Exception: pass
             embed.add_field(name="Fire mode", value=self.f_mode(weapon_data))
             embed.add_field(name="RPM", value=weapon_data["rate_of_fire"])
             embed.add_field(name="Tactical reload", value=f'{weapon_data["tactical_reload"]} s')

@@ -1,5 +1,4 @@
 from src.utils import _request, PlayerNotFound, platform_convert, headers
-import os
 import datetime as dt
 
 def get_match_history(player, platform):
