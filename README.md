@@ -1,4 +1,6 @@
-[![PyPI pyversions](https://img.shields.io/badge/python-3.7-blue)](https://www.python.org/) ![AppVeyor](https://img.shields.io/appveyor/ci/takitsu21/ApexStats) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b39e2c3164c1424785fcdf6723c9ddc1)](https://www.codacy.com/manual/takitsu21/ApexStats?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=takitsu21/ApexStats&amp;utm_campaign=Badge_Grade) [![Discord](https://img.shields.io/discord/556268083681951759?color=blue&label=discord)](http://discord.gg/wTxbQYb) [![GitHub](https://img.shields.io/github/license/takitsu21/ApexStats)](LICENCE)
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/U7U1RSV5) 
+
+[![PyPI pyversions](https://img.shields.io/badge/python-3.7-blue)](https://www.python.org/)  ![AppVeyor](https://img.shields.io/appveyor/ci/takitsu21/ApexStats) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b39e2c3164c1424785fcdf6723c9ddc1)](https://www.codacy.com/manual/takitsu21/ApexStats?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=takitsu21/ApexStats&amp;utm_campaign=Badge_Grade) [![Discord](https://img.shields.io/discord/556268083681951759?color=blue&label=discord)](http://discord.gg/wTxbQYb) [![GitHub](https://img.shields.io/github/license/takitsu21/ApexStats)](LICENCE)
 # Apex Stats
 
 * This bot provides your Apex Legends statistics and provides other features (Like linking your Discord to your Apex Profile)
