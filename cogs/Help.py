@@ -25,6 +25,11 @@ class Help(commands.Cog):
         embed.add_field(name='<:a_:632338231349739521> Apex Legends', value="View commands about Apex")
         embed.add_field(name='📃 News', value="View commands about Apex news")
         embed.add_field(name=u"\u2699 About Apex Stats", value="View commands about the bot")
+        embed.add_field(
+            name="If you want to support me",
+            value="[Kofi](https://ko-fi.com/takitsu)"
+                  "\n[Patreon](https://www.patreon.com/takitsu)"
+        )
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
         return embed 
