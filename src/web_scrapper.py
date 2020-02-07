@@ -6,6 +6,9 @@ user_agent = {'User-Agent':'Mozilla/5.0 (Windows NT x.y; Win64; x64; rv:10.0) Ge
 reddit = 'https://www.reddit.com'
 SERVERS = 'https://apexlegendsstatus.com/'
 
+class UnvailableServices(Exception):
+    pass
+
 def checkDaily(a) -> bool: # we don't want daily_discussion
     for c in a.split('/'):
         if re.match(r'^(daily_discussion)\w+',c):
@@ -13,8 +16,8 @@ def checkDaily(a) -> bool: # we don't want daily_discussion
     return True
 
 def get_subj_title(a) -> str:
-    _a = a.split('/')
-    return _a[len(_a)-2]
+    a = a.split('/')
+    return a[len(a)-2]
 
 def get_post(categorie) -> str:
     """Returns reddit url filtered by categorie
@@ -34,26 +37,6 @@ def get_server_status():
     page = BeautifulSoup(content, features="lxml")
     status = page.find(class_="alert")
     return status.get_text()
-
-# def status() -> str:
-#     """servers status
-#     -> returns formatted string about servers for discord"""
-#     res = ''
-#     acc = 0
-#     server_status = get_server_status().items()
-#     for key, value in server_status:
-#         old_res = res
-#         if acc % 2 == 0: # formatting the string output
-#             res += f"**{key}** : {value['ping']} {value['latency_msg']} | "
-#         else:
-#             res += f"**{key}** : {value['ping']} {value['latency_msg']}\n"
-#         if len(res) >= 2000: # discord raise error when #char > 2000
-#             return old_res
-#         acc += 1
-#     return res
-
-class UnvailableServices(Exception):
-    pass
 
 def get_news(limit=6) -> str:
     """Get news from https://www.ea.com/games/apex-legends/news"""

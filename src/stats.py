@@ -31,19 +31,6 @@ class Stats:
             return True
         except PlayerNotFound:
             return False
-    
-    @staticmethod
-    def parse_rank_url(url):
-        url = url.split("/")
-        rank = url[len(url)-1]
-        i = 0
-        res = str()
-        while rank[i].isalpha() and rank[i] != ".":
-            res += rank[i]
-            i += 1
-        if res == "apex":
-            res += " predator"
-        return res.capitalize()
 
 class Weapons:
     def __init__(self, name, _type="weapons"):
@@ -67,7 +54,7 @@ class Weapons:
             return ' or '.join(fire_modes["fire_modes"].keys()).capitalize()
         except Exception:
             return "Unknown"
-    
+
     @staticmethod
     def formatted_enum(weapon):
         return weapon.replace("-", "").upper()
@@ -97,3 +84,52 @@ class Weapons:
         else:
             pass # grenades, etc...
         return embed
+
+def rank_url(rank_score) -> str:
+    uri_rank = "http://api.apexlegendsstatus.com/assets/ranks/"
+    if rank_score < 4800:
+        delimiter = {
+            range(0, 1200): {
+                "rank": "bronze",
+                "major": 1200,
+                "minor": 0
+            },
+            range(1200, 2800): {
+                "rank": "silver",
+                "major": 2800,
+                "minor": 1200
+            },
+            range(2800, 4800): {
+                "rank": "gold",
+                "major": 4800,
+                "minor": 2800
+            }
+        }
+    elif rank_score in range(4800, 10000):
+        delimiter = {
+            range(4800, 7200): {
+                "rank": "platinum",
+                "major": 7200,
+                "minor": 4800
+            },
+            range(7200, 10000): {
+                "rank": "diamond",
+                "major": 10000,
+                "minor": 7200
+            }
+        }
+    else:
+        return uri_rank + "apexpredator1.png"
+    for checker, v in delimiter.items():
+        if rank_score in checker:
+            division = (rank_score - v["minor"]) / (v["major"] - v["minor"])
+            if division < .25:
+                division = 4
+            elif division >= .25 and division < .50:
+                division = 3
+            elif division >= .50 and division < .69:
+                division = 2
+            else:
+                division = 1
+            return uri_rank + v["rank"] + str(division) + ".png"
+    return uri_rank + "bronze1.png"

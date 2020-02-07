@@ -26,7 +26,6 @@ class Bot_Info(commands.Cog):
                                 colour=self.colour)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)", icon_url=ctx.guild.me.avatar_url)
-
         await ctx.send(embed = embed)
 
     @commands.command(pass_context=True)
@@ -87,7 +86,7 @@ class Bot_Info(commands.Cog):
         ping = (time.monotonic() - before) * 1000
         embed = discord.Embed(colour=0xff00,
                             title="Apex Stats ping",
-                            description=f"🏓{int(ping)} ms")
+                            description=f"🏓 {int(ping)} ms")
         await message.edit(content="", embed=embed)
 
 def setup(bot):

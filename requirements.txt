@@ -1,7 +1,7 @@
-discord.py
+git+https://github.com/Rapptz/discord.py
 bs4
-aiohttp_requests
 lxml
 asyncio
 dblpy
 psycopg2-binary
+requests

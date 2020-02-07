@@ -21,3 +21,8 @@ def _api_token():
     config = configparser.ConfigParser()
     config.read("config.ini")
     return config["TOKENS"]["trn_api_key"]
+
+def _dbl_token():
+    config = configparser.ConfigParser()
+    config.read("config.ini")
+    return config["TOKENS"]["dbl"]

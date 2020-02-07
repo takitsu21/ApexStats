@@ -6,131 +6,131 @@ class Stuff(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
-    async def peacekeeper(self, ctx):
-        wp = Weapons("peacekeeper")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
-    
-    @commands.command()
-    async def mozambique(self, ctx):
-        wp = Weapons("mozambique")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
-    
-    @commands.command(aliases=["eva8", "eva8auto"])
-    async def eva(self, ctx):
-        wp = Weapons("eva-8-auto")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command()
+    # async def peacekeeper(self, ctx):
+    #     wp = Weapons("peacekeeper")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command(aliases=["mastif"])
-    async def mastiff(self, ctx):
-        wp = Weapons("mastiff")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command()
+    # async def mozambique(self, ctx):
+    #     wp = Weapons("mozambique")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command(aliases=["g7scout"])
-    async def g7(self, ctx):
-        wp = Weapons("g7-scout")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command(aliases=["eva8", "eva8auto"])
+    # async def eva(self, ctx):
+    #     wp = Weapons("eva-8-auto")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command()
-    async def r99(self, ctx):
-        wp = Weapons("r-99")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command(aliases=["mastif"])
+    # async def mastiff(self, ctx):
+    #     wp = Weapons("mastiff")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command()
-    async def r301(self, ctx):
-        wp = Weapons("r-301")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command(aliases=["g7scout"])
+    # async def g7(self, ctx):
+    #     wp = Weapons("g7-scout")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command()
-    async def alternator(self, ctx):
-        wp = Weapons("alternator")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command()
+    # async def r99(self, ctx):
+    #     wp = Weapons("r-99")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command()
-    async def prowler(self, ctx):
-        wp = Weapons("prowler")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command()
+    # async def r301(self, ctx):
+    #     wp = Weapons("r-301")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command()
-    async def flatline(self, ctx):
-        wp = Weapons("flatline")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command()
+    # async def alternator(self, ctx):
+    #     wp = Weapons("alternator")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command(aliases=["hemlock"])
-    async def hemlok(self, ctx):
-        wp = Weapons("hemlok")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command()
+    # async def prowler(self, ctx):
+    #     wp = Weapons("prowler")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command()
-    async def havoc(self, ctx):
-        wp = Weapons("havoc")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command()
+    # async def flatline(self, ctx):
+    #     wp = Weapons("flatline")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command()
-    async def spitfire(self, ctx):
-        wp = Weapons("spitfire")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command(aliases=["hemlock"])
+    # async def hemlok(self, ctx):
+    #     wp = Weapons("hemlok")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command()
-    async def devotion(self, ctx):
-        wp = Weapons("devotion")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command()
+    # async def havoc(self, ctx):
+    #     wp = Weapons("havoc")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command()
-    async def lstar(self, ctx):
-        wp = Weapons("l-star")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command()
+    # async def spitfire(self, ctx):
+    #     wp = Weapons("spitfire")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command(aliases=["re"])
-    async def re45(self, ctx):
-        wp = Weapons("re-45")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command()
+    # async def devotion(self, ctx):
+    #     wp = Weapons("devotion")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command()
-    async def p2020(self, ctx):
-        wp = Weapons("p2020")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command()
+    # async def lstar(self, ctx):
+    #     wp = Weapons("l-star")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command()
-    async def wingman(self, ctx):
-        wp = Weapons("wingman")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command(aliases=["re"])
+    # async def re45(self, ctx):
+    #     wp = Weapons("re-45")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command()
-    async def longbow(self, ctx):
-        wp = Weapons("longbow")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command()
+    # async def p2020(self, ctx):
+    #     wp = Weapons("p2020")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command(aliases=["triple", "triplet"])
-    async def tripletake(self, ctx):
-        wp = Weapons("triple-take")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command()
+    # async def wingman(self, ctx):
+    #     wp = Weapons("wingman")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
-    @commands.command()
-    async def kraber(self, ctx):
-        wp = Weapons("kraber")
-        embed = wp.embed_w(ctx, wp.weapon())
-        await ctx.send(embed=embed)
+    # @commands.command()
+    # async def longbow(self, ctx):
+    #     wp = Weapons("longbow")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
+
+    # @commands.command(aliases=["triple", "triplet"])
+    # async def tripletake(self, ctx):
+    #     wp = Weapons("triple-take")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
+
+    # @commands.command()
+    # async def kraber(self, ctx):
+    #     wp = Weapons("kraber")
+    #     embed = wp.embed_w(ctx, wp.weapon())
+    #     await ctx.send(embed=embed)
 
     # @commands.command(aliases=["charger"])
     # async def chargerrifle(self, ctx):
@@ -141,7 +141,7 @@ class Stuff(commands.Cog):
     @commands.command()
     async def weapons(self, ctx):
         embed = discord.Embed(
-                    title="Listed commands for weapons",
+                    title="Listed commands for weapons (DEPRECATED)",
                     description="All commands to get informations about a weapon.",
                     colour=0xff0004
                 )

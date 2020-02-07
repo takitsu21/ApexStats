@@ -16,7 +16,7 @@ def platform_convert(s):
 
 def generate_url_profile(platform, player):
     """generate link to the website profile"""
-    return f"https://tracker.gg/apex/profile/{platform}/{player}/overview"
+    return f"https://apex.tracker.gg/profile/{platform}/{player}"
 
 def _request(
     url,

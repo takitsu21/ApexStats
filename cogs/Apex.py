@@ -18,20 +18,20 @@ class Apex(commands.Cog):
     @commands.command()
     @trigger_typing
     async def ranked(self, ctx):
-        about_ranked = "https://www.ea.com/games/apex-legends/news/ranked-league-series-2"
+        about_ranked = "https://www.ea.com/games/apex-legends/news/ranked-series-3-details"
         embed = discord.Embed(title="About ranked",
                         colour=self.colour,
                         timestamp=datetime.datetime.utcfromtimestamp(time.time()),
                         description=f"To know how ranked works go -> [here]({about_ranked})")
         embed.set_thumbnail(url= ctx.guild.me.avatar_url)
-        embed.set_footer(text="data provided by apex.tracker.gg | Mad with ❤️ by Taki#0853 (WIP)",
+        embed.set_footer(text="data provided by apex.tracker.gg | Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
         await ctx.send(embed=embed)
 
     @commands.command(pass_context=True)
-    @trigger_typing 
+    @trigger_typing
     async def map(self, ctx):
-        embed = discord.Embed(title="Map & loot Tier",
+        embed = discord.Embed(title="Map & loot Tier (DEPRECATED)",
                             colour=self.colour,
                             timestamp=datetime.datetime.utcfromtimestamp(time.time()))
         embed.set_image(url="https://i.redd.it/qnb34smk41q31.jpg")
@@ -47,9 +47,9 @@ class Apex(commands.Cog):
             colour=self.colour,
             timestamp=datetime.datetime.utcfromtimestamp(time.time())
         )
-        embed.set_thumbnail(url = data["segments"][0]["stats"]["rankScore"]["metadata"]["iconUrl"])
+        embed.set_thumbnail(url = rank_url(data["segments"][0]["stats"]["rankScore"]["value"]))
         embed.set_author(
-            name='{0} | Level {1} | Elo : {2}'.format(
+            name='{0} [{1}] Rankscore : {2}'.format(
             data["platformInfo"]["platformUserHandle"],
             int(data["segments"][0]["stats"]["level"]["value"]),
             data["segments"][0]["stats"]["rankScore"]["displayValue"]
@@ -64,12 +64,12 @@ class Apex(commands.Cog):
                 else:
                     res = better_formatting(stats["stats"])
                     legend = stats["metadata"]["name"]
-                    embed.add_field(name = '__{}__'.format(legend), value='```css\n{}```'.format(res), inline=True)
+                    embed.add_field(name = '__{}__'.format(legend), value='```css\n{}```'.format(res), inline=False)
                     res = ''
             except Exception as e:
                 print(f"{type(e).__name__} : {e}")
         embed.add_field(name = f'__Lifetime__', value='```css\n{}```'.format(overview),
-                        inline=True)
+                        inline=False)
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg",
                         icon_url=ctx.guild.me.avatar_url)
         return embed
@@ -108,6 +108,7 @@ class Apex(commands.Cog):
             finding = await ctx.send("`📡Fetching data...📡`")
             info = self.parse_user(list(args), platform)
             player, platform = info[0], info[1]
+            player = player.replace('\\', '')
             if platform in ['pc','xbox','psn']:
                 if len(player) >= 1:
                     stats = Stats(player, platform)

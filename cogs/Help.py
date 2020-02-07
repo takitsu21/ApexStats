@@ -15,6 +15,12 @@ class Help(commands.Cog):
         self.bot = bot
         self.colour = 0xff0004
 
+    @commands.command()
+    @commands.is_owner()
+    async def reload(self, ctx):
+        self.bot._unload_extensions()
+        self.bot._load_extensions()
+
     def embed_pagination(self, ctx):
         embed = discord.Embed(title="Help hub",
                             description="[Vote here](https://top.gg/bot/551446491886125059) to support me if you ❤️ the bot\n"
@@ -28,11 +34,12 @@ class Help(commands.Cog):
         embed.add_field(
             name="If you want to support me",
             value="[Kofi](https://ko-fi.com/takitsu)"
-                  "\n[Patreon](https://www.patreon.com/takitsu)"
+                  "\n[Patreon](https://www.patreon.com/takitsu)",
+            inline=False
         )
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)
-        return embed 
+        return embed
 
     @commands.command(aliases=["h"])
     @commands.bot_has_permissions(manage_messages=True, add_reactions=True)
@@ -41,7 +48,7 @@ class Help(commands.Cog):
         await ctx.message.delete()
         stats_commands = """**`<a!stats | a!s>`** - Explanation about stats\n
         **`<a!stats | a!s> [USERNAME] <pc | xbox | psn>`** - View Apex Legends statistics -> Example `a!s nicehat_taki pc`\n
-        **`<a!stats | a!s> [USERNAME]`** - View Apex Legends statistics for PC only (shortcut) -> Example `a!s nicehat_taki\n
+        **`<a!stats | a!s> [USERNAME]`** - View Apex Legends statistics for PC only (shortcut) -> Example `a!s nicehat_taki`\n
         **`<a!profile | a!p>`** - View your Apex Legends profile if registered before\n
         **`<a!profile | a!p> save [USERNAME] <pc | xbox | psn>`** - Link your Discord account to your Apex Legends stats -> Example `a!p save nicehat_taki pc`\n
         **`<a!profile | a!p> display`** - View the current saved profile\n
@@ -94,7 +101,7 @@ class Help(commands.Cog):
                 embed = discord.Embed(title="📃 News",
                                     description=news_command,
                                     color=self.colour)
-                
+
                 await pagination.edit(embed=embed)
             elif u"\u2699" in str(reaction.emoji):
                 embed = discord.Embed(title=u"\u2699 Bot",
@@ -103,6 +110,7 @@ class Help(commands.Cog):
             embed.set_thumbnail(url=ctx.guild.me.avatar_url)
             embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                             icon_url=ctx.guild.me.avatar_url)
+            await pagination.remove_reaction(reaction.emoji, user)
             await pagination.edit(embed=embed)
 
     @help.error
@@ -137,10 +145,10 @@ class Help(commands.Cog):
         embed = discord.Embed(title='**Available commands:**',
                             colour=self.colour,
                             description="`[RequiredArgument] <ParameterToChoose>`\n[Source code and commands](https://takitsu21.github.io/ApexStats/)")
-        embed.add_field(name="Stats commands", value=stats_commands)
-        embed.add_field(name="Apex Commands", value=apex_commands)
-        embed.add_field(name="News commands", value=news_command)
-        embed.add_field(name="Bot commands", value=other_commands)
+        embed.add_field(name="Stats commands", value=stats_commands, inline=False)
+        embed.add_field(name="Apex Commands", value=apex_commands, inline=False)
+        embed.add_field(name="News commands", value=news_command, inline=False)
+        embed.add_field(name="Bot commands", value=other_commands, inline=False)
         embed.set_thumbnail(url=ctx.guild.me.avatar_url)
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                         icon_url=ctx.guild.me.avatar_url)

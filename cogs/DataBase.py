@@ -21,9 +21,9 @@ class DataBase(commands.Cog):
             colour=self.colour,
             timestamp=datetime.datetime.utcfromtimestamp(time.time())
         )
-        embed.set_thumbnail(url = data["segments"][0]["stats"]["rankScore"]["metadata"]["iconUrl"])
+        embed.set_thumbnail(url = rank_url(data["segments"][0]["stats"]["rankScore"]["value"]))
         embed.set_author(
-            name='{0} | Level {1} | Elo : {2}'.format(
+            name='{0} [{1}]  Rankscore : {2}'.format(
             data["platformInfo"]["platformUserHandle"],
             int(data["segments"][0]["stats"]["level"]["value"]),
             data["segments"][0]["stats"]["rankScore"]["displayValue"]
@@ -38,11 +38,11 @@ class DataBase(commands.Cog):
                 else:
                     res = better_formatting(stats["stats"])
                     legend = stats["metadata"]["name"]
-                    embed.add_field(name = '__{}__'.format(legend), value='```css\n{}```'.format(res))
+                    embed.add_field(name = '__{}__'.format(legend), value='```css\n{}```'.format(res), inline=False)
                     res = ''
             except Exception as e:
                 print(f"{type(e).__name__} : {e}")
-        embed.add_field(name = f'__Lifetime__', value='```css\n{}```'.format(overview))
+        embed.add_field(name = f'__Lifetime__', value='```css\n{}```'.format(overview), inline=False)
         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP) | apex.tracker.gg", icon_url=ctx.guild.me.avatar_url)
         return embed
 
@@ -58,7 +58,7 @@ class DataBase(commands.Cog):
     async def profile(self,ctx, mode : str = "N", *args):
         userDb = sql.select('users', 'id', str(ctx.author.id))
         if not len(userDb):
-            sql.addUser(str(ctx.author.id),"NAN")
+            sql.addUser(str(ctx.author.id), "NAN")
         if mode.lower() == "display":
             user = sql.select('users', 'id', str(ctx.author.id))
             return await ctx.send(f"{ctx.author.mention} You're in the database as `{user[0][1]}` on `{user[0][2]}`")
@@ -106,8 +106,8 @@ class DataBase(commands.Cog):
                         embed.set_thumbnail(url=ctx.author.avatar_url)
                         embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                                             icon_url=ctx.guild.me.avatar_url)
-                        sql.change("users",str(ctx.author.id),"username",str(' '.join(player.split("%20"))))
-                        sql.change("users",str(ctx.author.id),"platform",str(platform))
+                        sql.change("users", str(ctx.author.id), "username", str(' '.join(player.split("%20"))))
+                        sql.change("users", str(ctx.author.id), "platform", str(platform))
                         return await ctx.send(embed=embed)
                     else:
                         embed = discord.Embed(title=f"❌Profile `{player}` on `{platform}` doesn't exist❌",
@@ -124,7 +124,7 @@ class DataBase(commands.Cog):
                     embed.set_footer(text="Made with ❤️ by Taki#0853 (WIP)",
                                         icon_url=ctx.guild.me.avatar_url)
                 await ctx.send(embed=embed)
-        if(mode.lower() == "n"):
+        if mode.lower() == "n":
             row = sql.select('users', 'id', str(ctx.author.id))
 
             if row[0][1] == "NAN":

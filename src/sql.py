@@ -30,16 +30,16 @@ def addUser(id_number, user, platform: str = 'pc'):
 
 def select(table, row, value):
     cursor = conn.cursor()
-    sql = "SELECT * FROM %s WHERE %s = %s;"
-    cursor.execute(sql, (table, row, value,))
+    sql = "SELECT * FROM {} WHERE {} = %s;".format(table, row)
+    cursor.execute(sql, (value,))
     rows = cursor.fetchall()
     return rows
 
 def change(table, user, value, newValue):
     cursor = conn.cursor()
-    sql_command = "UPDATE %s SET %s = %s WHERE id=%s;"
+    sql_command = "UPDATE {} SET {} = %s WHERE id=%s;".format(table, value)
     logger.info(sql_command)
-    cursor.execute(sql_command, (table, value, newValue, user,))
+    cursor.execute(sql_command, (newValue, user,))
     conn.commit()
 
 def unlink(value):

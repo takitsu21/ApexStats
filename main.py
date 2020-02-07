@@ -4,13 +4,12 @@ import discord
 import os
 import asyncio
 from discord.ext import commands
-from cogs import *
 import logging
 from src.config import _d_token
 from discord.utils import find
 import datetime
 import time
-from discord.ext.commands import when_mentioned_or
+
 
 logger = logging.getLogger("apex-stats")
 logger.setLevel(logging.INFO)
@@ -18,22 +17,17 @@ handler = logging.FileHandler(filename='apex-stats.log', encoding='utf-8', mode=
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
 
+
 class ApexStats(commands.Bot):
     def __init__(self):
-        super().__init__(command_prefix=when_mentioned_or('a!'), activity=discord.Game(name='Updating...'),
-                        status=discord.Status('dnd'))
+        super().__init__(
+            command_prefix=commands.when_mentioned_or('a!'),
+            activity=discord.Game(name='Updating...'),
+            status=discord.Status('dnd')
+            )
         self.remove_command("help")
         self._load_extensions()
         self.colour = 0xff0004
-
-    def _load_extensions(self):
-        for file in os.listdir("cogs/"):
-            try:
-                if file.endswith(".py"):
-                    self.load_extension(f'cogs.{file[:-3]}')
-                    logger.info(f"{file} loaded")
-            except Exception:
-                logger.exception(f"Fail to load {file}")
 
     async def on_guild_join(self, guild):
         general = find(lambda x: x.name == "general", guild.text_channels)
@@ -52,7 +46,7 @@ class ApexStats(commands.Bot):
             embed.add_field(name="Discord Support",
                             value="[Click here](https://discordapp.com/invite/wTxbQYb)")
             embed.add_field(name="Donate",value="[Click here](https://www.patreon.com/takitsu)")
-            embed.add_field(name = "Source code and commands", value="[Click here](https://takitsu21.github.io/ApexStats/)")
+            embed.add_field(name = "Source code and commands", value="[Click here](https://github.com/takitsu21/ApexStats)")
             embed.add_field(name="Help command",value="a!help")
             nb_users = 0
             for s in self.guilds:
@@ -66,6 +60,24 @@ class ApexStats(commands.Bot):
                             icon_url=guild.me.avatar_url)
             await general.send(embed=embed)
 
+    def _load_extensions(self):
+        for file in os.listdir("cogs/"):
+            try:
+                if file.endswith(".py"):
+                    self.load_extension(f'cogs.{file[:-3]}')
+                    logger.info(f"{file} loaded")
+            except Exception:
+                logger.exception(f"Fail to load {file}")
+
+    def _unload_extensions(self):
+        for file in os.listdir("cogs/"):
+            try:
+                if file.endswith(".py"):
+                    self.unload_extension(f'cogs.{file[:-3]}')
+                    logger.info(f"{file} unloaded")
+            except Exception:
+                logger.exception(f"Fail to unload {file}")
+
     async def on_ready(self):
         await self.wait_until_ready() # waiting internal cache to be ready
         logger.info(f"Logged in as {self.user}")
@@ -73,13 +85,15 @@ class ApexStats(commands.Bot):
             await self.change_presence(
                             activity=discord.Activity(
                                     name=f'[a!help] | {len(self.guilds)} servers',
-                                    type=3,status=discord.Status('offline'))
+                                    type=discord.ActivityType.watching
+                                    ),
+                            status=discord.Status.online
                             )
-            await asyncio.sleep(60*3)
+            await asyncio.sleep(60)
 
     def run(self, *args, **kwargs):
         try:
-            self.loop.run_until_complete(self.start(_d_token()))
+            self.loop.run_until_complete(self.start(_d_token(debug=True)))
         except KeyboardInterrupt:
             self.loop.run_until_complete(self.logout())
             for task in asyncio.all_tasks(self.loop):
