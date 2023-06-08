@@ -16,6 +16,7 @@ def platform_convert(s):
 
 def generate_url_profile(platform, player):
     """generate link to the website profile"""
+    if platform == 'origin': return f"https://apex.tracker.gg/profile/pc/{player}" # Fixes Issue #29 of improper link sent.
     return f"https://apex.tracker.gg/profile/{platform}/{player}"
 
 def _request(
